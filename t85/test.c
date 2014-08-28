@@ -45,42 +45,58 @@ int main( )
 	DDRB |= _BV(3) | _BV(4) | _BV(1);
 	PORTB &= ~_BV(1);
 
+	wasa = 0;
+	wasb = 0;
+
+	int suppress = 10;
+
 	for( ;; )
 	{
-		_delay_ms(16);
+		_delay_ms(8);
 		SendTick();
+		_delay_ms(8);
 
+//			SendCPacket();
+//continue;
 		isa = !(PINB & _BV(0));
 		isb = !(PINB & _BV(2));
 
 		i++;
 
-		if( isa != wasa )
+
+/*		if( !suppress )
+		{
+			if( isa != wasa )
+			{
+				if( isa )
+					SendAPacket();
+				wasa = isa;
+				continue;
+			}
+			if( isb != wasb )
+			{
+				if( isb )
+					SendBPacket();
+				wasb = isb;
+				continue;
+			}
+		}*/
+
+		if( i == 1 )
 		{
 			if( isa )
 				SendAPacket();
-			wasa = isa;
 		}
-		if( isb != wasb )
+		if( i == 2 )
 		{
 			if( isb )
 				SendBPacket();
-			wasb = isb;
 		}
 
-		if( i == 5 )
-		{
-//			if( isa )
-//				SendAPacket();
-		}
-		if( i == 10 )
-		{
-//			if( isb )
-//				SendBPacket();
-		}
-		if( i == 15 )
+		if( i == 3 )
 		{
 			SendCPacket();
+			if( suppress ) suppress--;
 			i = 0;
 		}
 	}

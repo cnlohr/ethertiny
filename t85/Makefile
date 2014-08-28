@@ -24,7 +24,7 @@ test.lst : test.c asmtest.S sendpack.S
 	avr-gcc -c -g -Wa,-a,-ad $(CFLAGS) $^ > $@
 
 burn : test.hex
-	avrdude -c usbtiny -p $(PROGPART) -U flash:w:test.hex
+	avrdude -c usbtiny -p $(PROGPART) -V -U flash:w:test.hex
 
 #For PLL
 burnfuses :

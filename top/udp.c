@@ -27,9 +27,10 @@ int main(int argc, char**argv)
       n = recvfrom(sockfd,mesg,1000,0,(struct sockaddr *)&cliaddr,&len);
       sendto(sockfd,mesg,n,0,(struct sockaddr *)&cliaddr,sizeof(cliaddr));
       mesg[n] = 0;
-		if(mesg[0] == 'C' ) printf( "\n" );
+		if(mesg[0] == 'C' ) printf( "." );
 		else
 		      printf("%s",mesg);
+			fflush( stdout );
 //		if(mesg[0] == 'C' ) printf( "\n" );
    }
 }
