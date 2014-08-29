@@ -29,21 +29,35 @@
 
 void Emit( unsigned char hv )
 {
-
+	int lastbit = -1;
 	printf( "\t // %02x\n", hv );
 
 	int bit = 0x01;
 	for( ; bit & 0xff; bit<<=1 )
 	{
-		if( hv & bit )
+		int thisbit = (hv & bit)?1:0;
+//#define NOPTEST
+		if( thisbit )
 		{
-			printf( "\tout PORTB, r18\n" );
+#ifdef NOPTEST
+			if( lastbit == 0 )
+				printf( "\tnop\n" );
+			else
+#endif
+				printf( "\tout PORTB, r18\n" );
 			printf( "\tout PORTB, r19\n" );
+			lastbit = 1;
 		}
 		else
 		{
-			printf( "\tout PORTB, r19\n" );
+#ifdef NOPTEST
+			if( lastbit == 1 )
+				printf( "\tnop\n" );
+			else
+#endif
+				printf( "\tout PORTB, r19\n" );
 			printf( "\tout PORTB, r18\n" );
+			lastbit = 0;
 		}
 	}
 	printf( "\n" );
