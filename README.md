@@ -1,3 +1,5 @@
+WARNING
+
 This is a really dangerous project.  Use at your own risk.
 
 By directly ethernet without magnetics to an AVR, you may

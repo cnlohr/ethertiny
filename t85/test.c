@@ -1,3 +1,12 @@
+/*
+
+	WARNING: Connecting an AVR to ethernet without magnetics is VERY DANGEROUS.
+	It may cause high voltages to go through the AVR and destroy it in DANGEROUS
+	that may harm personal safety.  Do only at your own risk.
+
+*/
+
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
