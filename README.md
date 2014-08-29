@@ -13,7 +13,8 @@ You are still responsible for sending the NLP pulses every
 
 
 ---------------For the Tiny85 version----------------
-The idea is you modify testpack.txt to be the following form:
+
+The idea is you modify testpack.txt to be the following from:
 
 :Function Name
 
