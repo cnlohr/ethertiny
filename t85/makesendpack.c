@@ -1,3 +1,26 @@
+/*
+    Copyright (C) 2014 <>< Charles Lohr
+
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+	copy of this software and associated documentation files (the "Software"),
+	to deal in the Software without restriction, including without limitation
+	the rights to use, copy, modify, merge, publish, distribute, sublicense,
+	and/or sell copies of the Software, and to permit persons to whom the
+	Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+	in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <zlib.h>
@@ -83,17 +106,6 @@ void EndEmit()
 			sendbuf[40+0] = csumr>>8;
 			sendbuf[40+1] = csumr&0xff;
 		}
-/*
-//	enc424j600_alter_word( 34+6, 0x11 + 0x8 + length-42 ); //UDP number + size + length (of packet)
-		//XXX I THINK 
-
-	enc424j600_start_checksum( 20+6, length - 42 + 16 ); //sta
-
-	ppl2 = enc424j600_get_checksum();
-	if( ppl2 == 0 ) ppl2 = 0xffff;
-
-	enc424j600_alter_word( 34+6, ppl2 );
-*/
 	}
 
 
