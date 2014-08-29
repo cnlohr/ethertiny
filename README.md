@@ -4,7 +4,8 @@ This is a really dangerous project.  Use at your own risk.
 
 By directly ethernet without magnetics to an AVR, you may
 cause serious damage, fire, or anything else crazy if there
-is a DC offset
+is a DC offset.  It does not follow 802.3 standards for
+10Base-T Ethernet.
 
 See the youtube video for how to hook it up.
      http://youtu.be/mwcvElQS-hM
@@ -33,8 +34,9 @@ simply call the function to send a packet!
 If you need to use the other ports for I/O, you'll need
 to modify the code to set up the right bits on port B.
 
-Right now, port PB3,PB4 are the TX+/TX- pins
-
+Right now, port PB3,PB4 are the TX+/TX- pins.
+A switch can be connected between PB0 and PB1
+and another switch may be connected btween PB2 and PB1.
 
 
 
