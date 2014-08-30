@@ -31,13 +31,14 @@
 
 struct EthernetPacket
 {
+	//MAC 24 bytes
 	uint8_t preamble[8];
 	uint8_t macto[6];
 	uint8_t macfrom[6];
 	uint16_t protocol;
 	uint16_t header;
 
-	//IP Header
+	//IP Header (18 bytes)
 	uint16_t len;
 	uint16_t id;
 	uint16_t flags;
@@ -47,13 +48,13 @@ struct EthernetPacket
 	uint32_t addyfrom;
 	uint32_t addyto;
 
-	//UDP Header
+	//UDP Header (8 bytes)
 	uint16_t srcport;
 	uint16_t dstport;
 	uint16_t length;
 	uint16_t udpcsum;
 
-	uint8_t payload[0];
+	uint8_t payload[0];  //Header takes up 
 };
 
 

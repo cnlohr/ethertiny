@@ -138,6 +138,50 @@ Done:
 
 
 
+.global MaybeHaveDataASM
+MaybeHaveDataASM:
+
+
+	push r16
+	push r18
+	push r19
+	push r20
+
+					//r22:r23 = bytes in buffer.
+	movw r30,r24    //r24:r25 = pointer to staging ram.
+
+	//In here, we're operating at 30 ~MHz (hopefully)
+	//We want to peel the data off the SPI bus as fast as possible!
+
+	//First, let's make sure it wasn't just a glitch.
+	in r18,USIBR  
+	tst r18
+	breq rlend
+
+
+	tst r22
+	breq rlend
+rloop:
+	in r18,USIDR  //1  ****
+	st Z+, r18    //2
+//	tst r18       //1
+	inc r18			//1
+    breq rlend    //2
+    nop           //1
+    nop           //1
+	in r18,USIDR  //1  ****
+	st Z+, r18    //2
+	dec r22       //1
+    nop           //
+    nop           //1
+	brne rloop    //2
+
+rlend:
+	pop r20
+	pop r19
+	pop r18
+	pop r16
+	ret
 
 
 
