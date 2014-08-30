@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cc4LkRLk.s 			page 1
+GAS LISTING /tmp/ccypg2Yv.s 			page 1
 
 
    1               		.file	"test.c"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  121 0000 0F93      		push r16
  122 0002 1F93      		push r17
  123               	/* prologue: function */
-GAS LISTING /tmp/cc4LkRLk.s 			page 2
+GAS LISTING /tmp/ccypg2Yv.s 			page 2
 
 
  124               	/* frame size = 0 */
@@ -118,7 +118,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   36:/usr/lib/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
   37:/usr/lib/avr/include/util/delay.h **** 
   38:/usr/lib/avr/include/util/delay.h **** #ifndef __HAS_DELAY_CYCLES
-GAS LISTING /tmp/cc4LkRLk.s 			page 3
+GAS LISTING /tmp/ccypg2Yv.s 			page 3
 
 
   39:/usr/lib/avr/include/util/delay.h **** #define __HAS_DELAY_CYCLES 1
@@ -178,7 +178,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   93:/usr/lib/avr/include/util/delay.h **** 
   94:/usr/lib/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
   95:/usr/lib/avr/include/util/delay.h **** # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-GAS LISTING /tmp/cc4LkRLk.s 			page 4
+GAS LISTING /tmp/ccypg2Yv.s 			page 4
 
 
   96:/usr/lib/avr/include/util/delay.h **** #endif
@@ -238,7 +238,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  150:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
  151:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
  152:/usr/lib/avr/include/util/delay.h **** 
-GAS LISTING /tmp/cc4LkRLk.s 			page 5
+GAS LISTING /tmp/ccypg2Yv.s 			page 5
 
 
  153:/usr/lib/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
@@ -280,487 +280,542 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  169 002e 0895      		ret
  174               	.Lscope1:
  176               		.stabd	78,0,0
- 180               	.global	waitforpacket
- 182               	waitforpacket:
- 183               		.stabd	46,0,0
+ 181               	.global	waitforpacket
+ 183               	waitforpacket:
+ 184               		.stabd	46,0,0
   47:test.c        **** 
   48:test.c        **** #define NOOP asm volatile("nop" ::)
   49:test.c        **** 
-  50:test.c        **** #define OSC20 0xB7
-  51:test.c        **** #define OSCHIGH 0xFF
-  52:test.c        **** 
-  53:test.c        **** static void setup_clock( void )
-  54:test.c        **** {
-  55:test.c        **** 	/*Examine Page 33*/
-  56:test.c        **** 
-  57:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
-  58:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
-  59:test.c        **** 
-  60:test.c        **** 
-  61:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
-GAS LISTING /tmp/cc4LkRLk.s 			page 6
+  50:test.c        **** #define OSC20 0xB6
+  51:test.c        **** //#define OSCHIGH 0xda  //~25 MHz???
+  52:test.c        **** #define OSCHIGH 0xFF  //~30 MHz?
+  53:test.c        **** 
+  54:test.c        **** 
+  55:test.c        **** static void setup_clock( void )
+  56:test.c        **** {
+  57:test.c        **** 	/*Examine Page 33*/
+  58:test.c        **** 
+  59:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
+  60:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
+  61:test.c        **** 
+GAS LISTING /tmp/ccypg2Yv.s 			page 6
 
 
-  62:test.c        **** 	PLLCSR |= _BV(LSM);
-  63:test.c        **** 	OSCCAL = OSC20;
-  64:test.c        **** 
-  65:test.c        **** }
+  62:test.c        **** 
+  63:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
+  64:test.c        **** 	PLLCSR |= _BV(LSM);
+  65:test.c        **** 	OSCCAL = OSC20;
   66:test.c        **** 
-  67:test.c        **** #define SMARTPWR
+  67:test.c        **** }
   68:test.c        **** 
-  69:test.c        **** //Inverting the manchester seems to universally make things worse.
-  70:test.c        **** //#define INVERT_MANCHESTER
-  71:test.c        **** 
-  72:test.c        **** #ifndef INVERT_MANCHESTER
-  73:test.c        **** //Do not split this across byte-addressing boundaries.
-  74:test.c        **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
-  75:test.c        **** 	0b10101010, 0b01101010, 0b10011010, 0b01011010,
-  76:test.c        **** 	0b10100110, 0b01100110, 0b10010110, 0b01010110,
-  77:test.c        **** 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
-  78:test.c        **** 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
-  79:test.c        **** };
-  80:test.c        **** #else
-  81:test.c        **** //Inverted
-  82:test.c        **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
-  83:test.c        **** 	0b01010101, 0b10010101, 0b01100101, 0b10100101,
-  84:test.c        **** 	0b01011001, 0b10011001, 0b01101001, 0b10101001,
-  85:test.c        **** 	0b01010110, 0b10010110, 0b01100110, 0b10100110,
-  86:test.c        **** 	0b01011010, 0b10011010, 0b01101010, 0b10101010,
-  87:test.c        **** };
-  88:test.c        **** #endif
-  89:test.c        **** /*
-  90:test.c        **** //Debug
-  91:test.c        **** char ManchesterTableDEBUG[16] __attribute__ ((aligned (16))) = {
-  92:test.c        **** 	0b00000000, 0b11000000, 0b00110000, 0b11110000,
-  93:test.c        **** 	0b00001100, 0b11001100, 0b00111100, 0b11111100,
-  94:test.c        **** 	0b00000011, 0b11000011, 0b00110011, 0b11110011,
-  95:test.c        **** 	0b00001111, 0b11001111, 0b00111111, 0b11111111,
-  96:test.c        **** };
-  97:test.c        **** */
-  98:test.c        **** unsigned char sendbuffer[370];
-  99:test.c        **** 
- 100:test.c        **** void SendTestASM( const unsigned char * c, uint8_t len );
- 101:test.c        **** void MaybeHaveDataASM( unsigned char * c, uint8_t len );
- 102:test.c        **** /*
- 103:test.c        **** void MaybeHaveDataTest( unsigned char * c, uint8_t lenX2 ) //LenX2 = 128->256, i.e. put in half the
- 104:test.c        **** {
- 105:test.c        **** 	while( lenX2-- )
- 106:test.c        **** 	{
- 107:test.c        **** 		*(c++) = USIBR;
- 108:test.c        **** 		*(c++) = USIBR;
- 109:test.c        **** 	}
- 110:test.c        **** }*/
- 111:test.c        **** 
- 112:test.c        **** void waitforpacket( unsigned char * buffer, uint16_t len, uint16_t ltime )
- 113:test.c        **** {
- 185               	.LM6:
- 186               	.LFBB2:
- 187 0030 FF92      		push r15
- 188 0032 0F93      		push r16
- 189 0034 1F93      		push r17
-GAS LISTING /tmp/cc4LkRLk.s 			page 7
+  69:test.c        **** //#define SMARTPWR
+  70:test.c        **** 
+  71:test.c        **** //Inverting the manchester seems to universally make things worse.
+  72:test.c        **** //#define INVERT_MANCHESTER
+  73:test.c        **** 
+  74:test.c        **** #ifndef INVERT_MANCHESTER
+  75:test.c        **** //Do not split this across byte-addressing boundaries.
+  76:test.c        **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
+  77:test.c        **** 	0b10101010, 0b01101010, 0b10011010, 0b01011010,
+  78:test.c        **** 	0b10100110, 0b01100110, 0b10010110, 0b01010110,
+  79:test.c        **** 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
+  80:test.c        **** 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
+  81:test.c        **** };
+  82:test.c        **** #else
+  83:test.c        **** //Inverted
+  84:test.c        **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
+  85:test.c        **** 	0b01010101, 0b10010101, 0b01100101, 0b10100101,
+  86:test.c        **** 	0b01011001, 0b10011001, 0b01101001, 0b10101001,
+  87:test.c        **** 	0b01010110, 0b10010110, 0b01100110, 0b10100110,
+  88:test.c        **** 	0b01011010, 0b10011010, 0b01101010, 0b10101010,
+  89:test.c        **** };
+  90:test.c        **** #endif
+  91:test.c        **** /*
+  92:test.c        **** //Debug
+  93:test.c        **** char ManchesterTableDEBUG[16] __attribute__ ((aligned (16))) = {
+  94:test.c        **** 	0b00000000, 0b11000000, 0b00110000, 0b11110000,
+  95:test.c        **** 	0b00001100, 0b11001100, 0b00111100, 0b11111100,
+  96:test.c        **** 	0b00000011, 0b11000011, 0b00110011, 0b11110011,
+  97:test.c        **** 	0b00001111, 0b11001111, 0b00111111, 0b11111111,
+  98:test.c        **** };
+  99:test.c        **** */
+ 100:test.c        **** unsigned char sendbuffer[370];
+ 101:test.c        **** 
+ 102:test.c        **** void SendTestASM( const unsigned char * c, uint8_t len );
+ 103:test.c        **** int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
+ 104:test.c        **** 
+ 105:test.c        **** /*
+ 106:test.c        **** void MaybeHaveDataTest( unsigned char * c, uint8_t lenX2 ) //LenX2 = 128->256, i.e. put in half the
+ 107:test.c        **** {
+ 108:test.c        **** 	while( lenX2-- )
+ 109:test.c        **** 	{
+ 110:test.c        **** 		*(c++) = USIBR;
+ 111:test.c        **** 		*(c++) = USIBR;
+ 112:test.c        **** 	}
+ 113:test.c        **** }*/
+ 114:test.c        **** 
+ 115:test.c        **** void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
+ 116:test.c        **** {
+ 186               	.LM6:
+ 187               	.LFBB2:
+GAS LISTING /tmp/ccypg2Yv.s 			page 7
 
 
- 190 0036 CF93      		push r28
- 191 0038 DF93      		push r29
+ 188 0030 0F93      		push r16
+ 189 0032 1F93      		push r17
+ 190 0034 CF93      		push r28
+ 191 0036 DF93      		push r29
  192               	/* prologue: function */
  193               	/* frame size = 0 */
- 194               	/* stack size = 5 */
- 195               	.L__stack_usage = 5
- 196 003a 8C01      		movw r16,r24
- 197 003c F62E      		mov r15,r22
- 114:test.c        **** 		OSCCAL = OSCHIGH;
+ 194               	/* stack size = 4 */
+ 195               	.L__stack_usage = 4
+ 196 0038 8B01      		movw r16,r22
+ 197 003a EA01      		movw r28,r20
+ 117:test.c        **** 		OSCCAL = OSCHIGH;
  199               	.LM7:
- 200 003e 8FEF      		ldi r24,lo8(-1)
- 201 0040 81BF      		out 0x31,r24
- 115:test.c        **** 
- 116:test.c        **** 	//Make sure we're not walking in on something.
- 117:test.c        **** 	while( ltime-- )
- 203               	.LM8:
- 204 0042 4150      		subi r20,1
- 205 0044 5109      		sbc r21,__zero_reg__
- 206               	.L7:
- 208               	.LM9:
- 209 0046 4F3F      		cpi r20,-1
- 210 0048 8FEF      		ldi r24,-1
- 211 004a 5807      		cpc r21,r24
- 212 004c 01F0      		breq .L8
- 118:test.c        **** 	{
- 119:test.c        **** 		if( USIBR == 0x00 ) break;
- 214               	.LM10:
- 215 004e 80B3      		in r24,0x10
- 216 0050 8823      		tst r24
- 217 0052 01F0      		breq .L8
- 120:test.c        **** 		if( USIBR == 0xFF ) break;
- 219               	.LM11:
- 220 0054 20B3      		in r18,0x10
- 221 0056 CA01      		movw r24,r20
- 222 0058 0197      		sbiw r24,1
- 223 005a 2F3F      		cpi r18,lo8(-1)
- 224 005c 01F0      		breq .L8
- 121:test.c        **** 		NOOP;
- 226               	.LM12:
- 227               	/* #APP */
- 228               	 ;  121 "test.c" 1
- 229 005e 0000      		nop
- 230               	 ;  0 "" 2
- 122:test.c        **** 		NOOP;
- 232               	.LM13:
- 233               	 ;  122 "test.c" 1
- 234 0060 0000      		nop
- 235               	 ;  0 "" 2
- 123:test.c        **** 		NOOP;
- 237               	.LM14:
- 238               	 ;  123 "test.c" 1
- 239 0062 0000      		nop
- 240               	 ;  0 "" 2
- 241               	/* #NOAPP */
- 242 0064 AC01      		movw r20,r24
- 243 0066 00C0      		rjmp .L7
- 244               	.L8:
-GAS LISTING /tmp/cc4LkRLk.s 			page 8
-
-
- 117:test.c        **** 	while( ltime-- )
- 246               	.LM15:
- 247 0068 EA01      		movw r28,r20
- 248               	.L10:
- 124:test.c        **** 	}
- 125:test.c        **** 
+ 200 003c 2FEF      		ldi r18,lo8(-1)
+ 201 003e 21BF      		out 0x31,r18
+ 202               	.L7:
+ 118:test.c        **** 
+ 119:test.c        **** 	//Make sure we're not walking in on something.
+ 120:test.c        **** 	while( ltime-- > 0 )
+ 204               	.LM8:
+ 205 0040 2197      		sbiw r28,1
+ 206 0042 9E01      		movw r18,r28
+ 207 0044 2F5F      		subi r18,-1
+ 208 0046 3F4F      		sbci r19,-1
+ 209 0048 1216      		cp __zero_reg__,r18
+ 210 004a 1306      		cpc __zero_reg__,r19
+ 211 004c 04F4      		brge .L12
+ 121:test.c        **** 	{
+ 122:test.c        **** 		if( USIBR == 0x00 ) break;
+ 213               	.LM9:
+ 214 004e 20B3      		in r18,0x10
+ 215 0050 2223      		tst r18
+ 216 0052 01F0      		breq .L12
+ 123:test.c        **** 		if( USIBR == 0xFF ) break;
+ 218               	.LM10:
+ 219 0054 20B3      		in r18,0x10
+ 220 0056 2F3F      		cpi r18,lo8(-1)
+ 221 0058 01F0      		breq .L12
+ 124:test.c        **** 		NOOP;
+ 223               	.LM11:
+ 224               	/* #APP */
+ 225               	 ;  124 "test.c" 1
+ 226 005a 0000      		nop
+ 227               	 ;  0 "" 2
+ 228               	/* #NOAPP */
+ 229 005c 00C0      		rjmp .L7
+ 230               	.L13:
+ 125:test.c        **** 	}
  126:test.c        **** 
- 127:test.c        **** 	while( ltime-- )
- 250               	.LM16:
- 251 006a 2097      		sbiw r28,0
- 252 006c 01F0      		breq .L25
- 128:test.c        **** 	{
- 129:test.c        **** 		if( USIBR && (USIBR != 0xFF ) )
- 254               	.LM17:
- 255 006e 80B3      		in r24,0x10
- 256 0070 8823      		tst r24
- 257 0072 01F0      		breq .L11
- 259               	.LM18:
- 260 0074 80B3      		in r24,0x10
- 261 0076 8F3F      		cpi r24,lo8(-1)
- 262 0078 01F0      		breq .L11
- 130:test.c        **** 		{
- 131:test.c        **** 			MaybeHaveDataASM( buffer, len );
- 264               	.LM19:
- 265 007a 6F2D      		mov r22,r15
- 266 007c C801      		movw r24,r16
- 267 007e 00D0      		rcall MaybeHaveDataASM
- 268               	.L11:
- 269 0080 2197      		sbiw r28,1
- 270 0082 00C0      		rjmp .L10
- 271               	.L25:
- 132:test.c        **** 		}
- 133:test.c        **** //		NOOP;
- 134:test.c        **** //		NOOP;
- 135:test.c        **** //		NOOP;
- 136:test.c        **** 	}
- 137:test.c        **** 		OSCCAL = OSC20;
- 273               	.LM20:
- 274 0084 87EB      		ldi r24,lo8(-73)
- 275 0086 81BF      		out 0x31,r24
- 276               	/* epilogue start */
- 138:test.c        **** }
- 278               	.LM21:
- 279 0088 DF91      		pop r29
- 280 008a CF91      		pop r28
- 281 008c 1F91      		pop r17
- 282 008e 0F91      		pop r16
- 283 0090 FF90      		pop r15
- 284 0092 0895      		ret
- 286               	.Lscope2:
- 288               		.stabd	78,0,0
- 289               		.section	.text.startup,"ax",@progbits
- 291               	.global	main
- 293               	main:
- 294               		.stabd	46,0,0
- 139:test.c        **** 
+ 127:test.c        **** 
+ 128:test.c        **** 	while( ltime-- > 0 )
+ 129:test.c        **** 	{
+ 130:test.c        **** 		if( USIBR && (USIBR != 0xFF ) )
+ 232               	.LM12:
+ 233 005e 20B3      		in r18,0x10
+ 234 0060 2111      		cpse r18,__zero_reg__
+ 235 0062 00C0      		rjmp .L28
+ 236               	.L12:
+GAS LISTING /tmp/ccypg2Yv.s 			page 8
+
+
+ 128:test.c        **** 	while( ltime-- > 0 )
+ 238               	.LM13:
+ 239 0064 2197      		sbiw r28,1
+ 240 0066 9E01      		movw r18,r28
+ 241 0068 2F5F      		subi r18,-1
+ 242 006a 3F4F      		sbci r19,-1
+ 243 006c 1216      		cp __zero_reg__,r18
+ 244 006e 1306      		cpc __zero_reg__,r19
+ 245 0070 04F0      		brlt .L13
+ 246 0072 00C0      		rjmp .L11
+ 247               	.L28:
+ 249               	.LM14:
+ 250 0074 20B3      		in r18,0x10
+ 251 0076 2F3F      		cpi r18,lo8(-1)
+ 252 0078 01F0      		breq .L12
+ 253               	.LBB6:
+ 131:test.c        **** 		{
+ 132:test.c        **** 			int r = MaybeHaveDataASM( buffer, len );
+ 255               	.LM15:
+ 256 007a 602F      		mov r22,r16
+ 257 007c 00D0      		rcall MaybeHaveDataASM
+ 133:test.c        **** 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
+ 259               	.LM16:
+ 260 007e 2397      		sbiw r28,3
+ 261 0080 B801      		movw r22,r16
+ 262 0082 681B      		sub r22,r24
+ 263 0084 790B      		sbc r23,r25
+ 264 0086 660F      		lsl r22
+ 265 0088 771F      		rol r23
+ 266 008a 660F      		lsl r22
+ 267 008c 771F      		rol r23
+ 268 008e C61B      		sub r28,r22
+ 269 0090 D70B      		sbc r29,r23
+ 270               	.L11:
+ 271               	.LBE6:
+ 134:test.c        **** 			break;
+ 135:test.c        **** 		}
+ 136:test.c        **** //		NOOP;
+ 137:test.c        **** //		NOOP;
+ 138:test.c        **** //		NOOP;
+ 139:test.c        **** 	}
  140:test.c        **** 
-GAS LISTING /tmp/cc4LkRLk.s 			page 9
+ 141:test.c        **** 	while( ltime-- > 0 )
+ 273               	.LM17:
+ 274 0092 1C16      		cp __zero_reg__,r28
+ 275 0094 1D06      		cpc __zero_reg__,r29
+ 276 0096 04F4      		brge .L29
+ 142:test.c        **** 	{
+ 143:test.c        **** 		NOOP;
+ 278               	.LM18:
+ 279               	/* #APP */
+ 280               	 ;  143 "test.c" 1
+ 281 0098 0000      		nop
+ 282               	 ;  0 "" 2
+ 144:test.c        **** 		NOOP;
+ 284               	.LM19:
+ 285               	 ;  144 "test.c" 1
+GAS LISTING /tmp/ccypg2Yv.s 			page 9
 
 
- 141:test.c        **** int main( )
- 142:test.c        **** {
- 296               	.LM22:
- 297               	.LFBB3:
- 298               	/* prologue: function */
- 299               	/* frame size = 0 */
- 300               	/* stack size = 0 */
- 301               	.L__stack_usage = 0
- 143:test.c        **** 	int i;
- 144:test.c        **** 	cli();
- 303               	.LM23:
- 304               	/* #APP */
- 305               	 ;  144 "test.c" 1
- 306 0000 F894      		cli
- 307               	 ;  0 "" 2
- 308               	/* #NOAPP */
- 309               	.LBB10:
- 310               	.LBB11:
-  57:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
- 312               	.LM24:
- 313 0002 80E8      		ldi r24,lo8(-128)
- 314 0004 86BD      		out 0x26,r24
-  58:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
- 316               	.LM25:
- 317 0006 16BC      		out 0x26,__zero_reg__
-  61:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
- 319               	.LM26:
- 320 0008 86E0      		ldi r24,lo8(6)
- 321 000a 87BD      		out 0x27,r24
-  62:test.c        **** 	PLLCSR |= _BV(LSM);
- 323               	.LM27:
- 324 000c 87B5      		in r24,0x27
- 325 000e 8068      		ori r24,lo8(-128)
- 326 0010 87BD      		out 0x27,r24
-  63:test.c        **** 	OSCCAL = OSC20;
- 328               	.LM28:
- 329 0012 87EB      		ldi r24,lo8(-73)
- 330 0014 81BF      		out 0x31,r24
- 331               	.LBE11:
- 332               	.LBE10:
- 145:test.c        **** 
- 146:test.c        **** 	setup_clock();
- 147:test.c        **** 
- 148:test.c        **** 	DDRB = _BV(1);
- 334               	.LM29:
- 335 0016 82E0      		ldi r24,lo8(2)
- 336 0018 87BB      		out 0x17,r24
+ 286 009a 0000      		nop
+ 287               	 ;  0 "" 2
+ 145:test.c        **** 		NOOP;
+ 289               	.LM20:
+ 290               	 ;  145 "test.c" 1
+ 291 009c 0000      		nop
+ 292               	 ;  0 "" 2
+ 146:test.c        **** 		NOOP;
+ 294               	.LM21:
+ 295               	 ;  146 "test.c" 1
+ 296 009e 0000      		nop
+ 297               	 ;  0 "" 2
+ 147:test.c        **** 		NOOP;
+ 299               	.LM22:
+ 300               	 ;  147 "test.c" 1
+ 301 00a0 0000      		nop
+ 302               	 ;  0 "" 2
+ 303               	/* #NOAPP */
+ 304 00a2 2197      		sbiw r28,1
+ 305 00a4 00C0      		rjmp .L11
+ 306               	.L29:
+ 148:test.c        **** 	}
  149:test.c        **** 
- 150:test.c        **** 	//1st let's see how fast we can clock the pin.
- 151:test.c        **** 
+ 150:test.c        **** 	OSCCAL = OSC20;
+ 308               	.LM23:
+ 309 00a6 86EB      		ldi r24,lo8(-74)
+ 310 00a8 81BF      		out 0x31,r24
+ 311               	/* epilogue start */
+ 151:test.c        **** }
+ 313               	.LM24:
+ 314 00aa DF91      		pop r29
+ 315 00ac CF91      		pop r28
+ 316 00ae 1F91      		pop r17
+ 317 00b0 0F91      		pop r16
+ 318 00b2 0895      		ret
+ 320               	.Lscope2:
+ 322               		.stabd	78,0,0
+ 323               		.section	.text.startup,"ax",@progbits
+ 325               	.global	main
+ 327               	main:
+ 328               		.stabd	46,0,0
  152:test.c        **** 
- 153:test.c        **** 	TCCR0A = _BV(WGM01);
- 338               	.LM30:
- 339 001a 8ABD      		out 0x2a,r24
- 154:test.c        **** 	TCCR0B = _BV(CS00);
- 341               	.LM31:
- 342 001c 81E0      		ldi r24,lo8(1)
-GAS LISTING /tmp/cc4LkRLk.s 			page 10
+ 153:test.c        **** 
+ 154:test.c        **** int main( )
+ 155:test.c        **** {
+ 330               	.LM25:
+ 331               	.LFBB3:
+ 332               	/* prologue: function */
+ 333               	/* frame size = 0 */
+ 334               	/* stack size = 0 */
+ 335               	.L__stack_usage = 0
+ 156:test.c        **** 	int i;
+ 157:test.c        **** 	cli();
+ 337               	.LM26:
+ 338               	/* #APP */
+ 339               	 ;  157 "test.c" 1
+ 340 0000 F894      		cli
+GAS LISTING /tmp/ccypg2Yv.s 			page 10
 
 
- 343 001e 83BF      		out 0x33,r24
- 155:test.c        **** 	OCR0A = 0;
- 345               	.LM32:
- 346 0020 19BC      		out 0x29,__zero_reg__
- 156:test.c        **** 
- 157:test.c        **** 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USICLK) | _BV(USITC);
- 348               	.LM33:
- 349 0022 87E1      		ldi r24,lo8(23)
- 350 0024 8DB9      		out 0xd,r24
- 351 0026 80E0      		ldi r24,lo8(PacketA)
- 352 0028 90E0      		ldi r25,hi8(PacketA)
- 353 002a A0E0      		ldi r26,lo8(sendbuffer)
- 354 002c B0E0      		ldi r27,hi8(sendbuffer)
- 355               	.L28:
- 356               	.LBB12:
+ 341               	 ;  0 "" 2
+ 342               	/* #NOAPP */
+ 343               	.LBB11:
+ 344               	.LBB12:
+  59:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
+ 346               	.LM27:
+ 347 0002 80E8      		ldi r24,lo8(-128)
+ 348 0004 86BD      		out 0x26,r24
+  60:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
+ 350               	.LM28:
+ 351 0006 16BC      		out 0x26,__zero_reg__
+  63:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
+ 353               	.LM29:
+ 354 0008 86E0      		ldi r24,lo8(6)
+ 355 000a 87BD      		out 0x27,r24
+  64:test.c        **** 	PLLCSR |= _BV(LSM);
+ 357               	.LM30:
+ 358 000c 87B5      		in r24,0x27
+ 359 000e 8068      		ori r24,lo8(-128)
+ 360 0010 87BD      		out 0x27,r24
+  65:test.c        **** 	OSCCAL = OSC20;
+ 362               	.LM31:
+ 363 0012 86EB      		ldi r24,lo8(-74)
+ 364 0014 81BF      		out 0x31,r24
+ 365               	.LBE12:
+ 366               	.LBE11:
  158:test.c        **** 
- 159:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
- 160:test.c        **** 	{
- 161:test.c        **** 		sendbuffer[i] = pgm_read_word( &PacketA[i] );
- 358               	.LM34:
- 359 002e FC01      		movw r30,r24
- 360               	/* #APP */
- 361               	 ;  161 "test.c" 1
- 362 0030 2591      		lpm r18, Z+
- 363 0032 3491      		lpm r19, Z
- 364               		
- 365               	 ;  0 "" 2
- 366               	/* #NOAPP */
- 367               	.LBE12:
- 368 0034 2D93      		st X+,r18
- 369 0036 0196      		adiw r24,1
- 159:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
- 371               	.LM35:
- 372 0038 20E0      		ldi r18,hi8(PacketA+76)
- 373 003a 8030      		cpi r24,lo8(PacketA+76)
- 374 003c 9207      		cpc r25,r18
- 375 003e 01F4      		brne .L28
- 162:test.c        **** 	}
- 163:test.c        **** 
- 164:test.c        **** 	i = 0;
+ 159:test.c        **** 	setup_clock();
+ 160:test.c        **** 
+ 161:test.c        **** 	DDRB = _BV(1);
+ 368               	.LM32:
+ 369 0016 82E0      		ldi r24,lo8(2)
+ 370 0018 87BB      		out 0x17,r24
+ 162:test.c        **** 
+ 163:test.c        **** 	//1st let's see how fast we can clock the pin.
+ 164:test.c        **** 
  165:test.c        **** 
- 166:test.c        **** 	int frame = 0;
- 167:test.c        **** 
- 168:test.c        **** 	struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
+ 166:test.c        **** 	TCCR0A = _BV(WGM01);
+ 372               	.LM33:
+ 373 001a 8ABD      		out 0x2a,r24
+ 167:test.c        **** 	TCCR0B = _BV(CS00);
+ 375               	.LM34:
+ 376 001c 81E0      		ldi r24,lo8(1)
+ 377 001e 83BF      		out 0x33,r24
+ 168:test.c        **** 	OCR0A = 0;
+ 379               	.LM35:
+ 380 0020 19BC      		out 0x29,__zero_reg__
  169:test.c        **** 
- 170:test.c        **** 	//??? I have no idea why this makes everyhting much more rubust.
- 171:test.c        **** 	PORTB |= _BV(0);
- 377               	.LM36:
- 378 0040 C09A      		sbi 0x18,0
- 172:test.c        **** 
- 173:test.c        **** 	while(1)
- 174:test.c        **** 	{
- 175:test.c        **** 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
- 176:test.c        **** 	//	continue;
- 177:test.c        **** 
- 178:test.c        **** 		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048 cycles (30MHz/8 = 
- 179:test.c        **** //		_delay_ms(8);
-GAS LISTING /tmp/cc4LkRLk.s 			page 11
+ 170:test.c        **** 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
+ 382               	.LM36:
+ 383 0022 85E1      		ldi r24,lo8(21)
+ 384 0024 8DB9      		out 0xd,r24
+ 385 0026 80E0      		ldi r24,lo8(PacketA)
+ 386 0028 90E0      		ldi r25,hi8(PacketA)
+ 387 002a A0E0      		ldi r26,lo8(sendbuffer)
+ 388 002c B0E0      		ldi r27,hi8(sendbuffer)
+ 389               	.L32:
+GAS LISTING /tmp/ccypg2Yv.s 			page 11
 
 
- 180:test.c        **** #ifdef SMARTPWR
- 181:test.c        **** 		DDRB |= _BV(1);
- 182:test.c        **** #endif
- 183:test.c        **** 		USIDR = 0x07;
- 380               	.LM37:
- 381 0042 17E0      		ldi r17,lo8(7)
- 382               	.LBB13:
- 184:test.c        **** #ifdef SMARTPWR
- 185:test.c        **** 		DDRB &= ~_BV(1);
- 186:test.c        **** #endif
- 187:test.c        **** 		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048  (30MHz/8 = 3.75MH
- 188:test.c        **** 		//_delay_ms(8);
- 189:test.c        **** 
- 190:test.c        **** 			i++;
- 191:test.c        **** 
- 192:test.c        **** 		if( i == 20 )
- 193:test.c        **** 		{
- 194:test.c        **** #ifdef SMARTPWR
- 195:test.c        **** 			DDRB |= _BV(1);
- 196:test.c        **** #endif
- 197:test.c        **** 
- 198:test.c        **** 			//UDP Data starts at byte #50
- 199:test.c        **** 			struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
- 200:test.c        **** //			sbe->payload[0] = 0xBB;
- 201:test.c        **** //			sbe->payload[1] = frame++;
- 202:test.c        **** 			sbe->addyfrom = 0x450a000a;
- 384               	.LM38:
- 385 0044 9AE0      		ldi r25,lo8(10)
- 386 0046 C92E      		mov r12,r25
- 387 0048 D12C      		mov r13,__zero_reg__
- 388 004a EC2C      		mov r14,r12
- 389 004c 95E4      		ldi r25,lo8(69)
- 390 004e F92E      		mov r15,r25
- 391               	.L32:
- 392               	.LBE13:
- 142:test.c        **** {
- 394               	.LM39:
- 395 0050 C4E1      		ldi r28,lo8(20)
- 396 0052 D0E0      		ldi r29,0
- 397               	.L30:
- 178:test.c        **** 		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048 cycles (30MHz/8 = 
- 399               	.LM40:
- 400 0054 40E3      		ldi r20,lo8(48)
- 401 0056 55E7      		ldi r21,lo8(117)
- 402 0058 60EA      		ldi r22,lo8(-96)
- 403 005a 70E0      		ldi r23,0
- 404 005c 80E0      		ldi r24,lo8(sendbuffer+50)
- 405 005e 90E0      		ldi r25,hi8(sendbuffer+50)
- 406 0060 00D0      		rcall waitforpacket
- 181:test.c        **** 		DDRB |= _BV(1);
- 408               	.LM41:
- 409 0062 B99A      		sbi 0x17,1
- 183:test.c        **** 		USIDR = 0x07;
- 411               	.LM42:
- 412 0064 1FB9      		out 0xf,r17
- 185:test.c        **** 		DDRB &= ~_BV(1);
- 414               	.LM43:
-GAS LISTING /tmp/cc4LkRLk.s 			page 12
+ 390               	.LBB13:
+ 171:test.c        **** 
+ 172:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
+ 173:test.c        **** 	{
+ 174:test.c        **** 		sendbuffer[i] = pgm_read_word( &PacketA[i] );
+ 392               	.LM37:
+ 393 002e FC01      		movw r30,r24
+ 394               	/* #APP */
+ 395               	 ;  174 "test.c" 1
+ 396 0030 2591      		lpm r18, Z+
+ 397 0032 3491      		lpm r19, Z
+ 398               		
+ 399               	 ;  0 "" 2
+ 400               	/* #NOAPP */
+ 401               	.LBE13:
+ 402 0034 2D93      		st X+,r18
+ 403 0036 0196      		adiw r24,1
+ 172:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
+ 405               	.LM38:
+ 406 0038 20E0      		ldi r18,hi8(PacketA+76)
+ 407 003a 8030      		cpi r24,lo8(PacketA+76)
+ 408 003c 9207      		cpc r25,r18
+ 409 003e 01F4      		brne .L32
+ 175:test.c        **** 	}
+ 176:test.c        **** 
+ 177:test.c        **** 	i = 0;
+ 178:test.c        **** 
+ 179:test.c        **** 	int frame = 0;
+ 180:test.c        **** 
+ 181:test.c        **** 	struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
+ 182:test.c        **** 
+ 183:test.c        **** //	PORTB |= _BV(0);  //Enable pullups.
+ 184:test.c        **** 	PORTB &= ~_BV(0); 
+ 411               	.LM39:
+ 412 0040 C098      		cbi 0x18,0
+ 185:test.c        **** 	DDRB &= ~_BV(0);
+ 414               	.LM40:
+ 415 0042 B898      		cbi 0x17,0
+ 186:test.c        **** 	PORTB &= ~_BV(1);
+ 417               	.LM41:
+ 418 0044 C198      		cbi 0x18,1
+ 187:test.c        **** 	USICR &= ~_BV(USIWM0);  //Disable USICR
+ 420               	.LM42:
+ 421 0046 6C98      		cbi 0xd,4
+ 422               	.LBB14:
+ 188:test.c        **** 
+ 189:test.c        **** 	while(1)
+ 190:test.c        **** 	{
+ 191:test.c        **** 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+ 192:test.c        **** 	//	continue;
+ 193:test.c        **** 
+ 194:test.c        **** #define LIMITSIZE  sizeof( sendbuffer )/2-50
+ 195:test.c        **** //#define LIMITSIZE 10
+ 196:test.c        **** 
+ 197:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 
+ 198:test.c        **** //		_delay_ms(8);
+ 199:test.c        **** #ifdef SMARTPWR
+GAS LISTING /tmp/ccypg2Yv.s 			page 12
 
 
- 415 0066 B998      		cbi 0x17,1
- 187:test.c        **** 		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048  (30MHz/8 = 3.75MH
- 417               	.LM44:
- 418 0068 40E3      		ldi r20,lo8(48)
- 419 006a 55E7      		ldi r21,lo8(117)
- 420 006c 60EA      		ldi r22,lo8(-96)
- 421 006e 70E0      		ldi r23,0
- 422 0070 80E0      		ldi r24,lo8(sendbuffer+50)
- 423 0072 90E0      		ldi r25,hi8(sendbuffer+50)
- 424 0074 00D0      		rcall waitforpacket
- 425 0076 2197      		sbiw r28,1
- 192:test.c        **** 		if( i == 20 )
- 427               	.LM45:
- 428 0078 2097      		sbiw r28,0
- 429 007a 01F4      		brne .L30
- 430               	.LBB14:
- 195:test.c        **** 			DDRB |= _BV(1);
- 432               	.LM46:
- 433 007c B99A      		sbi 0x17,1
- 435               	.LM47:
- 436 007e C092 0000 		sts sendbuffer+34,r12
- 437 0082 D092 0000 		sts sendbuffer+34+1,r13
- 438 0086 E092 0000 		sts sendbuffer+34+2,r14
- 439 008a F092 0000 		sts sendbuffer+34+3,r15
- 203:test.c        **** 			int rr = Ethernetize( sendbuffer, PacketABytes, 300);
- 441               	.LM48:
- 442 008e 4CE2      		ldi r20,lo8(44)
- 443 0090 51E0      		ldi r21,lo8(1)
- 444 0092 6CE4      		ldi r22,lo8(76)
- 445 0094 70E0      		ldi r23,0
- 446 0096 80E0      		ldi r24,lo8(sendbuffer)
- 447 0098 90E0      		ldi r25,hi8(sendbuffer)
- 448 009a 00D0      		rcall Ethernetize
- 204:test.c        **** 
- 205:test.c        **** 			SendTestASM( sendbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
- 450               	.LM49:
- 451 009c 97FD      		sbrc r25,7
- 452 009e 0396      		adiw r24,3
- 453               	.L31:
- 454 00a0 BC01      		movw r22,r24
- 455 00a2 7595      		asr r23
- 456 00a4 6795      		ror r22
- 457 00a6 7595      		asr r23
- 458 00a8 6795      		ror r22
- 459 00aa 6D5F      		subi r22,lo8(-(3))
- 460 00ac 80E0      		ldi r24,lo8(sendbuffer)
- 461 00ae 90E0      		ldi r25,hi8(sendbuffer)
- 462 00b0 00D0      		rcall SendTestASM
- 206:test.c        **** #ifdef SMARTPWR
- 207:test.c        **** 			DDRB &= ~_BV(1);
- 464               	.LM50:
- 465 00b2 B998      		cbi 0x17,1
- 466 00b4 00C0      		rjmp .L32
- 467               	.LBE14:
- 469               	.Lscope3:
- 471               		.stabd	78,0,0
- 472               		.comm	sendbuffer,370,1
-GAS LISTING /tmp/cc4LkRLk.s 			page 13
+ 200:test.c        **** 		DDRB |= _BV(1);
+ 201:test.c        **** #endif
+ 202:test.c        **** 		PORTB|=_BV(1);
+ 203:test.c        **** 		NOOP;
+ 204:test.c        **** 		PORTB &=~_BV(1);
+ 205:test.c        **** #ifdef SMARTPWR
+ 206:test.c        **** 		DDRB &= ~_BV(1);
+ 207:test.c        **** #endif
+ 208:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+ 209:test.c        **** // 		_delay_ms(8);
+ 210:test.c        **** 
+ 211:test.c        **** 		i++;
+ 212:test.c        **** 
+ 213:test.c        **** 		if( i == 20 )
+ 214:test.c        **** 		{
+ 215:test.c        **** #ifdef SMARTPWR
+ 216:test.c        **** 			DDRB |= _BV(1);
+ 217:test.c        **** #endif
+ 218:test.c        **** 
+ 219:test.c        **** 			//UDP Data starts at byte #50
+ 220:test.c        **** 			struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
+ 221:test.c        **** //			sbe->payload[0] = 0xBB;
+ 222:test.c        **** //			sbe->payload[1] = frame++;
+ 223:test.c        **** 			sbe->addyfrom = 0x450a000a;
+ 424               	.LM43:
+ 425 0048 2AE0      		ldi r18,lo8(10)
+ 426 004a C22E      		mov r12,r18
+ 427 004c D12C      		mov r13,__zero_reg__
+ 428 004e EC2C      		mov r14,r12
+ 429 0050 25E4      		ldi r18,lo8(69)
+ 430 0052 F22E      		mov r15,r18
+ 431               	.L36:
+ 432               	.LBE14:
+ 155:test.c        **** {
+ 434               	.LM44:
+ 435 0054 C4E1      		ldi r28,lo8(20)
+ 436 0056 D0E0      		ldi r29,0
+ 437               	.L34:
+ 197:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 
+ 439               	.LM45:
+ 440 0058 40E2      		ldi r20,lo8(32)
+ 441 005a 5EE4      		ldi r21,lo8(78)
+ 442 005c 67E8      		ldi r22,lo8(-121)
+ 443 005e 70E0      		ldi r23,0
+ 444 0060 80E0      		ldi r24,lo8(sendbuffer+50)
+ 445 0062 90E0      		ldi r25,hi8(sendbuffer+50)
+ 446 0064 00D0      		rcall waitforpacket
+ 202:test.c        **** 		PORTB|=_BV(1);
+ 448               	.LM46:
+ 449 0066 C19A      		sbi 0x18,1
+ 203:test.c        **** 		NOOP;
+ 451               	.LM47:
+ 452               	/* #APP */
+ 453               	 ;  203 "test.c" 1
+ 454 0068 0000      		nop
+ 455               	 ;  0 "" 2
+ 204:test.c        **** 		PORTB &=~_BV(1);
+GAS LISTING /tmp/ccypg2Yv.s 			page 13
 
 
- 473               	.global	ManchesterTable
- 474               		.data
- 475               		.p2align	4
- 478               	ManchesterTable:
- 479 0000 AA        		.byte	-86
- 480 0001 6A        		.byte	106
- 481 0002 9A        		.byte	-102
- 482 0003 5A        		.byte	90
- 483 0004 A6        		.byte	-90
- 484 0005 66        		.byte	102
- 485 0006 96        		.byte	-106
- 486 0007 56        		.byte	86
- 487 0008 A9        		.byte	-87
- 488 0009 69        		.byte	105
- 489 000a 99        		.byte	-103
- 490 000b 59        		.byte	89
- 491 000c A5        		.byte	-91
- 492 000d 65        		.byte	101
- 493 000e 95        		.byte	-107
- 494 000f 55        		.byte	85
- 497               		.text
- 499               	.Letext0:
- 500               		.ident	"GCC: (GNU) 4.8.2"
- 501               	.global __do_copy_data
- 502               	.global __do_clear_bss
-GAS LISTING /tmp/cc4LkRLk.s 			page 14
+ 457               	.LM48:
+ 458               	/* #NOAPP */
+ 459 006a C198      		cbi 0x18,1
+ 208:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+ 461               	.LM49:
+ 462 006c 40E2      		ldi r20,lo8(32)
+ 463 006e 5EE4      		ldi r21,lo8(78)
+ 464 0070 67E8      		ldi r22,lo8(-121)
+ 465 0072 70E0      		ldi r23,0
+ 466 0074 80E0      		ldi r24,lo8(sendbuffer+50)
+ 467 0076 90E0      		ldi r25,hi8(sendbuffer+50)
+ 468 0078 00D0      		rcall waitforpacket
+ 469 007a 2197      		sbiw r28,1
+ 213:test.c        **** 		if( i == 20 )
+ 471               	.LM50:
+ 472 007c 2097      		sbiw r28,0
+ 473 007e 01F4      		brne .L34
+ 474               	.LBB15:
+ 476               	.LM51:
+ 477 0080 C092 0000 		sts sendbuffer+34,r12
+ 478 0084 D092 0000 		sts sendbuffer+34+1,r13
+ 479 0088 E092 0000 		sts sendbuffer+34+2,r14
+ 480 008c F092 0000 		sts sendbuffer+34+3,r15
+ 224:test.c        **** 			int rr = Ethernetize( sendbuffer, PacketABytes, 300);
+ 482               	.LM52:
+ 483 0090 4CE2      		ldi r20,lo8(44)
+ 484 0092 51E0      		ldi r21,lo8(1)
+ 485 0094 6CE4      		ldi r22,lo8(76)
+ 486 0096 70E0      		ldi r23,0
+ 487 0098 80E0      		ldi r24,lo8(sendbuffer)
+ 488 009a 90E0      		ldi r25,hi8(sendbuffer)
+ 489 009c 00D0      		rcall Ethernetize
+ 225:test.c        **** 
+ 226:test.c        **** 			SendTestASM( sendbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+ 491               	.LM53:
+ 492 009e 97FD      		sbrc r25,7
+ 493 00a0 0396      		adiw r24,3
+ 494               	.L35:
+ 495 00a2 BC01      		movw r22,r24
+ 496 00a4 7595      		asr r23
+ 497 00a6 6795      		ror r22
+ 498 00a8 7595      		asr r23
+ 499 00aa 6795      		ror r22
+ 500 00ac 6D5F      		subi r22,lo8(-(3))
+ 501 00ae 80E0      		ldi r24,lo8(sendbuffer)
+ 502 00b0 90E0      		ldi r25,hi8(sendbuffer)
+ 503 00b2 00D0      		rcall SendTestASM
+ 504 00b4 00C0      		rjmp .L36
+ 505               	.LBE15:
+ 507               	.Lscope3:
+ 509               		.stabd	78,0,0
+ 510               		.comm	sendbuffer,370,1
+ 511               	.global	ManchesterTable
+ 512               		.data
+ 513               		.p2align	4
+ 516               	ManchesterTable:
+ 517 0000 AA        		.byte	-86
+GAS LISTING /tmp/ccypg2Yv.s 			page 14
+
+
+ 518 0001 6A        		.byte	106
+ 519 0002 9A        		.byte	-102
+ 520 0003 5A        		.byte	90
+ 521 0004 A6        		.byte	-90
+ 522 0005 66        		.byte	102
+ 523 0006 96        		.byte	-106
+ 524 0007 56        		.byte	86
+ 525 0008 A9        		.byte	-87
+ 526 0009 69        		.byte	105
+ 527 000a 99        		.byte	-103
+ 528 000b 59        		.byte	89
+ 529 000c A5        		.byte	-91
+ 530 000d 65        		.byte	101
+ 531 000e 95        		.byte	-107
+ 532 000f 55        		.byte	85
+ 535               		.text
+ 537               	.Letext0:
+ 538               		.ident	"GCC: (GNU) 4.8.2"
+ 539               	.global __do_copy_data
+ 540               	.global __do_clear_bss
+GAS LISTING /tmp/ccypg2Yv.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 test.c
-     /tmp/cc4LkRLk.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/cc4LkRLk.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/cc4LkRLk.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/cc4LkRLk.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/cc4LkRLk.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/cc4LkRLk.s:116    .text:0000000000000000 delay_ms
-     /tmp/cc4LkRLk.s:182    .text:0000000000000030 waitforpacket
-     /tmp/cc4LkRLk.s:293    .text.startup:0000000000000000 main
+     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccypg2Yv.s:116    .text:0000000000000000 delay_ms
+     /tmp/ccypg2Yv.s:183    .text:0000000000000030 waitforpacket
+     /tmp/ccypg2Yv.s:327    .text.startup:0000000000000000 main
                             *COM*:0000000000000172 sendbuffer
-     /tmp/cc4LkRLk.s:478    .data:0000000000000000 ManchesterTable
+     /tmp/ccypg2Yv.s:516    .data:0000000000000000 ManchesterTable
 
 UNDEFINED SYMBOLS
 MaybeHaveDataASM
@@ -769,7 +824,7 @@ Ethernetize
 SendTestASM
 __do_copy_data
 __do_clear_bss
-GAS LISTING /tmp/cc4LkRLk.s 			page 1
+GAS LISTING /tmp/ccypg2Yv.s 			page 1
 
 
    1               	# 1 "asmtest.S"
@@ -829,7 +884,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   23               	  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
   24               	  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
   25               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-GAS LISTING /tmp/cc4LkRLk.s 			page 2
+GAS LISTING /tmp/ccypg2Yv.s 			page 2
 
 
   26               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -889,7 +944,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   80               	    The last EEPROM address.
   81               	    <br>
   82               	    - \b FLASHEND
-GAS LISTING /tmp/cc4LkRLk.s 			page 3
+GAS LISTING /tmp/ccypg2Yv.s 			page 3
 
 
   83               	    <br>
@@ -949,7 +1004,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  136               	#  include <avr/iom32c1.h>
  137               	#elif defined (__AVR_ATmega32M1__)
  138               	#  include <avr/iom32m1.h>
-GAS LISTING /tmp/cc4LkRLk.s 			page 4
+GAS LISTING /tmp/ccypg2Yv.s 			page 4
 
 
  139               	#elif defined (__AVR_ATmega32U2__)
@@ -1009,7 +1064,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  193               	#elif defined (__AVR_ATmega6450__) || defined (__AVR_ATmega6450A__) || defined (__AVR_ATmega6450P__
  194               	#  include <avr/iom6450.h>
  195               	#elif defined (__AVR_ATmega649__) || defined (__AVR_ATmega649A__)
-GAS LISTING /tmp/cc4LkRLk.s 			page 5
+GAS LISTING /tmp/ccypg2Yv.s 			page 5
 
 
  196               	#  include <avr/iom649.h>
@@ -1069,7 +1124,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  250               	#  include <avr/iom165.h>
  251               	#elif defined (__AVR_ATmega165P__)
  252               	#  include <avr/iom165p.h>
-GAS LISTING /tmp/cc4LkRLk.s 			page 6
+GAS LISTING /tmp/ccypg2Yv.s 			page 6
 
 
  253               	#elif defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
@@ -1129,7 +1184,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  307               	#elif defined (__AVR_AT90S2333__)
  308               	#  include <avr/io2333.h>
  309               	#elif defined (__AVR_AT90S2323__)
-GAS LISTING /tmp/cc4LkRLk.s 			page 7
+GAS LISTING /tmp/ccypg2Yv.s 			page 7
 
 
  310               	#  include <avr/io2323.h>
@@ -1189,7 +1244,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   24               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
   25               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
   26               	  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-GAS LISTING /tmp/cc4LkRLk.s 			page 8
+GAS LISTING /tmp/ccypg2Yv.s 			page 8
 
 
   27               	  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
@@ -1249,7 +1304,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  381               	#elif defined (__AVR_ATxmega32A4__)
  382               	#  include <avr/iox32a4.h>
  383               	#elif defined (__AVR_ATxmega32D4__)
-GAS LISTING /tmp/cc4LkRLk.s 			page 9
+GAS LISTING /tmp/ccypg2Yv.s 			page 9
 
 
  384               	#  include <avr/iox32d4.h>
@@ -1309,7 +1364,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  436               	#include <avr/version.h>
    1               	/* Copyright (c) 2005, Joerg Wunsch                               -*- c -*-
  437               	
-GAS LISTING /tmp/cc4LkRLk.s 			page 10
+GAS LISTING /tmp/ccypg2Yv.s 			page 10
 
 
  438               	/* Include fuse.h after individual IO header files. */
@@ -1321,182 +1376,201 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
    1               	/* Copyright (c) 2007, Atmel Corporation
  443               	
   30               	
-  31               	.global SendTick
-  32               	SendTick:
-  33:asmtest.S     **** 	ori r18, 0b00010101
-  34:asmtest.S     **** 	ori r19, 0b00001101
-  35:asmtest.S     **** 	ori r20, 0b00000101
-  36:asmtest.S     **** 	out PORTB, r19
+  31               	#define USEBR  USIDR
+  32               	.global SendTick
+  33               	SendTick:
+  34:asmtest.S     **** 	ori r18, 0b00010101
+  35:asmtest.S     **** 	ori r19, 0b00001101
+  36:asmtest.S     **** 	ori r20, 0b00000101
   37:asmtest.S     **** 	out PORTB, r19
-  38:asmtest.S     **** 	out PORTB, r18
+  38:asmtest.S     **** 	out PORTB, r19
   39:asmtest.S     **** 	out PORTB, r18
-  40:asmtest.S     **** 	out PORTB, r20
-  41:asmtest.S     **** 	ret
-  42               	
-  43               	.global SendTestASM  // ( unsigned char * ptr_to_packet, uint8_t packet_length_longs ); (longs = pa
-  44               	SendTestASM:
-  45:asmtest.S     **** 	push r16
-  46:asmtest.S     **** 	push r18
-  47:asmtest.S     **** 	push r19
-  48:asmtest.S     **** 	push r20
-  49:asmtest.S     **** 	ldi r27,0
-  50:asmtest.S     **** 	ldi r26,0
-  51:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable))
-  52:asmtest.S     **** 	sbci r27,hi8(-(ManchesterTable))
-  53               	//	mov r17, r26 // For backup
-  54               		  //Manchester table now in X.
-  55               	
-  56               		//Move "Packet to send" into Z (R30, 31)
-  57:asmtest.S     **** 	movw r30,r24
-  58               	//	add r22,r24
-  59               	//	adc r23,r25
-  60               	
-  61               		//r22 = how big to send.
-  62               		
-  63:asmtest.S     **** 	mov r16, r22
-  64:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
-  65:asmtest.S     **** 	mov r26, r18   //1  R26 = To be read Manchester lookup
-  66:asmtest.S     **** 	andi r26, 0x0f //1
-  67:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
-  68               	SendLoop:
-  69:asmtest.S     **** 	tst r16
-  70:asmtest.S     **** 	breq Done
-  71               	KeepGoing:			///subi r26,lo8(-(ManchesterTable))
+  40:asmtest.S     **** 	out PORTB, r18
+  41:asmtest.S     **** 	out PORTB, r20
+  42:asmtest.S     **** 	ret
+  43               	
+  44               	.global SendTestASM  // ( unsigned char * ptr_to_packet, uint8_t packet_length_longs ); (longs = pa
+  45               	SendTestASM:
+  46:asmtest.S     **** 	push r16
+  47:asmtest.S     **** 	push r18
+  48:asmtest.S     **** 	push r19
+  49:asmtest.S     **** 	push r20
+  50:asmtest.S     **** 	ldi r27,0
+  51:asmtest.S     **** 	ldi r26,0
+  52:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable))
+  53:asmtest.S     **** 	sbci r27,hi8(-(ManchesterTable))
+  54               	//	mov r17, r26 // For backup
+  55               		  //Manchester table now in X.
+  56               	
+  57               		//Move "Packet to send" into Z (R30, 31)
+  58:asmtest.S     **** 	movw r30,r24
+  59               	//	add r22,r24
+  60               	//	adc r23,r25
+  61               	
+  62               		//r22 = how big to send.
+  63               		
+  64:asmtest.S     **** 	mov r16, r22
+  65:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
+  66:asmtest.S     **** 	mov r26, r18   //1  R26 = To be read Manchester lookup
+  67:asmtest.S     **** 	andi r26, 0x0f //1
+  68:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+  69               	SendLoop:
+  70:asmtest.S     **** 	tst r16
+  71:asmtest.S     **** 	breq Done
   72               	
-  73               		//Heavily interleved code.  Need a new OUTB every 8 cycles exactly.
-  74:asmtest.S     ****     nop           //1 //Look, ma ONE EXTRA CYCLE!
-  75               		//nop
-  76               	
-  77:asmtest.S     **** 	ld r19, X      //2
-  78:asmtest.S     **** 	swap r18       //1
-GAS LISTING /tmp/cc4LkRLk.s 			page 11
+  73               		//Enable the USI
+  74:asmtest.S     **** 	SBI USICR, USIWM0
+  75               	
+  76               	KeepGoing:			///subi r26,lo8(-(ManchesterTable))
+  77               	
+  78               		//Heavily interleved code.  Need a new OUTB every 8 cycles exactly.
+GAS LISTING /tmp/ccypg2Yv.s 			page 11
 
 
-  79:asmtest.S     **** 	out USIDR, r19 //1  START HERE
-  80:asmtest.S     **** 	mov r26, r18   //1
-  81:asmtest.S     **** 	andi r26, 0x0f //1
-  82:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
-  83:asmtest.S     **** 	ld r19, X      //2
-  84:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
-  85:asmtest.S     **** 	out USIDR, r19 //1 ** OK
-  86:asmtest.S     **** 	mov r26, r18   //1
-  87               	
-  88               	
-  89:asmtest.S     **** 	andi r26, 0x0f //1
-  90:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
-  91:asmtest.S     **** 	ld r19, X      //2
-  92:asmtest.S     **** 	swap r18       //1
-  93:asmtest.S     **** 	mov r26, r18   //1
-  94:asmtest.S     **** 	out USIDR, r19 //1  ** OK
-  95:asmtest.S     **** 	andi r26, 0x0f //1
-  96:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
-  97:asmtest.S     **** 	ld r19, X      //2
-  98:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
-  99:asmtest.S     **** 	mov r26, r18   //1
- 100:asmtest.S     **** 	out USIDR, r19 //1  **OK
- 101               	
- 102               	
- 103:asmtest.S     **** 	andi r26, 0x0f //1
- 104:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
- 105:asmtest.S     **** 	ld r19, X      //2
- 106:asmtest.S     **** 	swap r18       //1
- 107:asmtest.S     **** 	mov r26, r18   //1
+  79:asmtest.S     ****     nop           //1 //Look, ma ONE EXTRA CYCLE!
+  80               		//nop
+  81               	
+  82:asmtest.S     **** 	ld r19, X      //2
+  83:asmtest.S     **** 	swap r18       //1
+  84:asmtest.S     **** 	out USEBR, r19 //1  START HERE
+  85:asmtest.S     **** 	mov r26, r18   //1
+  86:asmtest.S     **** 	andi r26, 0x0f //1
+  87:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+  88:asmtest.S     **** 	ld r19, X      //2
+  89:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
+  90:asmtest.S     **** 	out USEBR, r19 //1 ** OK
+  91:asmtest.S     **** 	mov r26, r18   //1
+  92               	
+  93               	
+  94:asmtest.S     **** 	andi r26, 0x0f //1
+  95:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+  96:asmtest.S     **** 	ld r19, X      //2
+  97:asmtest.S     **** 	swap r18       //1
+  98:asmtest.S     **** 	mov r26, r18   //1
+  99:asmtest.S     **** 	out USEBR, r19 //1  ** OK
+ 100:asmtest.S     **** 	andi r26, 0x0f //1
+ 101:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+ 102:asmtest.S     **** 	ld r19, X      //2
+ 103:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
+ 104:asmtest.S     **** 	mov r26, r18   //1
+ 105:asmtest.S     **** 	out USEBR, r19 //1  **OK
+ 106               	
+ 107               	
  108:asmtest.S     **** 	andi r26, 0x0f //1
- 109:asmtest.S     **** 	out USIDR, r19 //1  ** OK 
- 110:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
- 111:asmtest.S     **** 	ld r19, X      //2
- 112:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
- 113:asmtest.S     **** 	mov r26, r18   //1
- 114:asmtest.S     **** 	andi r26, 0x0f //1
- 115:asmtest.S     **** 	out USIDR, r19 //1 ** OK
- 116:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
- 117:asmtest.S     **** 	ld r19, X      //2
- 118:asmtest.S     **** 	swap r18       //1
- 119:asmtest.S     **** 	mov r26, r18   //1
- 120:asmtest.S     **** 	andi r26, 0x0f //1
+ 109:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+ 110:asmtest.S     **** 	ld r19, X      //2
+ 111:asmtest.S     **** 	swap r18       //1
+ 112:asmtest.S     **** 	mov r26, r18   //1
+ 113:asmtest.S     **** 	andi r26, 0x0f //1
+ 114:asmtest.S     **** 	out USEBR, r19 //1  ** OK 
+ 115:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+ 116:asmtest.S     **** 	ld r19, X      //2
+ 117:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
+ 118:asmtest.S     **** 	mov r26, r18   //1
+ 119:asmtest.S     **** 	andi r26, 0x0f //1
+ 120:asmtest.S     **** 	out USEBR, r19 //1 ** OK
  121:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
- 122:asmtest.S     **** 	out USIDR, r19 //1 ** OK
- 123:asmtest.S     **** 	ld r19, X      //2
- 124:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
- 125:asmtest.S     **** 	mov r26, r18   //1
- 126:asmtest.S     **** 	andi r26, 0x0f //1
- 127:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
- 128:asmtest.S     **** 	out USIDR, r19 //1 ** OK
- 129               	
- 130:asmtest.S     **** 	dec r16         //1
- 131:asmtest.S     **** 	brne KeepGoing  //2
- 132               	Done:
- 133:asmtest.S     **** 	pop r20
- 134:asmtest.S     **** 	pop r19
- 135:asmtest.S     **** 	pop r18
-GAS LISTING /tmp/cc4LkRLk.s 			page 12
+ 122:asmtest.S     **** 	ld r19, X      //2
+ 123:asmtest.S     **** 	swap r18       //1
+ 124:asmtest.S     **** 	mov r26, r18   //1
+ 125:asmtest.S     **** 	andi r26, 0x0f //1
+ 126:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+ 127:asmtest.S     **** 	out USEBR, r19 //1 ** OK
+ 128:asmtest.S     **** 	ld r19, X      //2
+ 129:asmtest.S     **** 	ld r18,Z+      //2  //Read off the bytes.
+ 130:asmtest.S     **** 	mov r26, r18   //1
+ 131:asmtest.S     **** 	andi r26, 0x0f //1
+ 132:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
+ 133:asmtest.S     **** 	out USEBR, r19 //1 ** OK
+ 134               	
+ 135:asmtest.S     **** 	dec r16         //1
+GAS LISTING /tmp/ccypg2Yv.s 			page 12
 
 
- 136:asmtest.S     **** 	pop r16
- 137:asmtest.S     **** 	ret
- 138               	
- 139               	
- 140               	
- 141               	.global MaybeHaveDataASM
- 142               	MaybeHaveDataASM:
- 143               	
- 144               	
- 145:asmtest.S     **** 	push r16
- 146:asmtest.S     **** 	push r18
- 147:asmtest.S     **** 	push r19
- 148:asmtest.S     **** 	push r20
- 149               	
- 150               						//r22:r23 = bytes in buffer.
- 151:asmtest.S     **** 	movw r30,r24    //r24:r25 = pointer to staging ram.
- 152               	
- 153               		//In here, we're operating at 30 ~MHz (hopefully)
- 154               		//We want to peel the data off the SPI bus as fast as possible!
- 155               	
- 156               		//First, let's make sure it wasn't just a glitch.
- 157:asmtest.S     **** 	in r18,USIBR  
- 158:asmtest.S     **** 	tst r18
- 159:asmtest.S     **** 	breq rlend
+ 136:asmtest.S     **** 	brne KeepGoing  //2
+ 137               	Done:
+ 138:asmtest.S     **** 	nop
+ 139:asmtest.S     **** 	nop
+ 140:asmtest.S     **** 	nop
+ 141:asmtest.S     **** 	nop
+ 142:asmtest.S     **** 	andi r19,0
+ 143:asmtest.S     **** 	nop
+ 144:asmtest.S     **** 	out USEBR,r19 
+ 145:asmtest.S     **** 	CBI USICR, USIWM0
+ 146               	
+ 147:asmtest.S     **** 	pop r20
+ 148:asmtest.S     **** 	pop r19
+ 149:asmtest.S     **** 	pop r18
+ 150:asmtest.S     **** 	mov r24, r16
+ 151:asmtest.S     **** 	pop r16
+ 152:asmtest.S     **** 	ret
+ 153               	
+ 154               	
+ 155               	#define USEBRR  USIDR
+ 156               	//#define USEBRR  ADCL
+ 157               	
+ 158               	.global MaybeHaveDataASM
+ 159               	MaybeHaveDataASM:
  160               	
- 161               	
- 162:asmtest.S     **** 	tst r22
- 163:asmtest.S     **** 	breq rlend
- 164               	rloop:
- 165:asmtest.S     **** 	in r18,USIDR  //1  ****
- 166:asmtest.S     **** 	st Z+, r18    //2
- 167               	//	tst r18       //1
- 168:asmtest.S     **** 	inc r18			//1
- 169:asmtest.S     ****     breq rlend    //2
- 170:asmtest.S     ****     nop           //1
- 171:asmtest.S     ****     nop           //1
- 172:asmtest.S     **** 	in r18,USIDR  //1  ****
- 173:asmtest.S     **** 	st Z+, r18    //2
- 174:asmtest.S     **** 	dec r22       //1
- 175:asmtest.S     ****     nop           //
- 176:asmtest.S     ****     nop           //1
- 177:asmtest.S     **** 	brne rloop    //2
- 178               	
- 179               	rlend:
- 180:asmtest.S     **** 	pop r20
- 181:asmtest.S     **** 	pop r19
- 182:asmtest.S     **** 	pop r18
- 183:asmtest.S     **** 	pop r16
- 184:asmtest.S     **** 	ret
-GAS LISTING /tmp/cc4LkRLk.s 			page 13
+ 161:asmtest.S     **** 	push r16
+ 162:asmtest.S     **** 	push r22
+ 163:asmtest.S     **** 	push r18
+ 164:asmtest.S     **** 	push r19
+ 165:asmtest.S     **** 	push r20
+ 166               	
+ 167               						//r22 = words in buffer.
+ 168:asmtest.S     **** 	movw r30,r24    //r24:r25 = pointer to staging ram.
+ 169               	
+ 170               		//In here, we're operating at 30 ~MHz (hopefully)
+ 171               		//We want to peel the data off the SPI bus as fast as possible!
+ 172               	
+ 173:asmtest.S     **** 	tst r22
+ 174:asmtest.S     **** 	breq rlend
+ 175               	rloop:
+ 176               	
+ 177               	///XXX TODO: Scrutenize the "breq" 
+ 178:asmtest.S     **** 	in r19,USEBRR  //1  ****
+ 179:asmtest.S     **** 	inc r19			//1
+ 180:asmtest.S     ****     breq rlend    //2???
+ 181:asmtest.S     ****     nop           //1????
+ 182:asmtest.S     **** 	dec r19		//1
+ 183:asmtest.S     **** 	breq rlend  //2????
+ 184:asmtest.S     **** 	nop         //1
+ 185:asmtest.S     **** 	nop         //1
+ 186               	
+ 187:asmtest.S     **** 	in r18,USEBRR  //1  ****
+ 188:asmtest.S     **** 	st Z+, r19    //2
+ 189:asmtest.S     **** 	st Z+, r18    //2
+ 190:asmtest.S     **** 	dec r22       //1
+ 191:asmtest.S     **** 	brne rloop    //2
+ 192               	
+GAS LISTING /tmp/ccypg2Yv.s 			page 13
+
+
+ 193               	rlend:
+ 194:asmtest.S     **** 	mov r24,r22
+ 195:asmtest.S     **** 	pop r20
+ 196:asmtest.S     **** 	pop r19
+ 197:asmtest.S     **** 	pop r18
+ 198:asmtest.S     **** 	pop r22
+ 199:asmtest.S     **** 	pop r16
+ 200:asmtest.S     **** 	ret
+GAS LISTING /tmp/ccypg2Yv.s 			page 14
 
 
 DEFINED SYMBOLS
-           asmtest.S:32     .text:0000000000000000 SendTick
-           asmtest.S:44     .text:0000000000000012 SendTestASM
-           asmtest.S:68     .text:000000000000002e SendLoop
-           asmtest.S:132    .text:0000000000000098 Done
-           asmtest.S:71     .text:0000000000000032 KeepGoing
-           asmtest.S:142    .text:00000000000000a2 MaybeHaveDataASM
-           asmtest.S:179    .text:00000000000000ce rlend
-           asmtest.S:164    .text:00000000000000b6 rloop
+           asmtest.S:33     .text:0000000000000000 SendTick
+           asmtest.S:45     .text:0000000000000012 SendTestASM
+           asmtest.S:69     .text:000000000000002e SendLoop
+           asmtest.S:137    .text:000000000000009a Done
+           asmtest.S:76     .text:0000000000000034 KeepGoing
+           asmtest.S:159    .text:00000000000000b6 MaybeHaveDataASM
+           asmtest.S:193    .text:00000000000000e0 rlend
+           asmtest.S:175    .text:00000000000000c6 rloop
 
 UNDEFINED SYMBOLS
 ManchesterTable
-GAS LISTING /tmp/cc4LkRLk.s 			page 1
+GAS LISTING /tmp/ccypg2Yv.s 			page 1
 
 
    1               		.file	"sendpack.c"
@@ -1556,7 +1630,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  155 002b 00        		.byte	0
  156 002c 34        		.byte	52
  157 002d 00        		.byte	0
-GAS LISTING /tmp/cc4LkRLk.s 			page 2
+GAS LISTING /tmp/ccypg2Yv.s 			page 2
 
 
  158 002e 00        		.byte	0
@@ -1592,20 +1666,20 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  189               		.text
  191               	.Letext0:
  192               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/cc4LkRLk.s 			page 3
+GAS LISTING /tmp/ccypg2Yv.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sendpack.c
-     /tmp/cc4LkRLk.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/cc4LkRLk.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/cc4LkRLk.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/cc4LkRLk.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/cc4LkRLk.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/cc4LkRLk.s:111    .progmem.data:0000000000000000 PacketA
+     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccypg2Yv.s:111    .progmem.data:0000000000000000 PacketA
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/cc4LkRLk.s 			page 1
+GAS LISTING /tmp/ccypg2Yv.s 			page 1
 
 
    1               		.file	"packetmater.c"
@@ -1665,7 +1739,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
   44:packetmater.c **** 		packet[17] = fullpacklen&0xff;
   45:packetmater.c **** 		packet[24] = 0;
   46:packetmater.c **** 		packet[25] = 0;
-GAS LISTING /tmp/cc4LkRLk.s 			page 2
+GAS LISTING /tmp/ccypg2Yv.s 			page 2
 
 
   47:packetmater.c **** 		uint16_t csumr;
@@ -1725,7 +1799,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  119 0014 5901      		movw r10,r18
   85:packetmater.c ****    int i, j;
   86:packetmater.c ****    uint32_t mask;
-GAS LISTING /tmp/cc4LkRLk.s 			page 3
+GAS LISTING /tmp/ccypg2Yv.s 			page 3
 
 
   87:packetmater.c **** 	uint8_t byte;
@@ -1785,7 +1859,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  169 0058 8E09      		sbc r24,r14
  170 005a 9F09      		sbc r25,r15
  172               	.LM8:
-GAS LISTING /tmp/cc4LkRLk.s 			page 4
+GAS LISTING /tmp/ccypg2Yv.s 			page 4
 
 
  173 005c 6072      		andi r22,32
@@ -1845,7 +1919,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  231 0096 9B01      		movw r18,r22
  232 0098 DC01      		movw r26,r24
  106:packetmater.c **** 	uint16_t i;
-GAS LISTING /tmp/cc4LkRLk.s 			page 5
+GAS LISTING /tmp/ccypg2Yv.s 			page 5
 
 
  107:packetmater.c **** 	const uint16_t * wptr = (uint16_t*) start;
@@ -1905,7 +1979,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  282 00d2 AA27      		clr r26
  283 00d4 BB27      		clr r27
  284 00d6 0097      		sbiw r24,0
-GAS LISTING /tmp/cc4LkRLk.s 			page 6
+GAS LISTING /tmp/ccypg2Yv.s 			page 6
 
 
  285 00d8 A105      		cpc r26,__zero_reg__
@@ -1965,7 +2039,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  349 0120 0F93      		push r16
  350 0122 1F93      		push r17
  351 0124 CF93      		push r28
-GAS LISTING /tmp/cc4LkRLk.s 			page 7
+GAS LISTING /tmp/ccypg2Yv.s 			page 7
 
 
  352 0126 DF93      		push r29
@@ -2025,7 +2099,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  406 016a 00C0      		rjmp .L24
  407               	.LBB3:
   42:packetmater.c **** 		uint16_t fullpacklen = plen-14;
-GAS LISTING /tmp/cc4LkRLk.s 			page 8
+GAS LISTING /tmp/ccypg2Yv.s 			page 8
 
 
  409               	.LM33:
@@ -2085,7 +2159,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  463               	.LM47:
  464 019e E9AA      		std Y+49,r14
   64:packetmater.c **** 			csumr = internet_checksum( &packet[26], udppacklen+8 );
-GAS LISTING /tmp/cc4LkRLk.s 			page 9
+GAS LISTING /tmp/ccypg2Yv.s 			page 9
 
 
  466               	.LM48:
@@ -2145,7 +2219,7 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  520 01dc 1F91      		pop r17
  521 01de 0F91      		pop r16
  522 01e0 FF90      		pop r15
-GAS LISTING /tmp/cc4LkRLk.s 			page 10
+GAS LISTING /tmp/ccypg2Yv.s 			page 10
 
 
  523 01e2 EF90      		pop r14
@@ -2158,18 +2232,18 @@ GAS LISTING /tmp/cc4LkRLk.s 			page 1
  535               		.stabd	78,0,0
  537               	.Letext0:
  538               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/cc4LkRLk.s 			page 11
+GAS LISTING /tmp/ccypg2Yv.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 packetmater.c
-     /tmp/cc4LkRLk.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/cc4LkRLk.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/cc4LkRLk.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/cc4LkRLk.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/cc4LkRLk.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/cc4LkRLk.s:100    .text:0000000000000000 crc32b
-     /tmp/cc4LkRLk.s:220    .text:0000000000000092 internet_checksum
-     /tmp/cc4LkRLk.s:338    .text:0000000000000114 Ethernetize
+     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccypg2Yv.s:100    .text:0000000000000000 crc32b
+     /tmp/ccypg2Yv.s:220    .text:0000000000000092 internet_checksum
+     /tmp/ccypg2Yv.s:338    .text:0000000000000114 Ethernetize
 
 NO UNDEFINED SYMBOLS

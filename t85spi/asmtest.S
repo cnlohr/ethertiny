@@ -28,6 +28,7 @@
 
 #include <avr/io.h>
 
+#define USEBR  USIDR
 .global SendTick
 SendTick:
 	ori r18, 0b00010101
@@ -68,6 +69,10 @@ SendTestASM:
 SendLoop:
 	tst r16
 	breq Done
+
+	//Enable the USI
+	SBI USICR, USIWM0
+
 KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 
 	//Heavily interleved code.  Need a new OUTB every 8 cycles exactly.
@@ -76,13 +81,13 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 
 	ld r19, X      //2
 	swap r18       //1
-	out USIDR, r19 //1  START HERE
+	out USEBR, r19 //1  START HERE
 	mov r26, r18   //1
 	andi r26, 0x0f //1
 	subi r26,lo8(-(ManchesterTable)) //1
 	ld r19, X      //2
 	ld r18,Z+      //2  //Read off the bytes.
-	out USIDR, r19 //1 ** OK
+	out USEBR, r19 //1 ** OK
 	mov r26, r18   //1
 
 
@@ -91,13 +96,13 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 	ld r19, X      //2
 	swap r18       //1
 	mov r26, r18   //1
-	out USIDR, r19 //1  ** OK
+	out USEBR, r19 //1  ** OK
 	andi r26, 0x0f //1
 	subi r26,lo8(-(ManchesterTable)) //1
 	ld r19, X      //2
 	ld r18,Z+      //2  //Read off the bytes.
 	mov r26, r18   //1
-	out USIDR, r19 //1  **OK
+	out USEBR, r19 //1  **OK
 
 
 	andi r26, 0x0f //1
@@ -106,80 +111,91 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 	swap r18       //1
 	mov r26, r18   //1
 	andi r26, 0x0f //1
-	out USIDR, r19 //1  ** OK 
+	out USEBR, r19 //1  ** OK 
 	subi r26,lo8(-(ManchesterTable)) //1
 	ld r19, X      //2
 	ld r18,Z+      //2  //Read off the bytes.
 	mov r26, r18   //1
 	andi r26, 0x0f //1
-	out USIDR, r19 //1 ** OK
+	out USEBR, r19 //1 ** OK
 	subi r26,lo8(-(ManchesterTable)) //1
 	ld r19, X      //2
 	swap r18       //1
 	mov r26, r18   //1
 	andi r26, 0x0f //1
 	subi r26,lo8(-(ManchesterTable)) //1
-	out USIDR, r19 //1 ** OK
+	out USEBR, r19 //1 ** OK
 	ld r19, X      //2
 	ld r18,Z+      //2  //Read off the bytes.
 	mov r26, r18   //1
 	andi r26, 0x0f //1
 	subi r26,lo8(-(ManchesterTable)) //1
-	out USIDR, r19 //1 ** OK
+	out USEBR, r19 //1 ** OK
 
 	dec r16         //1
 	brne KeepGoing  //2
 Done:
+	nop
+	nop
+	nop
+	nop
+	andi r19,0
+	nop
+	out USEBR,r19 
+	CBI USICR, USIWM0
+
 	pop r20
 	pop r19
 	pop r18
+	mov r24, r16
 	pop r16
 	ret
 
 
+#define USEBRR  USIDR
+//#define USEBRR  ADCL
 
 .global MaybeHaveDataASM
 MaybeHaveDataASM:
 
-
 	push r16
+	push r22
 	push r18
 	push r19
 	push r20
 
-					//r22:r23 = bytes in buffer.
+					//r22 = words in buffer.
 	movw r30,r24    //r24:r25 = pointer to staging ram.
 
 	//In here, we're operating at 30 ~MHz (hopefully)
 	//We want to peel the data off the SPI bus as fast as possible!
 
-	//First, let's make sure it wasn't just a glitch.
-	in r18,USIBR  
-	tst r18
-	breq rlend
-
-
 	tst r22
 	breq rlend
 rloop:
-	in r18,USIDR  //1  ****
-	st Z+, r18    //2
-//	tst r18       //1
-	inc r18			//1
-    breq rlend    //2
-    nop           //1
-    nop           //1
-	in r18,USIDR  //1  ****
+
+///XXX TODO: Scrutenize the "breq" 
+	in r19,USEBRR  //1  ****
+	inc r19			//1
+    breq rlend    //2???
+    nop           //1????
+	dec r19		//1
+	breq rlend  //2????
+	nop         //1
+	nop         //1
+
+	in r18,USEBRR  //1  ****
+	st Z+, r19    //2
 	st Z+, r18    //2
 	dec r22       //1
-    nop           //
-    nop           //1
 	brne rloop    //2
 
 rlend:
+	mov r24,r22
 	pop r20
 	pop r19
 	pop r18
+	pop r22
 	pop r16
 	ret
 

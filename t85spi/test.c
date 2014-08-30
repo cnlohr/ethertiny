@@ -47,8 +47,10 @@ void delay_ms(uint32_t time) {
 
 #define NOOP asm volatile("nop" ::)
 
-#define OSC20 0xB7
-#define OSCHIGH 0xFF
+#define OSC20 0xB6
+//#define OSCHIGH 0xda  //~25 MHz???
+#define OSCHIGH 0xFF  //~30 MHz?
+
 
 static void setup_clock( void )
 {
@@ -64,7 +66,7 @@ static void setup_clock( void )
 
 }
 
-#define SMARTPWR
+//#define SMARTPWR
 
 //Inverting the manchester seems to universally make things worse.
 //#define INVERT_MANCHESTER
@@ -98,7 +100,8 @@ char ManchesterTableDEBUG[16] __attribute__ ((aligned (16))) = {
 unsigned char sendbuffer[370];
 
 void SendTestASM( const unsigned char * c, uint8_t len );
-void MaybeHaveDataASM( unsigned char * c, uint8_t len );
+int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
+
 /*
 void MaybeHaveDataTest( unsigned char * c, uint8_t lenX2 ) //LenX2 = 128->256, i.e. put in half the size.
 {
@@ -109,32 +112,42 @@ void MaybeHaveDataTest( unsigned char * c, uint8_t lenX2 ) //LenX2 = 128->256, i
 	}
 }*/
 
-void waitforpacket( unsigned char * buffer, uint16_t len, uint16_t ltime )
+void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 {
 		OSCCAL = OSCHIGH;
 
 	//Make sure we're not walking in on something.
-	while( ltime-- )
+	while( ltime-- > 0 )
 	{
 		if( USIBR == 0x00 ) break;
 		if( USIBR == 0xFF ) break;
 		NOOP;
-		NOOP;
-		NOOP;
 	}
 
 
-	while( ltime-- )
+	while( ltime-- > 0 )
 	{
 		if( USIBR && (USIBR != 0xFF ) )
 		{
-			MaybeHaveDataASM( buffer, len );
+			int r = MaybeHaveDataASM( buffer, len );
+			ltime-=(len-r)*4+3; //About how long the function takes to execute.
+			break;
 		}
 //		NOOP;
 //		NOOP;
 //		NOOP;
 	}
-		OSCCAL = OSC20;
+
+	while( ltime-- > 0 )
+	{
+		NOOP;
+		NOOP;
+		NOOP;
+		NOOP;
+		NOOP;
+	}
+
+	OSCCAL = OSC20;
 }
 
 
@@ -154,7 +167,7 @@ int main( )
 	TCCR0B = _BV(CS00);
 	OCR0A = 0;
 
-	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USICLK) | _BV(USITC);
+	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
 
 	for( i = 0; i < PacketABytes; i++ )
 	{
@@ -167,27 +180,35 @@ int main( )
 
 	struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
 
-	//??? I have no idea why this makes everyhting much more rubust.
-	PORTB |= _BV(0);
+//	PORTB |= _BV(0);  //Enable pullups.
+	PORTB &= ~_BV(0); 
+	DDRB &= ~_BV(0);
+	PORTB &= ~_BV(1);
+	USICR &= ~_BV(USIWM0);  //Disable USICR
 
 	while(1)
 	{
 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 	//	continue;
 
-		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
+#define LIMITSIZE  sizeof( sendbuffer )/2-50
+//#define LIMITSIZE 10
+
+		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
 //		_delay_ms(8);
 #ifdef SMARTPWR
 		DDRB |= _BV(1);
 #endif
-		USIDR = 0x07;
+		PORTB|=_BV(1);
+		NOOP;
+		PORTB &=~_BV(1);
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);
 #endif
-		waitforpacket(sbe->payload, sizeof( sendbuffer )/2-25, 30000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
-		//_delay_ms(8);
+		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+// 		_delay_ms(8);
 
-			i++;
+		i++;
 
 		if( i == 20 )
 		{
