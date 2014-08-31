@@ -37,7 +37,7 @@
 #include <string.h>
 
 #include "net_compat.h"
-#include "sendpack.h"
+//#include "sendpack.h"
 #include "packetmater.h"
 #include "hlprocess.h"
 #include "iparpetc.h"
@@ -64,8 +64,6 @@ static void setup_clock( void )
 //#define SMARTPWR
 
 
-//unsigned char ETbuffer[390];
-
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
@@ -75,10 +73,10 @@ uint8_t MyMask[4] = { 255, 255, 255, 0 };
 
 void HandleUDP( uint16_t len )
 {
-	//Do nothing (yet)
+	
 }
 
-char strbuffer[32];
+//char strbuffer[32];
 
 int main( )
 {
@@ -87,15 +85,8 @@ int main( )
 
 	setup_clock();
 
-	LRP( "Boot OK.\n" );
-
 	//1st let's see how fast we can clock the pin.
 	et_init( MyMAC );
-
-	for( i = 0; i < PacketABytes; i++ )
-	{
-		ETbuffer[i] = pgm_read_word( &PacketA[i] );
-	}
 
 	i = 0;
 
@@ -133,7 +124,7 @@ int main( )
 			et_push16( 1024 ); //from port
 			et_push16( 0 ); //length for later
 			et_push16( 0 ); //csum for later
-			et_pushblob( strbuffer, 32 );
+//			et_pushblob( strbuffer, 32 );
 			util_finish_udp_packet();
 
 //			et_xmitpacket( 0, 340 );

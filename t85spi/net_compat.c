@@ -25,6 +25,49 @@ char ManchesterTable[16] __attribute__ ((aligned (16))) = {
 
 //Internal functs
 
+//From: http://www.hackersdelight.org/hdcodetxt/crc.c.txt
+uint32_t crc32b(uint32_t crc, unsigned char *message, int len) {
+   int i, j;
+   uint32_t mask;
+	uint8_t byte;
+
+   i = 0;
+//   crc = 0xFFFFFFFF;
+	crc = ~crc;
+   while (i < len) {
+      byte = message[i];            // Get next byte.
+      crc = crc ^ byte;
+      for (j = 7; j >= 0; j--) {    // Do eight times.
+         mask = -(crc & 1);
+         crc = (crc >> 1) ^ (0xEDB88320 & mask);
+      }
+      i = i + 1;
+   }
+   return ~crc;
+}
+
+uint16_t internet_checksum( const unsigned char * start, uint16_t len )
+{
+	uint16_t i;
+	const uint16_t * wptr = (uint16_t*) start;
+	uint32_t csum = 0;
+	for (i=1;i<len;i+=2)
+	{
+		csum = csum + (uint32_t)(*(wptr++));	
+	}
+	if( len & 1 )  //See if there's an odd number of bytes?
+	{
+		uint8_t * tt = (uint8_t*)wptr;
+		csum += *tt;
+	}
+	while (csum>>16)
+		csum = (csum & 0xFFFF)+(csum >> 16);
+	csum = (csum>>8) | ((csum&0xff)<<8);
+	return ~csum;
+}
+
+
+
 //From the ASM file.
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
@@ -65,6 +108,7 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 			int r = MaybeHaveDataASM( buffer, len );
 			if( r > 10 )
 			{
+				buffer[ETBUFFERSIZE-1] = 0; //Force an end-of-packet.
 				int16_t byr = Demanchestrate( buffer, r );
 				if( byr > 32 )
 				{

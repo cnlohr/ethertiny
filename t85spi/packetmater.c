@@ -27,6 +27,7 @@
 */
 #include "packetmater.h"
 
+/*
 //Fix all checksums for UDP packets and add etherlink CRC.
 uint16_t Ethernetize( unsigned char * packet, int plen, int udplenoverride )
 {
@@ -78,49 +79,7 @@ uint16_t Ethernetize( unsigned char * packet, int plen, int udplenoverride )
 	packet[plen+3] = (crc>>24) & 0xff;
 
 	return plen;
-}
-
-
-//From: http://www.hackersdelight.org/hdcodetxt/crc.c.txt
-uint32_t crc32b(uint32_t crc, unsigned char *message, int len) {
-   int i, j;
-   uint32_t mask;
-	uint8_t byte;
-
-   i = 0;
-//   crc = 0xFFFFFFFF;
-	crc = ~crc;
-   while (i < len) {
-      byte = message[i];            // Get next byte.
-      crc = crc ^ byte;
-      for (j = 7; j >= 0; j--) {    // Do eight times.
-         mask = -(crc & 1);
-         crc = (crc >> 1) ^ (0xEDB88320 & mask);
-      }
-      i = i + 1;
-   }
-   return ~crc;
-}
-
-uint16_t internet_checksum( const unsigned char * start, uint16_t len )
-{
-	uint16_t i;
-	const uint16_t * wptr = (uint16_t*) start;
-	uint32_t csum = 0;
-	for (i=1;i<len;i+=2)
-	{
-		csum = csum + (uint32_t)(*(wptr++));	
-	}
-	if( len & 1 )  //See if there's an odd number of bytes?
-	{
-		uint8_t * tt = (uint8_t*)wptr;
-		csum += *tt;
-	}
-	while (csum>>16)
-		csum = (csum & 0xFFFF)+(csum >> 16);
-	csum = (csum>>8) | ((csum&0xff)<<8);
-	return ~csum;
-}
+}*/
 
 
 
