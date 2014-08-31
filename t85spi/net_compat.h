@@ -1,8 +1,8 @@
 #ifndef _ENC424JCOMPAT_H
 #define _ENC424JCOMPAT_H
 
-//et compat lib.
-//We're using the IP library from AVRCraft
+//enc424j600 compat lib.
+//We're using the IP library from AVRCraft... but we're using our own PHY+MAC
 
 //TODO: Should probably use Timer1 (since we can't use Timer0)
 //to make sure we send media detect pulses at the right points.
@@ -13,7 +13,7 @@
 
 //MyMAC is included in this driver.
 extern unsigned char MyMAC[6];
-extern unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+extern unsigned char ETbuffer[ETBUFFERSIZE];
 extern unsigned short ETsendplace;
 //For telling where the current transaction started.
 extern uint16_t sendbaseaddress;

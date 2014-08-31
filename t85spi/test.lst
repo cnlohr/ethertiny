@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               		.file	"test.c"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  119               	.LM0:
  120               	.LFBB1:
  121 0000 0F93      		push r16
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
  122 0002 1F93      		push r17
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   34:/usr/lib/avr/include/util/delay.h **** 
   35:/usr/lib/avr/include/util/delay.h **** #ifndef _UTIL_DELAY_H_
   36:/usr/lib/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
   37:/usr/lib/avr/include/util/delay.h **** 
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   91:/usr/lib/avr/include/util/delay.h **** # define F_CPU 1000000UL
   92:/usr/lib/avr/include/util/delay.h **** #endif
   93:/usr/lib/avr/include/util/delay.h **** 
-GAS LISTING /tmp/ccMP3Ntm.s 			page 4
+GAS LISTING /tmp/ccouZRfQ.s 			page 4
 
 
   94:/usr/lib/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  148:/usr/lib/avr/include/util/delay.h ****   __STDC_HOSTED__
  149:/usr/lib/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
  150:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
-GAS LISTING /tmp/ccMP3Ntm.s 			page 5
+GAS LISTING /tmp/ccouZRfQ.s 			page 5
 
 
  151:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   58:test.c        **** 
   59:test.c        **** 
   60:test.c        **** }
-GAS LISTING /tmp/ccMP3Ntm.s 			page 6
+GAS LISTING /tmp/ccouZRfQ.s 			page 6
 
 
   61:test.c        **** 
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  219 0016 A0E0      		ldi r26,lo8(ETbuffer)
  220 0018 B0E0      		ldi r27,hi8(ETbuffer)
  221               	.L8:
-GAS LISTING /tmp/ccMP3Ntm.s 			page 7
+GAS LISTING /tmp/ccouZRfQ.s 			page 7
 
 
  222               	.LBB12:
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  247 0030 D12C      		mov r13,__zero_reg__
  248 0032 EC2C      		mov r14,r12
  249 0034 95E4      		ldi r25,lo8(69)
-GAS LISTING /tmp/ccMP3Ntm.s 			page 8
+GAS LISTING /tmp/ccouZRfQ.s 			page 8
 
 
  250 0036 F92E      		mov r15,r25
@@ -474,18 +474,18 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  302               		.text
  304               	.Letext0:
  305               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccMP3Ntm.s 			page 9
+GAS LISTING /tmp/ccouZRfQ.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 test.c
-     /tmp/ccMP3Ntm.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccMP3Ntm.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccMP3Ntm.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccMP3Ntm.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccMP3Ntm.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccMP3Ntm.s:116    .text:0000000000000000 delay_ms
-     /tmp/ccMP3Ntm.s:181    .text.startup:0000000000000000 main
+     /tmp/ccouZRfQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccouZRfQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccouZRfQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccouZRfQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccouZRfQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccouZRfQ.s:116    .text:0000000000000000 delay_ms
+     /tmp/ccouZRfQ.s:181    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 MyMAC
@@ -495,7 +495,7 @@ ETbuffer
 et_recvpack
 Ethernetize
 SendTestASM
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               	# 1 "asmtest.S"
@@ -555,7 +555,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   23               	  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
   24               	  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
   25               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
   26               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -615,7 +615,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   80               	    The last EEPROM address.
   81               	    <br>
   82               	    - \b FLASHEND
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
   83               	    <br>
@@ -675,7 +675,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  136               	#  include <avr/iom32c1.h>
  137               	#elif defined (__AVR_ATmega32M1__)
  138               	#  include <avr/iom32m1.h>
-GAS LISTING /tmp/ccMP3Ntm.s 			page 4
+GAS LISTING /tmp/ccouZRfQ.s 			page 4
 
 
  139               	#elif defined (__AVR_ATmega32U2__)
@@ -735,7 +735,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  193               	#elif defined (__AVR_ATmega6450__) || defined (__AVR_ATmega6450A__) || defined (__AVR_ATmega6450P__
  194               	#  include <avr/iom6450.h>
  195               	#elif defined (__AVR_ATmega649__) || defined (__AVR_ATmega649A__)
-GAS LISTING /tmp/ccMP3Ntm.s 			page 5
+GAS LISTING /tmp/ccouZRfQ.s 			page 5
 
 
  196               	#  include <avr/iom649.h>
@@ -795,7 +795,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  250               	#  include <avr/iom165.h>
  251               	#elif defined (__AVR_ATmega165P__)
  252               	#  include <avr/iom165p.h>
-GAS LISTING /tmp/ccMP3Ntm.s 			page 6
+GAS LISTING /tmp/ccouZRfQ.s 			page 6
 
 
  253               	#elif defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
@@ -855,7 +855,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  307               	#elif defined (__AVR_AT90S2333__)
  308               	#  include <avr/io2333.h>
  309               	#elif defined (__AVR_AT90S2323__)
-GAS LISTING /tmp/ccMP3Ntm.s 			page 7
+GAS LISTING /tmp/ccouZRfQ.s 			page 7
 
 
  310               	#  include <avr/io2323.h>
@@ -915,7 +915,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   24               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
   25               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
   26               	  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-GAS LISTING /tmp/ccMP3Ntm.s 			page 8
+GAS LISTING /tmp/ccouZRfQ.s 			page 8
 
 
   27               	  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
@@ -975,7 +975,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  381               	#elif defined (__AVR_ATxmega32A4__)
  382               	#  include <avr/iox32a4.h>
  383               	#elif defined (__AVR_ATxmega32D4__)
-GAS LISTING /tmp/ccMP3Ntm.s 			page 9
+GAS LISTING /tmp/ccouZRfQ.s 			page 9
 
 
  384               	#  include <avr/iox32d4.h>
@@ -1035,7 +1035,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  436               	#include <avr/version.h>
    1               	/* Copyright (c) 2005, Joerg Wunsch                               -*- c -*-
  437               	
-GAS LISTING /tmp/ccMP3Ntm.s 			page 10
+GAS LISTING /tmp/ccouZRfQ.s 			page 10
 
 
  438               	/* Include fuse.h after individual IO header files. */
@@ -1095,7 +1095,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   76               	.SkipD:
   77               	
   78               	
-GAS LISTING /tmp/ccMP3Ntm.s 			page 11
+GAS LISTING /tmp/ccouZRfQ.s 			page 11
 
 
   79               	//////////////////////////////////////////////////
@@ -1155,7 +1155,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  133               	
  134               	
  135:asmtest.S     **** 	andi r26, 0x0f //1
-GAS LISTING /tmp/ccMP3Ntm.s 			page 12
+GAS LISTING /tmp/ccouZRfQ.s 			page 12
 
 
  136:asmtest.S     **** 	subi r26,lo8(-(ManchesterTable)) //1
@@ -1215,7 +1215,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  190:asmtest.S     **** 	push r22
  191:asmtest.S     **** 	push r18
  192:asmtest.S     **** 	push r19
-GAS LISTING /tmp/ccMP3Ntm.s 			page 13
+GAS LISTING /tmp/ccouZRfQ.s 			page 13
 
 
  193:asmtest.S     **** 	push r20
@@ -1254,7 +1254,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  226:asmtest.S     **** 	pop r22
  227:asmtest.S     **** 	pop r16
  228:asmtest.S     **** 	ret
-GAS LISTING /tmp/ccMP3Ntm.s 			page 14
+GAS LISTING /tmp/ccouZRfQ.s 			page 14
 
 
 DEFINED SYMBOLS
@@ -1271,7 +1271,7 @@ DEFINED SYMBOLS
 
 UNDEFINED SYMBOLS
 ManchesterTable
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               		.file	"sendpack.c"
@@ -1331,7 +1331,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  155 002b 0A        		.byte	10
  156 002c AA        		.byte	-86
  157 002d AA        		.byte	-86
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
  158 002e AA        		.byte	-86
@@ -1359,20 +1359,20 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  181               		.text
  183               	.Letext0:
  184               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sendpack.c
-     /tmp/ccMP3Ntm.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccMP3Ntm.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccMP3Ntm.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccMP3Ntm.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccMP3Ntm.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccMP3Ntm.s:111    .progmem.data:0000000000000000 PacketA
+     /tmp/ccouZRfQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccouZRfQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccouZRfQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccouZRfQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccouZRfQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccouZRfQ.s:111    .progmem.data:0000000000000000 PacketA
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               		.file	"packetmater.c"
@@ -1432,7 +1432,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   44:packetmater.c **** 		packet[24] = 0;
   45:packetmater.c **** 		packet[25] = 0;
   46:packetmater.c **** 		uint16_t csumr;
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
   47:packetmater.c **** //		fprintf( stderr, "Header checksum: 0x%04x\n", csumr = csrange(14,20) );
@@ -1492,7 +1492,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   84:packetmater.c ****    int i, j;
   85:packetmater.c ****    uint32_t mask;
   86:packetmater.c **** 	uint8_t byte;
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
   87:packetmater.c **** 
@@ -1552,7 +1552,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  170 005a 9F09      		sbc r25,r15
  172               	.LM8:
  173 005c 6072      		andi r22,32
-GAS LISTING /tmp/ccMP3Ntm.s 			page 4
+GAS LISTING /tmp/ccouZRfQ.s 			page 4
 
 
  174 005e 7378      		andi r23,131
@@ -1612,7 +1612,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  232 0098 DC01      		movw r26,r24
  105:packetmater.c **** 	uint16_t i;
  106:packetmater.c **** 	const uint16_t * wptr = (uint16_t*) start;
-GAS LISTING /tmp/ccMP3Ntm.s 			page 5
+GAS LISTING /tmp/ccouZRfQ.s 			page 5
 
 
  107:packetmater.c **** 	uint32_t csum = 0;
@@ -1672,7 +1672,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  283 00d4 BB27      		clr r27
  284 00d6 0097      		sbiw r24,0
  285 00d8 A105      		cpc r26,__zero_reg__
-GAS LISTING /tmp/ccMP3Ntm.s 			page 6
+GAS LISTING /tmp/ccouZRfQ.s 			page 6
 
 
  286 00da B105      		cpc r27,__zero_reg__
@@ -1732,7 +1732,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  350 0122 DF93      		push r29
  351               	/* prologue: function */
  352               	/* frame size = 0 */
-GAS LISTING /tmp/ccMP3Ntm.s 			page 7
+GAS LISTING /tmp/ccouZRfQ.s 			page 7
 
 
  353               	/* stack size = 8 */
@@ -1792,7 +1792,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   43:packetmater.c **** 		packet[17] = fullpacklen&0xff;
  408               	.LM34:
  409 0166 898B      		std Y+17,r24
-GAS LISTING /tmp/ccMP3Ntm.s 			page 8
+GAS LISTING /tmp/ccouZRfQ.s 			page 8
 
 
   44:packetmater.c **** 		packet[24] = 0;
@@ -1852,7 +1852,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   64:packetmater.c **** 			if( csumr == 0 ) csumr = 0xffff;
  465               	.LM48:
  466 019e 0097      		sbiw r24,0
-GAS LISTING /tmp/ccMP3Ntm.s 			page 9
+GAS LISTING /tmp/ccouZRfQ.s 			page 9
 
 
  467 01a0 01F4      		brne .L26
@@ -1910,22 +1910,22 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  524               		.stabd	78,0,0
  526               	.Letext0:
  527               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccMP3Ntm.s 			page 10
+GAS LISTING /tmp/ccouZRfQ.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 packetmater.c
-     /tmp/ccMP3Ntm.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccMP3Ntm.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccMP3Ntm.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccMP3Ntm.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccMP3Ntm.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccMP3Ntm.s:100    .text:0000000000000000 crc32b
-     /tmp/ccMP3Ntm.s:220    .text:0000000000000092 internet_checksum
-     /tmp/ccMP3Ntm.s:338    .text:0000000000000114 Ethernetize
+     /tmp/ccouZRfQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccouZRfQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccouZRfQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccouZRfQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccouZRfQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccouZRfQ.s:100    .text:0000000000000000 crc32b
+     /tmp/ccouZRfQ.s:220    .text:0000000000000092 internet_checksum
+     /tmp/ccouZRfQ.s:338    .text:0000000000000114 Ethernetize
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               		.file	"hlprocess.c"
@@ -1985,7 +1985,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  127 0018 A0E0      		ldi r26,0
   13:hlprocess.c   **** 	uint16_t plen = 0;
  129               	.LM5:
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
  130 001a 20E0      		ldi r18,0
@@ -2045,7 +2045,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  176 0048 00C0      		rjmp .L20
  177               	.L4:
   32:hlprocess.c   **** 				{
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
   33:hlprocess.c   **** 					in_preamble--;
@@ -2105,7 +2105,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   69:hlprocess.c   **** 					}
   70:hlprocess.c   **** 					if( mark_emit )
   71:hlprocess.c   **** 					{
-GAS LISTING /tmp/ccMP3Ntm.s 			page 4
+GAS LISTING /tmp/ccouZRfQ.s 			page 4
 
 
   72:hlprocess.c   **** 						//Emit cemitbit. 
@@ -2165,7 +2165,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  235               	.LM28:
  236 0078 6B2F      		mov r22,r27
  237               	.L14:
-GAS LISTING /tmp/ccMP3Ntm.s 			page 5
+GAS LISTING /tmp/ccouZRfQ.s 			page 5
 
 
   73:hlprocess.c   **** 						cemitbyte |= cemitbit?cemitmask:0;
@@ -2225,7 +2225,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  292 00aa 8FEF      		ldi r24,lo8(-1)
  293 00ac 9FEF      		ldi r25,lo8(-1)
  294               	.L19:
-GAS LISTING /tmp/ccMP3Ntm.s 			page 6
+GAS LISTING /tmp/ccouZRfQ.s 			page 6
 
 
  295               	/* epilogue start */
@@ -2250,20 +2250,20 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  321               		.stabd	78,0,0
  323               	.Letext0:
  324               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccMP3Ntm.s 			page 7
+GAS LISTING /tmp/ccouZRfQ.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 hlprocess.c
-     /tmp/ccMP3Ntm.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccMP3Ntm.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccMP3Ntm.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccMP3Ntm.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccMP3Ntm.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccMP3Ntm.s:98     .text:0000000000000000 Demanchestrate
+     /tmp/ccouZRfQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccouZRfQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccouZRfQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccouZRfQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccouZRfQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccouZRfQ.s:98     .text:0000000000000000 Demanchestrate
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccMP3Ntm.s 			page 1
+GAS LISTING /tmp/ccouZRfQ.s 			page 1
 
 
    1               		.file	"net_compat.c"
@@ -2280,8 +2280,8 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
    1:net_compat.h  **** #ifndef _ENC424JCOMPAT_H
    2:net_compat.h  **** #define _ENC424JCOMPAT_H
    3:net_compat.h  **** 
-   4:net_compat.h  **** //et compat lib.
-   5:net_compat.h  **** //We're using the IP library from AVRCraft
+   4:net_compat.h  **** //enc424j600 compat lib.
+   5:net_compat.h  **** //We're using the IP library from AVRCraft... but we're using our own PHY+MAC
    6:net_compat.h  **** 
    7:net_compat.h  **** //TODO: Should probably use Timer1 (since we can't use Timer0)
    8:net_compat.h  **** //to make sure we send media detect pulses at the right points.
@@ -2292,7 +2292,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   13:net_compat.h  **** 
   14:net_compat.h  **** //MyMAC is included in this driver.
   15:net_compat.h  **** extern unsigned char MyMAC[6];
-  16:net_compat.h  **** extern unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+  16:net_compat.h  **** extern unsigned char ETbuffer[ETBUFFERSIZE];
   17:net_compat.h  **** extern unsigned short ETsendplace;
   18:net_compat.h  **** //For telling where the current transaction started.
   19:net_compat.h  **** extern uint16_t sendbaseaddress;
@@ -2323,7 +2323,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   44:net_compat.h  **** static inline void et_dumpbytes( uint8_t len ) { ETsendplace += len; }
   45:net_compat.h  **** static inline uint16_t et_pop16() { return ETbuffer[ETsendplace++]; }
   46:net_compat.h  **** static inline uint8_t et_pop8() { return ETbuffer[ETsendplace++]; }
-GAS LISTING /tmp/ccMP3Ntm.s 			page 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 2
 
 
   47:net_compat.h  **** 
@@ -2366,7 +2366,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
    6:net_compat.c  **** 
    7:net_compat.c  **** 
    8:net_compat.c  **** unsigned char MyMAC[6];
-   9:net_compat.c  **** unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+   9:net_compat.c  **** unsigned char ETbuffer[ETBUFFERSIZE];
   10:net_compat.c  **** unsigned short ETsendplace;
   11:net_compat.c  **** uint16_t sendbaseaddress;
   12:net_compat.c  **** unsigned short ETchecksum;
@@ -2383,7 +2383,7 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   23:net_compat.c  **** 
   24:net_compat.c  **** 
   25:net_compat.c  **** 
-GAS LISTING /tmp/ccMP3Ntm.s 			page 3
+GAS LISTING /tmp/ccouZRfQ.s 			page 3
 
 
   26:net_compat.c  **** //Internal functs
@@ -2403,216 +2403,192 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
  155               	.L__stack_usage = 0
   35:net_compat.c  **** 	int byr = 0;
   36:net_compat.c  **** 
-  37:net_compat.c  **** 	byr = Demanchestrate( machesterized, mlen );
- 157               	.LM3:
- 158 0020 BA01      		movw r22,r20
- 159 0022 00C0      		rjmp Demanchestrate
- 161               	.Lscope2:
- 163               		.stabd	78,0,0
- 168               	.global	waitforpacket
- 170               	waitforpacket:
- 171               		.stabd	46,0,0
+  37:net_compat.c  **** //	byr = Demanchestrate( machesterized, mlen );
   38:net_compat.c  **** 
   39:net_compat.c  **** 	//Don't do anything yet...
   40:net_compat.c  **** 	//XXX TODO THIS will be some good stuff in here.
   41:net_compat.c  **** 
   42:net_compat.c  **** 	return byr;
   43:net_compat.c  **** }
+ 157               	.LM3:
+ 158 0020 80E0      		ldi r24,0
+ 159 0022 90E0      		ldi r25,0
+ 160 0024 0895      		ret
+ 162               	.Lscope2:
+ 164               		.stabd	78,0,0
+ 169               	.global	waitforpacket
+ 171               	waitforpacket:
+ 172               		.stabd	46,0,0
   44:net_compat.c  **** 
   45:net_compat.c  **** void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
   46:net_compat.c  **** {
- 173               	.LM4:
- 174               	.LFBB3:
- 175 0024 CF92      		push r12
- 176 0026 DF92      		push r13
- 177 0028 EF92      		push r14
- 178 002a FF92      		push r15
- 179 002c 0F93      		push r16
- 180 002e 1F93      		push r17
- 181 0030 CF93      		push r28
- 182 0032 DF93      		push r29
- 183               	/* prologue: function */
- 184               	/* frame size = 0 */
- 185               	/* stack size = 8 */
- 186               	.L__stack_usage = 8
- 187 0034 6C01      		movw r12,r24
- 188 0036 7B01      		movw r14,r22
- 189 0038 EA01      		movw r28,r20
+ 174               	.LM4:
+ 175               	.LFBB3:
+ 176 0026 0F93      		push r16
+ 177 0028 1F93      		push r17
+ 178 002a CF93      		push r28
+ 179 002c DF93      		push r29
+ 180               	/* prologue: function */
+ 181               	/* frame size = 0 */
+ 182               	/* stack size = 4 */
+ 183               	.L__stack_usage = 4
+ 184 002e 8B01      		movw r16,r22
+ 185 0030 EA01      		movw r28,r20
   47:net_compat.c  **** 	OSCCAL = OSCHIGH;
- 191               	.LM5:
- 192 003a 8FEF      		ldi r24,lo8(-1)
- 193 003c 81BF      		out 0x31,r24
- 194               	.L4:
-GAS LISTING /tmp/ccMP3Ntm.s 			page 4
-
-
+ 187               	.LM5:
+ 188 0032 2FEF      		ldi r18,lo8(-1)
+ 189 0034 21BF      		out 0x31,r18
+ 190               	.L4:
   48:net_compat.c  **** 
   49:net_compat.c  **** 	//Make sure we're not walking in on something.
   50:net_compat.c  **** 	while( ltime-- > 0 )
- 196               	.LM6:
- 197 003e 2197      		sbiw r28,1
- 198 0040 CE01      		movw r24,r28
- 199 0042 0196      		adiw r24,1
- 200 0044 1816      		cp __zero_reg__,r24
- 201 0046 1906      		cpc __zero_reg__,r25
- 202 0048 04F4      		brge .L10
+ 192               	.LM6:
+GAS LISTING /tmp/ccouZRfQ.s 			page 4
+
+
+ 193 0036 2197      		sbiw r28,1
+ 194 0038 9E01      		movw r18,r28
+ 195 003a 2F5F      		subi r18,-1
+ 196 003c 3F4F      		sbci r19,-1
+ 197 003e 1216      		cp __zero_reg__,r18
+ 198 0040 1306      		cpc __zero_reg__,r19
+ 199 0042 04F4      		brge .L9
   51:net_compat.c  **** 	{
   52:net_compat.c  **** 		if( USIBR == 0x00 ) break;
- 204               	.LM7:
- 205 004a 80B3      		in r24,0x10
- 206 004c 8823      		tst r24
- 207 004e 01F0      		breq .L10
+ 201               	.LM7:
+ 202 0044 20B3      		in r18,0x10
+ 203 0046 2223      		tst r18
+ 204 0048 01F0      		breq .L9
   53:net_compat.c  **** 		if( USIBR == 0xFF ) break;
- 209               	.LM8:
- 210 0050 80B3      		in r24,0x10
- 211 0052 8F3F      		cpi r24,lo8(-1)
- 212 0054 01F0      		breq .L10
+ 206               	.LM8:
+ 207 004a 20B3      		in r18,0x10
+ 208 004c 2F3F      		cpi r18,lo8(-1)
+ 209 004e 01F0      		breq .L9
   54:net_compat.c  **** 		NOOP;
- 214               	.LM9:
- 215               	/* #APP */
- 216               	 ;  54 "net_compat.c" 1
- 217 0056 0000      		nop
- 218               	 ;  0 "" 2
- 219               	/* #NOAPP */
- 220 0058 00C0      		rjmp .L4
- 221               	.L11:
+ 211               	.LM9:
+ 212               	/* #APP */
+ 213               	 ;  54 "net_compat.c" 1
+ 214 0050 0000      		nop
+ 215               	 ;  0 "" 2
+ 216               	/* #NOAPP */
+ 217 0052 00C0      		rjmp .L4
+ 218               	.L10:
   55:net_compat.c  **** 	}
   56:net_compat.c  **** 
   57:net_compat.c  **** 
   58:net_compat.c  **** 	while( ltime-- > 0 )
   59:net_compat.c  **** 	{
   60:net_compat.c  **** 		if( USIBR && (USIBR != 0xFF ) )
- 223               	.LM10:
- 224 005a 80B3      		in r24,0x10
- 225 005c 8111      		cpse r24,__zero_reg__
- 226 005e 00C0      		rjmp .L27
- 227               	.L10:
+ 220               	.LM10:
+ 221 0054 20B3      		in r18,0x10
+ 222 0056 2111      		cpse r18,__zero_reg__
+ 223 0058 00C0      		rjmp .L26
+ 224               	.L9:
   58:net_compat.c  **** 	while( ltime-- > 0 )
- 229               	.LM11:
- 230 0060 2197      		sbiw r28,1
- 231 0062 CE01      		movw r24,r28
- 232 0064 0196      		adiw r24,1
- 233 0066 1816      		cp __zero_reg__,r24
- 234 0068 1906      		cpc __zero_reg__,r25
- 235 006a 04F0      		brlt .L11
- 236 006c 00C0      		rjmp .L9
- 237               	.L27:
- 239               	.LM12:
- 240 006e 80B3      		in r24,0x10
- 241 0070 8F3F      		cpi r24,lo8(-1)
- 242 0072 01F0      		breq .L10
- 243               	.LBB5:
+ 226               	.LM11:
+ 227 005a 2197      		sbiw r28,1
+ 228 005c 9E01      		movw r18,r28
+ 229 005e 2F5F      		subi r18,-1
+ 230 0060 3F4F      		sbci r19,-1
+ 231 0062 1216      		cp __zero_reg__,r18
+ 232 0064 1306      		cpc __zero_reg__,r19
+ 233 0066 04F0      		brlt .L10
+ 234 0068 00C0      		rjmp .L8
+ 235               	.L26:
+ 237               	.LM12:
+ 238 006a 20B3      		in r18,0x10
+ 239 006c 2F3F      		cpi r18,lo8(-1)
+ 240 006e 01F0      		breq .L9
+ 241               	.LBB5:
   61:net_compat.c  **** 		{
-GAS LISTING /tmp/ccMP3Ntm.s 			page 5
-
-
   62:net_compat.c  **** 			int r = MaybeHaveDataASM( buffer, len );
- 245               	.LM13:
- 246 0074 6E2D      		mov r22,r14
- 247 0076 C601      		movw r24,r12
- 248 0078 00D0      		rcall MaybeHaveDataASM
- 249 007a 8C01      		movw r16,r24
+ 243               	.LM13:
+GAS LISTING /tmp/ccouZRfQ.s 			page 5
+
+
+ 244 0070 602F      		mov r22,r16
+ 245 0072 00D0      		rcall MaybeHaveDataASM
   63:net_compat.c  **** 			if( r > 1 )
- 251               	.LM14:
- 252 007c 8230      		cpi r24,2
- 253 007e 9105      		cpc r25,__zero_reg__
- 254 0080 04F0      		brlt .L8
- 255               	.LBB6:
- 256               	.LBB7:
-  37:net_compat.c  **** 	byr = Demanchestrate( machesterized, mlen );
- 258               	.LM15:
- 259 0082 B701      		movw r22,r14
- 260 0084 C601      		movw r24,r12
- 261 0086 00D0      		rcall Demanchestrate
- 262               	.LBE7:
- 263               	.LBE6:
   64:net_compat.c  **** 			{
   65:net_compat.c  **** 				r += GotPack( buffer, r, len );
- 265               	.LM16:
- 266 0088 080F      		add r16,r24
- 267 008a 191F      		adc r17,r25
- 268               	.L8:
   66:net_compat.c  **** 			}
   67:net_compat.c  **** 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
- 270               	.LM17:
- 271 008c 2397      		sbiw r28,3
- 272 008e E01A      		sub r14,r16
- 273 0090 F10A      		sbc r15,r17
- 274 0092 EE0C      		lsl r14
- 275 0094 FF1C      		rol r15
- 276 0096 EE0C      		lsl r14
- 277 0098 FF1C      		rol r15
- 278 009a CE19      		sub r28,r14
- 279 009c DF09      		sbc r29,r15
- 280               	.L9:
- 281               	.LBE5:
+ 247               	.LM14:
+ 248 0074 2397      		sbiw r28,3
+ 249 0076 B801      		movw r22,r16
+ 250 0078 681B      		sub r22,r24
+ 251 007a 790B      		sbc r23,r25
+ 252 007c 660F      		lsl r22
+ 253 007e 771F      		rol r23
+ 254 0080 660F      		lsl r22
+ 255 0082 771F      		rol r23
+ 256 0084 C61B      		sub r28,r22
+ 257 0086 D70B      		sbc r29,r23
+ 258               	.L8:
+ 259               	.LBE5:
   68:net_compat.c  **** 			break;
   69:net_compat.c  **** 		}
   70:net_compat.c  **** 	}
   71:net_compat.c  **** 
   72:net_compat.c  **** 
   73:net_compat.c  **** 	while( ltime-- > 0 )
- 283               	.LM18:
- 284 009e 1C16      		cp __zero_reg__,r28
- 285 00a0 1D06      		cpc __zero_reg__,r29
- 286 00a2 04F4      		brge .L28
+ 261               	.LM15:
+ 262 0088 1C16      		cp __zero_reg__,r28
+ 263 008a 1D06      		cpc __zero_reg__,r29
+ 264 008c 04F4      		brge .L27
   74:net_compat.c  **** 	{
   75:net_compat.c  **** 		NOOP;
- 288               	.LM19:
- 289               	/* #APP */
- 290               	 ;  75 "net_compat.c" 1
- 291 00a4 0000      		nop
- 292               	 ;  0 "" 2
-GAS LISTING /tmp/ccMP3Ntm.s 			page 6
-
-
+ 266               	.LM16:
+ 267               	/* #APP */
+ 268               	 ;  75 "net_compat.c" 1
+ 269 008e 0000      		nop
+ 270               	 ;  0 "" 2
   76:net_compat.c  **** 		NOOP;
- 294               	.LM20:
- 295               	 ;  76 "net_compat.c" 1
- 296 00a6 0000      		nop
- 297               	 ;  0 "" 2
+ 272               	.LM17:
+ 273               	 ;  76 "net_compat.c" 1
+ 274 0090 0000      		nop
+ 275               	 ;  0 "" 2
   77:net_compat.c  **** 		NOOP;
- 299               	.LM21:
- 300               	 ;  77 "net_compat.c" 1
- 301 00a8 0000      		nop
- 302               	 ;  0 "" 2
+ 277               	.LM18:
+ 278               	 ;  77 "net_compat.c" 1
+ 279 0092 0000      		nop
+ 280               	 ;  0 "" 2
   78:net_compat.c  **** 		NOOP;
- 304               	.LM22:
- 305               	 ;  78 "net_compat.c" 1
- 306 00aa 0000      		nop
- 307               	 ;  0 "" 2
+ 282               	.LM19:
+ 283               	 ;  78 "net_compat.c" 1
+ 284 0094 0000      		nop
+ 285               	 ;  0 "" 2
   79:net_compat.c  **** 		NOOP;
- 309               	.LM23:
- 310               	 ;  79 "net_compat.c" 1
- 311 00ac 0000      		nop
- 312               	 ;  0 "" 2
- 313               	/* #NOAPP */
- 314 00ae 2197      		sbiw r28,1
- 315 00b0 00C0      		rjmp .L9
- 316               	.L28:
+ 287               	.LM20:
+ 288               	 ;  79 "net_compat.c" 1
+ 289 0096 0000      		nop
+ 290               	 ;  0 "" 2
+GAS LISTING /tmp/ccouZRfQ.s 			page 6
+
+
+ 291               	/* #NOAPP */
+ 292 0098 2197      		sbiw r28,1
+ 293 009a 00C0      		rjmp .L8
+ 294               	.L27:
   80:net_compat.c  **** 	}
   81:net_compat.c  **** 
   82:net_compat.c  **** 	OSCCAL = OSC20;
- 318               	.LM24:
- 319 00b2 86EB      		ldi r24,lo8(-74)
- 320 00b4 81BF      		out 0x31,r24
- 321               	/* epilogue start */
+ 296               	.LM21:
+ 297 009c 8BEB      		ldi r24,lo8(-69)
+ 298 009e 81BF      		out 0x31,r24
+ 299               	/* epilogue start */
   83:net_compat.c  **** }
- 323               	.LM25:
- 324 00b6 DF91      		pop r29
- 325 00b8 CF91      		pop r28
- 326 00ba 1F91      		pop r17
- 327 00bc 0F91      		pop r16
- 328 00be FF90      		pop r15
- 329 00c0 EF90      		pop r14
- 330 00c2 DF90      		pop r13
- 331 00c4 CF90      		pop r12
- 332 00c6 0895      		ret
- 337               	.Lscope3:
- 339               		.stabd	78,0,0
- 343               	.global	et_popblob
- 345               	et_popblob:
- 346               		.stabd	46,0,0
+ 301               	.LM22:
+ 302 00a0 DF91      		pop r29
+ 303 00a2 CF91      		pop r28
+ 304 00a4 1F91      		pop r17
+ 305 00a6 0F91      		pop r16
+ 306 00a8 0895      		ret
+ 308               	.Lscope3:
+ 310               		.stabd	78,0,0
+ 314               	.global	et_popblob
+ 316               	et_popblob:
+ 317               		.stabd	46,0,0
   84:net_compat.c  **** 
   85:net_compat.c  **** 
   86:net_compat.c  **** 
@@ -2623,546 +2599,545 @@ GAS LISTING /tmp/ccMP3Ntm.s 			page 1
   91:net_compat.c  **** 
   92:net_compat.c  **** 
   93:net_compat.c  **** //
-GAS LISTING /tmp/ccMP3Ntm.s 			page 7
-
-
   94:net_compat.c  **** 
   95:net_compat.c  **** void et_popblob( uint8_t * data, uint8_t len )
   96:net_compat.c  **** {
- 348               	.LM26:
- 349               	.LFBB4:
- 350               	/* prologue: function */
- 351               	/* frame size = 0 */
- 352               	/* stack size = 0 */
- 353               	.L__stack_usage = 0
- 354               	.L30:
+ 319               	.LM23:
+ 320               	.LFBB4:
+ 321               	/* prologue: function */
+ 322               	/* frame size = 0 */
+ 323               	/* stack size = 0 */
+ 324               	.L__stack_usage = 0
+ 325               	.L29:
   97:net_compat.c  **** 	while( len-- )
- 356               	.LM27:
- 357 00c8 6150      		subi r22,1
- 358 00ca 00F0      		brcs .L32
- 359               	.LBB10:
- 360               	.LBB11:
- 362               	.Ltext3:
+ 327               	.LM24:
+ 328 00aa 6150      		subi r22,1
+ 329 00ac 00F0      		brcs .L31
+ 330               	.LBB8:
+ 331               	.LBB9:
+ 333               	.Ltext3:
   46:net_compat.h  **** static inline uint8_t et_pop8() { return ETbuffer[ETsendplace++]; }
- 364               	.LM28:
- 365 00cc 2091 0000 		lds r18,ETsendplace
- 366 00d0 3091 0000 		lds r19,ETsendplace+1
- 367 00d4 A901      		movw r20,r18
- 368 00d6 4F5F      		subi r20,-1
- 369 00d8 5F4F      		sbci r21,-1
- 370 00da 5093 0000 		sts ETsendplace+1,r21
- 371 00de 4093 0000 		sts ETsendplace,r20
- 372 00e2 F901      		movw r30,r18
- 373 00e4 E050      		subi r30,lo8(-(ETbuffer))
- 374 00e6 F040      		sbci r31,hi8(-(ETbuffer))
- 375 00e8 2081      		ld r18,Z
- 376               	.LBE11:
- 377               	.LBE10:
- 379               	.Ltext4:
+ 335               	.LM25:
+ 336 00ae 2091 0000 		lds r18,ETsendplace
+ 337 00b2 3091 0000 		lds r19,ETsendplace+1
+ 338 00b6 A901      		movw r20,r18
+ 339 00b8 4F5F      		subi r20,-1
+ 340 00ba 5F4F      		sbci r21,-1
+GAS LISTING /tmp/ccouZRfQ.s 			page 7
+
+
+ 341 00bc 5093 0000 		sts ETsendplace+1,r21
+ 342 00c0 4093 0000 		sts ETsendplace,r20
+ 343 00c4 F901      		movw r30,r18
+ 344 00c6 E050      		subi r30,lo8(-(ETbuffer))
+ 345 00c8 F040      		sbci r31,hi8(-(ETbuffer))
+ 346 00ca 2081      		ld r18,Z
+ 347               	.LBE9:
+ 348               	.LBE8:
+ 350               	.Ltext4:
   98:net_compat.c  **** 	{
   99:net_compat.c  **** 		*(data++) = et_pop8();
- 381               	.LM29:
- 382 00ea FC01      		movw r30,r24
- 383 00ec 2193      		st Z+,r18
- 384 00ee CF01      		movw r24,r30
- 385 00f0 00C0      		rjmp .L30
- 386               	.L32:
- 387               	/* epilogue start */
+ 352               	.LM26:
+ 353 00cc FC01      		movw r30,r24
+ 354 00ce 2193      		st Z+,r18
+ 355 00d0 CF01      		movw r24,r30
+ 356 00d2 00C0      		rjmp .L29
+ 357               	.L31:
+ 358               	/* epilogue start */
  100:net_compat.c  **** 	}
  101:net_compat.c  **** }
- 389               	.LM30:
- 390 00f2 0895      		ret
- 392               	.Lscope4:
- 394               		.stabd	78,0,0
- 397               	.global	et_pushpgmstr
- 399               	et_pushpgmstr:
- 400               		.stabd	46,0,0
+ 360               	.LM27:
+ 361 00d4 0895      		ret
+ 363               	.Lscope4:
+ 365               		.stabd	78,0,0
+ 368               	.global	et_pushpgmstr
+ 370               	et_pushpgmstr:
+ 371               		.stabd	46,0,0
  102:net_compat.c  **** 
  103:net_compat.c  **** void et_pushpgmstr( const char * msg )
  104:net_compat.c  **** {
- 402               	.LM31:
- 403               	.LFBB5:
- 404 00f4 CF93      		push r28
-GAS LISTING /tmp/ccMP3Ntm.s 			page 8
-
-
- 405 00f6 DF93      		push r29
- 406               	/* prologue: function */
- 407               	/* frame size = 0 */
- 408               	/* stack size = 2 */
- 409               	.L__stack_usage = 2
- 410 00f8 FC01      		movw r30,r24
- 411               	.L35:
- 412               	.LBB12:
+ 373               	.LM28:
+ 374               	.LFBB5:
+ 375 00d6 CF93      		push r28
+ 376 00d8 DF93      		push r29
+ 377               	/* prologue: function */
+ 378               	/* frame size = 0 */
+ 379               	/* stack size = 2 */
+ 380               	.L__stack_usage = 2
+ 381 00da FC01      		movw r30,r24
+ 382               	.L34:
+ 383               	.LBB10:
  105:net_compat.c  **** 	uint8_t r;
  106:net_compat.c  **** 	do
  107:net_compat.c  **** 	{
  108:net_compat.c  **** 		r = pgm_read_byte(msg++);
- 414               	.LM32:
- 415               	/* #APP */
- 416               	 ;  108 "net_compat.c" 1
- 417 00fa 8491      		lpm r24, Z
- 418               		
- 419               	 ;  0 "" 2
- 420               	/* #NOAPP */
- 421 00fc EF01      		movw r28,r30
- 422 00fe 2196      		adiw r28,1
- 423               	.LBE12:
+ 385               	.LM29:
+ 386               	/* #APP */
+ 387               	 ;  108 "net_compat.c" 1
+ 388 00dc 8491      		lpm r24, Z
+ 389               		
+ 390               	 ;  0 "" 2
+ 391               	/* #NOAPP */
+ 392 00de EF01      		movw r28,r30
+ 393 00e0 2196      		adiw r28,1
+ 394               	.LBE10:
  109:net_compat.c  **** 		if( !r ) break;
- 425               	.LM33:
- 426 0100 8823      		tst r24
- 427 0102 01F0      		breq .L33
+ 396               	.LM30:
+GAS LISTING /tmp/ccouZRfQ.s 			page 8
+
+
+ 397 00e2 8823      		tst r24
+ 398 00e4 01F0      		breq .L32
  110:net_compat.c  **** 		et_push8( r );
- 429               	.LM34:
- 430 0104 00D0      		rcall et_push8
- 431 0106 FE01      		movw r30,r28
+ 400               	.LM31:
+ 401 00e6 00D0      		rcall et_push8
+ 402 00e8 FE01      		movw r30,r28
  111:net_compat.c  **** 	} while( 1 );
- 433               	.LM35:
- 434 0108 00C0      		rjmp .L35
- 435               	.L33:
- 436               	/* epilogue start */
+ 404               	.LM32:
+ 405 00ea 00C0      		rjmp .L34
+ 406               	.L32:
+ 407               	/* epilogue start */
  112:net_compat.c  **** }
- 438               	.LM36:
- 439 010a DF91      		pop r29
- 440 010c CF91      		pop r28
- 441 010e 0895      		ret
- 446               	.Lscope5:
- 448               		.stabd	78,0,0
- 451               	.global	et_pushpgmblob
- 453               	et_pushpgmblob:
- 454               		.stabd	46,0,0
+ 409               	.LM33:
+ 410 00ec DF91      		pop r29
+ 411 00ee CF91      		pop r28
+ 412 00f0 0895      		ret
+ 417               	.Lscope5:
+ 419               		.stabd	78,0,0
+ 422               	.global	et_pushpgmblob
+ 424               	et_pushpgmblob:
+ 425               		.stabd	46,0,0
  113:net_compat.c  **** 
  114:net_compat.c  **** void et_pushpgmblob( const uint8_t * data, uint8_t len )
  115:net_compat.c  **** {
- 456               	.LM37:
- 457               	.LFBB6:
- 458 0110 0F93      		push r16
- 459 0112 1F93      		push r17
- 460 0114 CF93      		push r28
- 461 0116 DF93      		push r29
- 462 0118 1F92      		push __zero_reg__
- 463 011a CDB7      		in r28,__SP_L__
- 464 011c DEB7      		in r29,__SP_H__
-GAS LISTING /tmp/ccMP3Ntm.s 			page 9
-
-
- 465               	/* prologue: function */
- 466               	/* frame size = 1 */
- 467               	/* stack size = 5 */
- 468               	.L__stack_usage = 5
+ 427               	.LM34:
+ 428               	.LFBB6:
+ 429 00f2 0F93      		push r16
+ 430 00f4 1F93      		push r17
+ 431 00f6 CF93      		push r28
+ 432 00f8 DF93      		push r29
+ 433 00fa 1F92      		push __zero_reg__
+ 434 00fc CDB7      		in r28,__SP_L__
+ 435 00fe DEB7      		in r29,__SP_H__
+ 436               	/* prologue: function */
+ 437               	/* frame size = 1 */
+ 438               	/* stack size = 5 */
+ 439               	.L__stack_usage = 5
  116:net_compat.c  **** 	while( len-- )
- 470               	.LM38:
- 471 011e 8C01      		movw r16,r24
- 472 0120 680F      		add r22,r24
- 473               	.L37:
- 475               	.LM39:
- 476 0122 6017      		cp r22,r16
- 477 0124 01F0      		breq .L39
- 478               	.LBB13:
+ 441               	.LM35:
+ 442 0100 8C01      		movw r16,r24
+ 443 0102 680F      		add r22,r24
+ 444               	.L36:
+ 446               	.LM36:
+ 447 0104 6017      		cp r22,r16
+ 448 0106 01F0      		breq .L38
+ 449               	.LBB11:
  117:net_compat.c  **** 	{
  118:net_compat.c  **** 		et_push8( pgm_read_byte(data++) );
- 480               	.LM40:
- 481 0126 F801      		movw r30,r16
- 482               	/* #APP */
- 483               	 ;  118 "net_compat.c" 1
- 484 0128 8491      		lpm r24, Z
- 485               		
- 486               	 ;  0 "" 2
- 487               	/* #NOAPP */
- 488               	.LBE13:
- 489 012a 6983      		std Y+1,r22
- 490 012c 00D0      		rcall et_push8
- 491 012e 0F5F      		subi r16,-1
- 492 0130 1F4F      		sbci r17,-1
- 493 0132 6981      		ldd r22,Y+1
- 494 0134 00C0      		rjmp .L37
- 495               	.L39:
- 496               	/* epilogue start */
+ 451               	.LM37:
+ 452 0108 F801      		movw r30,r16
+ 453               	/* #APP */
+ 454               	 ;  118 "net_compat.c" 1
+ 455 010a 8491      		lpm r24, Z
+ 456               		
+ 457               	 ;  0 "" 2
+ 458               	/* #NOAPP */
+ 459               	.LBE11:
+GAS LISTING /tmp/ccouZRfQ.s 			page 9
+
+
+ 460 010c 6983      		std Y+1,r22
+ 461 010e 00D0      		rcall et_push8
+ 462 0110 0F5F      		subi r16,-1
+ 463 0112 1F4F      		sbci r17,-1
+ 464 0114 6981      		ldd r22,Y+1
+ 465 0116 00C0      		rjmp .L36
+ 466               	.L38:
+ 467               	/* epilogue start */
  119:net_compat.c  **** 	}
  120:net_compat.c  **** }
- 498               	.LM41:
- 499 0136 0F90      		pop __tmp_reg__
- 500 0138 DF91      		pop r29
- 501 013a CF91      		pop r28
- 502 013c 1F91      		pop r17
- 503 013e 0F91      		pop r16
- 504 0140 0895      		ret
- 509               	.Lscope6:
- 511               		.stabd	78,0,0
- 514               	.global	et_pushstr
- 516               	et_pushstr:
- 517               		.stabd	46,0,0
+ 469               	.LM38:
+ 470 0118 0F90      		pop __tmp_reg__
+ 471 011a DF91      		pop r29
+ 472 011c CF91      		pop r28
+ 473 011e 1F91      		pop r17
+ 474 0120 0F91      		pop r16
+ 475 0122 0895      		ret
+ 480               	.Lscope6:
+ 482               		.stabd	78,0,0
+ 485               	.global	et_pushstr
+ 487               	et_pushstr:
+ 488               		.stabd	46,0,0
  121:net_compat.c  **** 
  122:net_compat.c  **** 
  123:net_compat.c  **** void et_pushstr( const char * msg )
  124:net_compat.c  **** {
- 519               	.LM42:
- 520               	.LFBB7:
- 521 0142 CF93      		push r28
- 522 0144 DF93      		push r29
- 523               	/* prologue: function */
- 524               	/* frame size = 0 */
- 525               	/* stack size = 2 */
-GAS LISTING /tmp/ccMP3Ntm.s 			page 10
-
-
- 526               	.L__stack_usage = 2
- 527 0146 EC01      		movw r28,r24
- 528               	.L41:
+ 490               	.LM39:
+ 491               	.LFBB7:
+ 492 0124 CF93      		push r28
+ 493 0126 DF93      		push r29
+ 494               	/* prologue: function */
+ 495               	/* frame size = 0 */
+ 496               	/* stack size = 2 */
+ 497               	.L__stack_usage = 2
+ 498 0128 EC01      		movw r28,r24
+ 499               	.L40:
  125:net_compat.c  **** 	for( ; *msg; msg++ ) 
- 530               	.LM43:
- 531 0148 8991      		ld r24,Y+
- 532 014a 8823      		tst r24
- 533 014c 01F0      		breq .L43
+ 501               	.LM40:
+ 502 012a 8991      		ld r24,Y+
+ 503 012c 8823      		tst r24
+ 504 012e 01F0      		breq .L42
  126:net_compat.c  **** 		et_push8( *msg );
- 535               	.LM44:
- 536 014e 00D0      		rcall et_push8
- 537 0150 00C0      		rjmp .L41
- 538               	.L43:
- 539               	/* epilogue start */
+ 506               	.LM41:
+ 507 0130 00D0      		rcall et_push8
+ 508 0132 00C0      		rjmp .L40
+ 509               	.L42:
+ 510               	/* epilogue start */
  127:net_compat.c  **** }
- 541               	.LM45:
- 542 0152 DF91      		pop r29
- 543 0154 CF91      		pop r28
- 544 0156 0895      		ret
- 546               	.Lscope7:
- 548               		.stabd	78,0,0
- 551               	.global	et_pushblob
- 553               	et_pushblob:
- 554               		.stabd	46,0,0
+ 512               	.LM42:
+ 513 0134 DF91      		pop r29
+ 514 0136 CF91      		pop r28
+ 515 0138 0895      		ret
+ 517               	.Lscope7:
+ 519               		.stabd	78,0,0
+ 522               	.global	et_pushblob
+ 524               	et_pushblob:
+ 525               		.stabd	46,0,0
+GAS LISTING /tmp/ccouZRfQ.s 			page 10
+
+
  128:net_compat.c  **** 
  129:net_compat.c  **** void et_pushblob( const uint8_t * data, uint8_t len )
  130:net_compat.c  **** {
- 556               	.LM46:
- 557               	.LFBB8:
- 558 0158 0F93      		push r16
- 559 015a 1F93      		push r17
- 560 015c CF93      		push r28
- 561 015e DF93      		push r29
- 562 0160 1F92      		push __zero_reg__
- 563 0162 CDB7      		in r28,__SP_L__
- 564 0164 DEB7      		in r29,__SP_H__
- 565               	/* prologue: function */
- 566               	/* frame size = 1 */
- 567               	/* stack size = 5 */
- 568               	.L__stack_usage = 5
+ 527               	.LM43:
+ 528               	.LFBB8:
+ 529 013a 0F93      		push r16
+ 530 013c 1F93      		push r17
+ 531 013e CF93      		push r28
+ 532 0140 DF93      		push r29
+ 533 0142 1F92      		push __zero_reg__
+ 534 0144 CDB7      		in r28,__SP_L__
+ 535 0146 DEB7      		in r29,__SP_H__
+ 536               	/* prologue: function */
+ 537               	/* frame size = 1 */
+ 538               	/* stack size = 5 */
+ 539               	.L__stack_usage = 5
  131:net_compat.c  **** 	while( len-- )
- 570               	.LM47:
- 571 0166 8C01      		movw r16,r24
- 572 0168 680F      		add r22,r24
- 573               	.L45:
- 575               	.LM48:
- 576 016a 6017      		cp r22,r16
- 577 016c 01F0      		breq .L47
+ 541               	.LM44:
+ 542 0148 8C01      		movw r16,r24
+ 543 014a 680F      		add r22,r24
+ 544               	.L44:
+ 546               	.LM45:
+ 547 014c 6017      		cp r22,r16
+ 548 014e 01F0      		breq .L46
  132:net_compat.c  **** 	{
  133:net_compat.c  **** 		et_push8( *(data++) );
- 579               	.LM49:
- 580 016e F801      		movw r30,r16
- 581 0170 8191      		ld r24,Z+
- 582 0172 8F01      		movw r16,r30
- 583 0174 6983      		std Y+1,r22
- 584 0176 00D0      		rcall et_push8
- 585 0178 6981      		ldd r22,Y+1
-GAS LISTING /tmp/ccMP3Ntm.s 			page 11
-
-
- 586 017a 00C0      		rjmp .L45
- 587               	.L47:
- 588               	/* epilogue start */
+ 550               	.LM46:
+ 551 0150 F801      		movw r30,r16
+ 552 0152 8191      		ld r24,Z+
+ 553 0154 8F01      		movw r16,r30
+ 554 0156 6983      		std Y+1,r22
+ 555 0158 00D0      		rcall et_push8
+ 556 015a 6981      		ldd r22,Y+1
+ 557 015c 00C0      		rjmp .L44
+ 558               	.L46:
+ 559               	/* epilogue start */
  134:net_compat.c  **** 	}
  135:net_compat.c  **** }
- 590               	.LM50:
- 591 017c 0F90      		pop __tmp_reg__
- 592 017e DF91      		pop r29
- 593 0180 CF91      		pop r28
- 594 0182 1F91      		pop r17
- 595 0184 0F91      		pop r16
- 596 0186 0895      		ret
- 598               	.Lscope8:
- 600               		.stabd	78,0,0
- 603               	.global	et_init
- 605               	et_init:
- 606               		.stabd	46,0,0
+ 561               	.LM47:
+ 562 015e 0F90      		pop __tmp_reg__
+ 563 0160 DF91      		pop r29
+ 564 0162 CF91      		pop r28
+ 565 0164 1F91      		pop r17
+ 566 0166 0F91      		pop r16
+ 567 0168 0895      		ret
+ 569               	.Lscope8:
+ 571               		.stabd	78,0,0
+ 574               	.global	et_init
+ 576               	et_init:
+ 577               		.stabd	46,0,0
  136:net_compat.c  **** 
  137:net_compat.c  **** 
  138:net_compat.c  **** //return 0 if OK, otherwise nonzero.
  139:net_compat.c  **** int8_t et_init( const unsigned char * macaddy )
  140:net_compat.c  **** {
- 608               	.LM51:
- 609               	.LFBB9:
- 610               	/* prologue: function */
- 611               	/* frame size = 0 */
- 612               	/* stack size = 0 */
- 613               	.L__stack_usage = 0
- 614 0188 FC01      		movw r30,r24
+ 579               	.LM48:
+ 580               	.LFBB9:
+GAS LISTING /tmp/ccouZRfQ.s 			page 11
+
+
+ 581               	/* prologue: function */
+ 582               	/* frame size = 0 */
+ 583               	/* stack size = 0 */
+ 584               	.L__stack_usage = 0
+ 585 016a FC01      		movw r30,r24
  141:net_compat.c  **** 	MyMAC[0] = macaddy[0];
- 616               	.LM52:
- 617 018a 8081      		ld r24,Z
- 618 018c 8093 0000 		sts MyMAC,r24
+ 587               	.LM49:
+ 588 016c 8081      		ld r24,Z
+ 589 016e 8093 0000 		sts MyMAC,r24
  142:net_compat.c  **** 	MyMAC[1] = macaddy[1];
- 620               	.LM53:
- 621 0190 8181      		ldd r24,Z+1
- 622 0192 8093 0000 		sts MyMAC+1,r24
+ 591               	.LM50:
+ 592 0172 8181      		ldd r24,Z+1
+ 593 0174 8093 0000 		sts MyMAC+1,r24
  143:net_compat.c  **** 	MyMAC[2] = macaddy[2];
- 624               	.LM54:
- 625 0196 8281      		ldd r24,Z+2
- 626 0198 8093 0000 		sts MyMAC+2,r24
+ 595               	.LM51:
+ 596 0178 8281      		ldd r24,Z+2
+ 597 017a 8093 0000 		sts MyMAC+2,r24
  144:net_compat.c  **** 	MyMAC[3] = macaddy[3];
- 628               	.LM55:
- 629 019c 8381      		ldd r24,Z+3
- 630 019e 8093 0000 		sts MyMAC+3,r24
+ 599               	.LM52:
+ 600 017e 8381      		ldd r24,Z+3
+ 601 0180 8093 0000 		sts MyMAC+3,r24
  145:net_compat.c  **** 	MyMAC[4] = macaddy[4];
- 632               	.LM56:
- 633 01a2 8481      		ldd r24,Z+4
- 634 01a4 8093 0000 		sts MyMAC+4,r24
+ 603               	.LM53:
+ 604 0184 8481      		ldd r24,Z+4
+ 605 0186 8093 0000 		sts MyMAC+4,r24
  146:net_compat.c  **** 	MyMAC[5] = macaddy[5];
- 636               	.LM57:
- 637 01a8 8581      		ldd r24,Z+5
- 638 01aa 8093 0000 		sts MyMAC+5,r24
+ 607               	.LM54:
+ 608 018a 8581      		ldd r24,Z+5
+ 609 018c 8093 0000 		sts MyMAC+5,r24
  147:net_compat.c  **** 
  148:net_compat.c  **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
- 640               	.LM58:
- 641 01ae 86E0      		ldi r24,lo8(6)
-GAS LISTING /tmp/ccMP3Ntm.s 			page 12
-
-
- 642 01b0 87BD      		out 0x27,r24
+ 611               	.LM55:
+ 612 0190 86E0      		ldi r24,lo8(6)
+ 613 0192 87BD      		out 0x27,r24
  149:net_compat.c  **** 	PLLCSR |= _BV(LSM);
- 644               	.LM59:
- 645 01b2 87B5      		in r24,0x27
- 646 01b4 8068      		ori r24,lo8(-128)
- 647 01b6 87BD      		out 0x27,r24
+ 615               	.LM56:
+ 616 0194 87B5      		in r24,0x27
+ 617 0196 8068      		ori r24,lo8(-128)
+ 618 0198 87BD      		out 0x27,r24
  150:net_compat.c  **** 	OSCCAL = OSC20;
- 649               	.LM60:
- 650 01b8 86EB      		ldi r24,lo8(-74)
- 651 01ba 81BF      		out 0x31,r24
+ 620               	.LM57:
+ 621 019a 8BEB      		ldi r24,lo8(-69)
+ 622 019c 81BF      		out 0x31,r24
  151:net_compat.c  **** 
  152:net_compat.c  **** 
  153:net_compat.c  **** 	//Setup timer 0 to speed along.
  154:net_compat.c  **** 	//Yes, this means you can't use it.
  155:net_compat.c  **** 	TCCR0A = _BV(WGM01);
- 653               	.LM61:
- 654 01bc 82E0      		ldi r24,lo8(2)
- 655 01be 8ABD      		out 0x2a,r24
+ 624               	.LM58:
+ 625 019e 82E0      		ldi r24,lo8(2)
+ 626 01a0 8ABD      		out 0x2a,r24
  156:net_compat.c  **** 	TCCR0B = _BV(CS00);
- 657               	.LM62:
- 658 01c0 81E0      		ldi r24,lo8(1)
- 659 01c2 83BF      		out 0x33,r24
+ 628               	.LM59:
+ 629 01a2 81E0      		ldi r24,lo8(1)
+ 630 01a4 83BF      		out 0x33,r24
  157:net_compat.c  **** 	OCR0A = 0;
- 661               	.LM63:
- 662 01c4 19BC      		out 0x29,__zero_reg__
+ 632               	.LM60:
+GAS LISTING /tmp/ccouZRfQ.s 			page 12
+
+
+ 633 01a6 19BC      		out 0x29,__zero_reg__
  158:net_compat.c  **** 
  159:net_compat.c  **** 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
- 664               	.LM64:
- 665 01c6 85E1      		ldi r24,lo8(21)
- 666 01c8 8DB9      		out 0xd,r24
+ 635               	.LM61:
+ 636 01a8 85E1      		ldi r24,lo8(21)
+ 637 01aa 8DB9      		out 0xd,r24
  160:net_compat.c  **** 
  161:net_compat.c  **** 	//setup port B
  162:net_compat.c  **** 
  163:net_compat.c  **** 	PORTB &= ~_BV(0); 
- 668               	.LM65:
- 669 01ca C098      		cbi 0x18,0
+ 639               	.LM62:
+ 640 01ac C098      		cbi 0x18,0
  164:net_compat.c  **** 	DDRB &= ~_BV(0);
- 671               	.LM66:
- 672 01cc B898      		cbi 0x17,0
+ 642               	.LM63:
+ 643 01ae B898      		cbi 0x17,0
  165:net_compat.c  **** 	PORTB &= ~_BV(1);
- 674               	.LM67:
- 675 01ce C198      		cbi 0x18,1
+ 645               	.LM64:
+ 646 01b0 C198      		cbi 0x18,1
  166:net_compat.c  **** 	USICR &= ~_BV(USIWM0);  //Disable USICR
- 677               	.LM68:
- 678 01d0 6C98      		cbi 0xd,4
+ 648               	.LM65:
+ 649 01b2 6C98      		cbi 0xd,4
  167:net_compat.c  **** 
  168:net_compat.c  **** 	return 0;
  169:net_compat.c  **** }
- 680               	.LM69:
- 681 01d2 80E0      		ldi r24,0
- 682 01d4 0895      		ret
- 684               	.Lscope9:
- 686               		.stabd	78,0,0
- 690               	.global	et_xmitpacket
- 692               	et_xmitpacket:
- 693               		.stabd	46,0,0
+ 651               	.LM66:
+ 652 01b4 80E0      		ldi r24,0
+ 653 01b6 0895      		ret
+ 655               	.Lscope9:
+ 657               		.stabd	78,0,0
+ 661               	.global	et_xmitpacket
+ 663               	et_xmitpacket:
+ 664               		.stabd	46,0,0
  170:net_compat.c  **** 
-GAS LISTING /tmp/ccMP3Ntm.s 			page 13
-
-
  171:net_compat.c  **** int8_t et_xmitpacket( uint16_t start, uint16_t len )
  172:net_compat.c  **** {
- 695               	.LM70:
- 696               	.LFBB10:
- 697               	/* prologue: function */
- 698               	/* frame size = 0 */
- 699               	/* stack size = 0 */
- 700               	.L__stack_usage = 0
+ 666               	.LM67:
+ 667               	.LFBB10:
+ 668               	/* prologue: function */
+ 669               	/* frame size = 0 */
+ 670               	/* stack size = 0 */
+ 671               	.L__stack_usage = 0
  173:net_compat.c  **** 	//XXX !!! TODO
  174:net_compat.c  **** }
- 702               	.LM71:
- 703 01d6 0895      		ret
- 705               	.Lscope10:
- 707               		.stabd	78,0,0
- 709               	.global	et_recvpack
- 711               	et_recvpack:
- 712               		.stabd	46,0,0
+ 673               	.LM68:
+ 674 01b8 0895      		ret
+ 676               	.Lscope10:
+ 678               		.stabd	78,0,0
+ 680               	.global	et_recvpack
+ 682               	et_recvpack:
+ 683               		.stabd	46,0,0
  175:net_compat.c  **** 
  176:net_compat.c  **** //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
  177:net_compat.c  **** unsigned short et_recvpack()
  178:net_compat.c  **** {
- 714               	.LM72:
- 715               	.LFBB11:
- 716               	/* prologue: function */
- 717               	/* frame size = 0 */
- 718               	/* stack size = 0 */
- 719               	.L__stack_usage = 0
+ 685               	.LM69:
+ 686               	.LFBB11:
+ 687               	/* prologue: function */
+GAS LISTING /tmp/ccouZRfQ.s 			page 13
+
+
+ 688               	/* frame size = 0 */
+ 689               	/* stack size = 0 */
+ 690               	.L__stack_usage = 0
  179:net_compat.c  **** 
  180:net_compat.c  **** #define LIMITSIZE  sizeof( ETbuffer )/2-30
  181:net_compat.c  **** //#define LIMITSIZE 10
  182:net_compat.c  **** 
- 183:net_compat.c  **** 		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MH
- 721               	.LM73:
- 722 01d8 40E2      		ldi r20,lo8(32)
- 723 01da 5EE4      		ldi r21,lo8(78)
- 724 01dc 64E8      		ldi r22,lo8(-124)
- 725 01de 70E0      		ldi r23,0
- 726 01e0 80E0      		ldi r24,lo8(ETbuffer+48)
- 727 01e2 90E0      		ldi r25,hi8(ETbuffer+48)
- 728 01e4 00D0      		rcall waitforpacket
+ 183:net_compat.c  **** 		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000
+ 692               	.LM70:
+ 693 01ba 40E2      		ldi r20,lo8(32)
+ 694 01bc 5EE4      		ldi r21,lo8(78)
+ 695 01be 62E8      		ldi r22,lo8(-126)
+ 696 01c0 70E0      		ldi r23,0
+ 697 01c2 80E0      		ldi r24,lo8(ETbuffer+40)
+ 698 01c4 90E0      		ldi r25,hi8(ETbuffer+40)
+ 699 01c6 00D0      		rcall waitforpacket
  184:net_compat.c  **** //		_delay_ms(8);
  185:net_compat.c  **** #ifdef SMARTPWR
  186:net_compat.c  **** 		DDRB |= _BV(1);
  187:net_compat.c  **** #endif
  188:net_compat.c  **** 		PORTB|=_BV(1);
- 730               	.LM74:
- 731 01e6 C19A      		sbi 0x18,1
+ 701               	.LM71:
+ 702 01c8 C19A      		sbi 0x18,1
  189:net_compat.c  **** 		NOOP;
- 733               	.LM75:
- 734               	/* #APP */
- 735               	 ;  189 "net_compat.c" 1
- 736 01e8 0000      		nop
- 737               	 ;  0 "" 2
+ 704               	.LM72:
+ 705               	/* #APP */
+ 706               	 ;  189 "net_compat.c" 1
+ 707 01ca 0000      		nop
+ 708               	 ;  0 "" 2
  190:net_compat.c  **** 		PORTB &=~_BV(1);
- 739               	.LM76:
- 740               	/* #NOAPP */
- 741 01ea C198      		cbi 0x18,1
-GAS LISTING /tmp/ccMP3Ntm.s 			page 14
-
-
+ 710               	.LM73:
+ 711               	/* #NOAPP */
+ 712 01cc C198      		cbi 0x18,1
  191:net_compat.c  **** #ifdef SMARTPWR
  192:net_compat.c  **** 		DDRB &= ~_BV(1);
  193:net_compat.c  **** #endif
- 194:net_compat.c  **** 		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30
- 743               	.LM77:
- 744 01ec 40E2      		ldi r20,lo8(32)
- 745 01ee 5EE4      		ldi r21,lo8(78)
- 746 01f0 64E8      		ldi r22,lo8(-124)
- 747 01f2 70E0      		ldi r23,0
- 748 01f4 80E0      		ldi r24,lo8(ETbuffer+48)
- 749 01f6 90E0      		ldi r25,hi8(ETbuffer+48)
- 750 01f8 00D0      		rcall waitforpacket
+ 194:net_compat.c  **** 		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms
+ 714               	.LM74:
+ 715 01ce 40E2      		ldi r20,lo8(32)
+ 716 01d0 5EE4      		ldi r21,lo8(78)
+ 717 01d2 62E8      		ldi r22,lo8(-126)
+ 718 01d4 70E0      		ldi r23,0
+ 719 01d6 80E0      		ldi r24,lo8(ETbuffer+40)
+ 720 01d8 90E0      		ldi r25,hi8(ETbuffer+40)
+ 721 01da 00D0      		rcall waitforpacket
  195:net_compat.c  **** // 		_delay_ms(8);
  196:net_compat.c  **** 
  197:net_compat.c  **** }
- 752               	.LM78:
- 753 01fa 0895      		ret
- 755               	.Lscope11:
- 757               		.stabd	78,0,0
- 761               	.global	et_start_checksum
- 763               	et_start_checksum:
- 764               		.stabd	46,0,0
+ 723               	.LM75:
+ 724 01dc 0895      		ret
+ 726               	.Lscope11:
+ 728               		.stabd	78,0,0
+ 732               	.global	et_start_checksum
+ 734               	et_start_checksum:
+ 735               		.stabd	46,0,0
  198:net_compat.c  **** 
  199:net_compat.c  **** void et_start_checksum( uint16_t start, uint16_t len )
+GAS LISTING /tmp/ccouZRfQ.s 			page 14
+
+
  200:net_compat.c  **** {
- 766               	.LM79:
- 767               	.LFBB12:
- 768               	/* prologue: function */
- 769               	/* frame size = 0 */
- 770               	/* stack size = 0 */
- 771               	.L__stack_usage = 0
- 772 01fc 0895      		ret
- 774               	.Lscope12:
- 776               		.stabd	78,0,0
- 783               	.global	et_copy_memory
- 785               	et_copy_memory:
- 786               		.stabd	46,0,0
+ 737               	.LM76:
+ 738               	.LFBB12:
+ 739               	/* prologue: function */
+ 740               	/* frame size = 0 */
+ 741               	/* stack size = 0 */
+ 742               	.L__stack_usage = 0
+ 743 01de 0895      		ret
+ 745               	.Lscope12:
+ 747               		.stabd	78,0,0
+ 754               	.global	et_copy_memory
+ 756               	et_copy_memory:
+ 757               		.stabd	46,0,0
  201:net_compat.c  **** //	ETchecksum = uint16_t internet_checksum( &ETbuffer[start], uint16_t len );
  202:net_compat.c  **** 	//XXX !!! TODO
  203:net_compat.c  **** }
  204:net_compat.c  **** 
  205:net_compat.c  **** void et_copy_memory( uint16_t to, uint16_t from, uint16_t length, uint16_t range_start, uint16_t ra
  206:net_compat.c  **** {
- 788               	.LM80:
- 789               	.LFBB13:
- 790               	/* prologue: function */
- 791               	/* frame size = 0 */
- 792               	/* stack size = 0 */
- 793               	.L__stack_usage = 0
- 794 01fe 0895      		ret
- 796               	.Lscope13:
- 798               		.stabd	78,0,0
- 799               	.global	ManchesterTable
- 800               		.data
- 801               		.p2align	4
- 804               	ManchesterTable:
- 805 0000 AA        		.byte	-86
-GAS LISTING /tmp/ccMP3Ntm.s 			page 15
+ 759               	.LM77:
+ 760               	.LFBB13:
+ 761               	/* prologue: function */
+ 762               	/* frame size = 0 */
+ 763               	/* stack size = 0 */
+ 764               	.L__stack_usage = 0
+ 765 01e0 0895      		ret
+ 767               	.Lscope13:
+ 769               		.stabd	78,0,0
+ 770               	.global	ManchesterTable
+ 771               		.data
+ 772               		.p2align	4
+ 775               	ManchesterTable:
+ 776 0000 AA        		.byte	-86
+ 777 0001 6A        		.byte	106
+ 778 0002 9A        		.byte	-102
+ 779 0003 5A        		.byte	90
+ 780 0004 A6        		.byte	-90
+ 781 0005 66        		.byte	102
+ 782 0006 96        		.byte	-106
+ 783 0007 56        		.byte	86
+ 784 0008 A9        		.byte	-87
+ 785 0009 69        		.byte	105
+ 786 000a 99        		.byte	-103
+ 787 000b 59        		.byte	89
+ 788 000c A5        		.byte	-91
+ 789 000d 65        		.byte	101
+ 790 000e 95        		.byte	-107
+ 791 000f 55        		.byte	85
+ 792               		.comm	ETchecksum,2,1
+ 793               		.comm	sendbaseaddress,2,1
+ 794               		.comm	ETsendplace,2,1
+ 795               		.comm	ETbuffer,320,1
+ 796               		.comm	MyMAC,6,1
+ 803               		.text
+ 805               	.Letext0:
+ 806               		.ident	"GCC: (GNU) 4.8.2"
+ 807               	.global __do_copy_data
+GAS LISTING /tmp/ccouZRfQ.s 			page 15
 
 
- 806 0001 6A        		.byte	106
- 807 0002 9A        		.byte	-102
- 808 0003 5A        		.byte	90
- 809 0004 A6        		.byte	-90
- 810 0005 66        		.byte	102
- 811 0006 96        		.byte	-106
- 812 0007 56        		.byte	86
- 813 0008 A9        		.byte	-87
- 814 0009 69        		.byte	105
- 815 000a 99        		.byte	-103
- 816 000b 59        		.byte	89
- 817 000c A5        		.byte	-91
- 818 000d 65        		.byte	101
- 819 000e 95        		.byte	-107
- 820 000f 55        		.byte	85
- 821               		.comm	ETchecksum,2,1
- 822               		.comm	sendbaseaddress,2,1
- 823               		.comm	ETsendplace,2,1
- 824               		.comm	ETbuffer,324,1
- 825               		.comm	MyMAC,6,1
- 832               		.text
- 834               	.Letext0:
- 835               		.ident	"GCC: (GNU) 4.8.2"
- 836               	.global __do_copy_data
- 837               	.global __do_clear_bss
-GAS LISTING /tmp/ccMP3Ntm.s 			page 16
+ 808               	.global __do_clear_bss
+GAS LISTING /tmp/ccouZRfQ.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 net_compat.c
-     /tmp/ccMP3Ntm.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccMP3Ntm.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccMP3Ntm.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccMP3Ntm.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccMP3Ntm.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccMP3Ntm.s:110    .text:0000000000000000 et_push8
+     /tmp/ccouZRfQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccouZRfQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccouZRfQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccouZRfQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccouZRfQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccouZRfQ.s:110    .text:0000000000000000 et_push8
                             *COM*:0000000000000002 ETsendplace
-                            *COM*:0000000000000144 ETbuffer
-     /tmp/ccMP3Ntm.s:145    .text:0000000000000020 GotPack
-     /tmp/ccMP3Ntm.s:170    .text:0000000000000024 waitforpacket
-     /tmp/ccMP3Ntm.s:345    .text:00000000000000c8 et_popblob
-     /tmp/ccMP3Ntm.s:399    .text:00000000000000f4 et_pushpgmstr
-     /tmp/ccMP3Ntm.s:453    .text:0000000000000110 et_pushpgmblob
-     /tmp/ccMP3Ntm.s:516    .text:0000000000000142 et_pushstr
-     /tmp/ccMP3Ntm.s:553    .text:0000000000000158 et_pushblob
-     /tmp/ccMP3Ntm.s:605    .text:0000000000000188 et_init
+                            *COM*:0000000000000140 ETbuffer
+     /tmp/ccouZRfQ.s:145    .text:0000000000000020 GotPack
+     /tmp/ccouZRfQ.s:171    .text:0000000000000026 waitforpacket
+     /tmp/ccouZRfQ.s:316    .text:00000000000000aa et_popblob
+     /tmp/ccouZRfQ.s:370    .text:00000000000000d6 et_pushpgmstr
+     /tmp/ccouZRfQ.s:424    .text:00000000000000f2 et_pushpgmblob
+     /tmp/ccouZRfQ.s:487    .text:0000000000000124 et_pushstr
+     /tmp/ccouZRfQ.s:524    .text:000000000000013a et_pushblob
+     /tmp/ccouZRfQ.s:576    .text:000000000000016a et_init
                             *COM*:0000000000000006 MyMAC
-     /tmp/ccMP3Ntm.s:692    .text:00000000000001d6 et_xmitpacket
-     /tmp/ccMP3Ntm.s:711    .text:00000000000001d8 et_recvpack
-     /tmp/ccMP3Ntm.s:763    .text:00000000000001fc et_start_checksum
-     /tmp/ccMP3Ntm.s:785    .text:00000000000001fe et_copy_memory
-     /tmp/ccMP3Ntm.s:804    .data:0000000000000000 ManchesterTable
+     /tmp/ccouZRfQ.s:663    .text:00000000000001b8 et_xmitpacket
+     /tmp/ccouZRfQ.s:682    .text:00000000000001ba et_recvpack
+     /tmp/ccouZRfQ.s:734    .text:00000000000001de et_start_checksum
+     /tmp/ccouZRfQ.s:756    .text:00000000000001e0 et_copy_memory
+     /tmp/ccouZRfQ.s:775    .data:0000000000000000 ManchesterTable
                             *COM*:0000000000000002 ETchecksum
                             *COM*:0000000000000002 sendbaseaddress
 
 UNDEFINED SYMBOLS
-Demanchestrate
 MaybeHaveDataASM
 __do_copy_data
 __do_clear_bss

@@ -6,7 +6,7 @@
 
 
 unsigned char MyMAC[6];
-unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+unsigned char ETbuffer[ETBUFFERSIZE];
 unsigned short ETsendplace;
 uint16_t sendbaseaddress;
 unsigned short ETchecksum;
@@ -34,7 +34,7 @@ int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
 {
 	int byr = 0;
 
-	byr = Demanchestrate( machesterized, mlen );
+//	byr = Demanchestrate( machesterized, mlen );
 
 	//Don't do anything yet...
 	//XXX TODO THIS will be some good stuff in here.
@@ -180,7 +180,7 @@ unsigned short et_recvpack()
 #define LIMITSIZE  sizeof( ETbuffer )/2-30
 //#define LIMITSIZE 10
 
-		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
 //		_delay_ms(8);
 #ifdef SMARTPWR
 		DDRB |= _BV(1);
@@ -191,7 +191,7 @@ unsigned short et_recvpack()
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);
 #endif
-		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
 // 		_delay_ms(8);
 
 }
