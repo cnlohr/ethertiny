@@ -32,7 +32,6 @@
 struct EthernetPacket
 {
 	//MAC 24 bytes
-	uint8_t preamble[8];
 	uint8_t macto[6];
 	uint8_t macfrom[6];
 	uint16_t protocol;
@@ -59,10 +58,6 @@ struct EthernetPacket
 
 
 //Fix all checksums for UDP packets and add etherlink CRC.
-//You _MUST_ prepend your preamble before you get here.
-//It should start off with 
-//0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xd5
-// You MUST pass this in.
 //
 //plen is the "minimum" packet length.  if udplenoverride exceeds this, it will accomidate.
 uint16_t Ethernetize( unsigned char * packet, int plen, int udplenoverride );

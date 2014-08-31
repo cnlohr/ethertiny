@@ -37,6 +37,7 @@ int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
 	byr = Demanchestrate( machesterized, mlen );
 
 	//Don't do anything yet...
+	//XXX TODO THIS will be some good stuff in here.
 
 	return byr;
 }

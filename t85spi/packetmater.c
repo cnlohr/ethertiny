@@ -28,8 +28,7 @@
 //Fix all checksums for UDP packets and add etherlink CRC.
 uint16_t Ethernetize( unsigned char * packet, int plen, int udplenoverride )
 {
-	plen -= 12;
-	packet += 8; //User must provide preamble.
+	plen -= 4;
 
 	if( (udplenoverride+8) > plen-34 )
 		plen = (udplenoverride+8) + 34;
