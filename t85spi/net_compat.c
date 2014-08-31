@@ -22,6 +22,7 @@ char ManchesterTable[16] __attribute__ ((aligned (16))) = {
 };
 
 
+
 //Internal functs
 
 //From the ASM file.

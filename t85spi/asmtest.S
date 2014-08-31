@@ -41,9 +41,12 @@ SendTick:
 	out PORTB, r20
 	ret
 
+
+//Handles sending preamble + Packet ovr the USI
 .global SendTestASM  // ( unsigned char * ptr_to_packet, uint8_t packet_length_longs ); (longs = packet_length / 4)
 SendTestASM:
 	push r16
+	push r17
 	push r18
 	push r19
 	push r20
@@ -62,16 +65,40 @@ SendTestASM:
 	//r22 = how big to send.
 	
 	mov r16, r22
-	ld r18,Z+      //2  //Read off the bytes.
-	mov r26, r18   //1  R26 = To be read Manchester lookup
-	andi r26, 0x0f //1
-	subi r26,lo8(-(ManchesterTable)) //1
+	ld r18,Z+
+	mov r26, r18 
+	andi r26, 0x0f
+	subi r26,lo8(-(ManchesterTable)) //1  (This sets X up)
 SendLoop:
 	tst r16
-	breq Done
+	brne .SkipD
+	rjmp .Done
+.SkipD:
 
+
+//////////////////////////////////////////////////
+//Special: preamble.
+	ldi r20, 15   //Iterate 15 times. (the 0x55 pattern) then finish out with the 0xD5 pattern.
+	ldi r19, 0b01100110  //Standard 0x55 pattern
+	ldi r17, 0b01100101  //Final pattern marker.
+	//Go ahead with the preamble.
 	//Enable the USI
 	SBI USICR, USIWM0
+
+.PreambleLoop:
+	out USEBR, r19
+	nop
+	nop
+	nop
+	nop
+	dec r20
+	brne .PreambleLoop
+    nop
+	out USEBR, r17
+	nop
+
+	nop
+	nop
 
 KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 
@@ -134,7 +161,7 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 
 	dec r16         //1
 	brne KeepGoing  //2
-Done:
+.Done:
 	nop
 	nop
 	nop
@@ -147,6 +174,7 @@ Done:
 	pop r20
 	pop r19
 	pop r18
+	pop r17
 	mov r24, r16
 	pop r16
 	ret

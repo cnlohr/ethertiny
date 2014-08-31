@@ -113,7 +113,7 @@ int main( )
 			sbe->addyfrom = 0x450a000a;
 			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
 
-			SendTestASM( ETbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+			SendTestASM( ETbuffer + 8, rr/4 + 3 - 2 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 #ifdef SMARTPWR
 			DDRB &= ~_BV(1);
 #endif
