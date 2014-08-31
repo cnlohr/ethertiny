@@ -1,10 +1,10 @@
-all : udp udp-histo
+all : udp udp-histo2
 
-udp-histo : udp-histo.c
+udp-histo2 : udp-histo2.c
 	gcc -o $@ $^ -lm
 
 udp : udp.c
 	gcc -o $@ $^
 
 clean :
-	rm -rf *.o *~ udp udp-histo
+	rm -rf *.o *~ udp udp-histo2
