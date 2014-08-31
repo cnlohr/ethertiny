@@ -13,7 +13,11 @@
 //Warning: When receiving packets, you will only be able to receive packets
 // less than 1/3 the size of preamble + etbuffersize.
 
-#define ETBUFFERSIZE 320
+#define ETBUFFERSIZE 330
+#define MAX_FRAMELEN (ETBUFFERSIZE-30)
+#define TX_SCRATCHES 1
+#define RX_BUFFER_START 0
+#define RX_BUFFER_END   MAX_FRAMELEN
 
 
 //OSC20 will depend on the specific chip.  Needs to be AS CLOSE TO 20 MHZ AS POSSIBLE!
@@ -23,6 +27,11 @@
 //OSCHi needs to be as fast as the chip goes, but less than ~35 MHz. IT MUST EXCEED 30 MHZ!
 #define OSCHIGH 0xFF  //~30 MHz?
 
+
+extern char strbuffer[32];
+#define LRP( x... ) sprintf( strbuffer, x );
+
+#define INCLUDE_UDP
 
 
 

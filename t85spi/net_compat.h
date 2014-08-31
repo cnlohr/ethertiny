@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include "eth_config.h"
 
-//MyMAC is included in this driver.
+//You must define 'mymac'
 extern unsigned char MyMAC[6];
 extern unsigned char ETbuffer[ETBUFFERSIZE];
 extern unsigned short ETsendplace;
@@ -42,7 +42,7 @@ static inline void et_finish_callback_now() { }
 //Raw, on-wire pops. (assuming already in read)
 void et_popblob( uint8_t * data, uint8_t len );
 static inline void et_dumpbytes( uint8_t len ) { ETsendplace += len; }
-static inline uint16_t et_pop16() { return ETbuffer[ETsendplace++]; }
+uint16_t et_pop16();
 static inline uint8_t et_pop8() { return ETbuffer[ETsendplace++]; }
 
 //Raw, on-wire push. (assuming already in write)
@@ -57,7 +57,7 @@ void et_push16( uint16_t v );
 //Start a new send.									//OPENING
 static inline void et_startsend( uint16_t start ) { sendbaseaddress = ETsendplace = start; }
 
-static inline uint16_t et_get_write_length() { return ETsendplace - sendbaseaddress; }
+static inline uint16_t et_get_write_length() { return ETsendplace - sendbaseaddress + 6; } //XXX: Tricky - throw in extra 6 here because dstmac is included.
 
 //End sending (calls xmitpacket with correct flags)	//CLOSURE
 static inline void et_endsend() { et_xmitpacket( sendbaseaddress, ETsendplace - sendbaseaddress ); }
@@ -76,11 +76,15 @@ static inline void et_alter_word( uint16_t address, uint16_t val ) { ETbuffer[ad
 
 //Copy from one part of the enc to the other.
 //Warning range_end is INCLUSIVE! You will likely want to subtract one.
+//Double-warning.  On some MACs, range is ignored.
 void et_copy_memory( uint16_t to, uint16_t from, uint16_t length, uint16_t range_start, uint16_t range_end );
 
-//Low-level access (not available)
-static inline void et_write_ctrl_reg16( uint8_t addy, uint16_t value ) { }
-static inline uint16_t et_read_ctrl_reg16( uint8_t addy ) { return 0; }
+
+#define EERXRDPTL 1
+#define EEGPWRPTL 2
+//Low-level access (not available, except for above )
+void et_write_ctrl_reg16( uint8_t addy, uint16_t value );
+uint16_t et_read_ctrl_reg16( uint8_t addy );
 
 
 

@@ -1,6 +1,8 @@
 //Packet mater.  A super tiny file that helps with checksums and ethernet CRCs.
 //CRC Was taken from linked page.
 
+//This file must be phased out.
+
 /*
     Copyright (C) 2014 <>< Charles Lohr
 

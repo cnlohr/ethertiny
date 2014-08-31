@@ -1,11 +1,11 @@
 #include "net_compat.h"
 #include <avr/pgmspace.h>
 #include <string.h>
+#include "hlprocess.h"
+#include "packetmater.h"
 
 #define NOOP asm volatile("nop" ::)
 
-
-unsigned char MyMAC[6];
 unsigned char ETbuffer[ETBUFFERSIZE];
 unsigned short ETsendplace;
 uint16_t sendbaseaddress;
@@ -29,18 +29,21 @@ char ManchesterTable[16] __attribute__ ((aligned (16))) = {
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
+/*
 //Attempt to return rough estimate of processing time.
 int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
 {
 	int byr = 0;
 
-//	byr = Demanchestrate( machesterized, mlen );
+	byr = Demanchestrate( machesterized, mlen );
+	et_receivecallback( 
 
 	//Don't do anything yet...
 	//XXX TODO THIS will be some good stuff in here.
 
 	return byr;
 }
+*/
 
 void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 {
@@ -60,9 +63,24 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 		if( USIBR && (USIBR != 0xFF ) )
 		{
 			int r = MaybeHaveDataASM( buffer, len );
-			if( r > 1 )
+			if( r > 10 )
 			{
-				r += GotPack( buffer, r, len );
+				int16_t byr = Demanchestrate( buffer, r );
+				if( byr > 32 )
+				{
+					uint32_t cmpcrc = crc32b( 0, buffer, byr - 4 );
+					OSCCAL = OSC20; //Drop back to 20 MHz if we need to send.
+					if( cmpcrc == *((uint32_t*)&buffer[byr-4]) )
+					{
+						//LRP( "%d->%d\n", r, byr );
+
+						//If you ever get to this code, a miracle has happened.
+						//Pray that many more continue.
+						ETsendplace = 0;
+						et_receivecallback( byr - 4 );
+					}
+					OSCCAL = OSCHIGH;
+				}
 			}
 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
 			break;
@@ -91,6 +109,11 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 
 
 //
+uint16_t et_pop16()
+{
+	uint16_t ret = et_pop8();
+	return (ret<<8) | et_pop8();
+}
 
 void et_popblob( uint8_t * data, uint8_t len )
 {
@@ -134,6 +157,12 @@ void et_pushblob( const uint8_t * data, uint8_t len )
 	}
 }
 
+void et_push16( uint16_t p )
+{
+	et_push8( p>>8 );
+	et_push8( p&0xff );
+}
+
 
 //return 0 if OK, otherwise nonzero.
 int8_t et_init( const unsigned char * macaddy )
@@ -170,7 +199,26 @@ int8_t et_init( const unsigned char * macaddy )
 
 int8_t et_xmitpacket( uint16_t start, uint16_t len )
 {
-	//XXX !!! TODO
+	//If we're here, ETbuffer[start] points to the first byte (dst MAC address)
+	//Gotta calculate the checksum.
+
+	//First, round up the length and make sure it meets minimum requirements.
+	if( len < 60 ) len = 60;
+	len = ((len-1) & 0xfffc) + 4; //round up to 4.
+
+	uint8_t  * buffer = &ETbuffer[start];
+	uint32_t crc = crc32b( 0, buffer, len );
+	uint16_t i = start + len;
+	
+	buffer[i++] = crc & 0xff;
+	buffer[i++] = (crc>>8) & 0xff;
+	buffer[i++] = (crc>>16) & 0xff;
+	buffer[i++] = (crc>>24) & 0xff;
+
+	//Actually emit the packet.
+	SendTestASM( buffer, (len>>2) + 1 ); //Don't forget the CRC!
+
+	return 0;
 }
 
 //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
@@ -180,7 +228,7 @@ unsigned short et_recvpack()
 #define LIMITSIZE  sizeof( ETbuffer )/2-30
 //#define LIMITSIZE 10
 
-		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
 //		_delay_ms(8);
 #ifdef SMARTPWR
 		DDRB |= _BV(1);
@@ -191,20 +239,81 @@ unsigned short et_recvpack()
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);
 #endif
-		waitforpacket(&ETbuffer[40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
 // 		_delay_ms(8);
 
+	return 0;
 }
 
 void et_start_checksum( uint16_t start, uint16_t len )
 {
-//	ETchecksum = uint16_t internet_checksum( &ETbuffer[start], uint16_t len );
-	//XXX !!! TODO
+	uint16_t i;
+	const uint16_t * wptr = (uint16_t*)&ETbuffer[start];
+	uint32_t csum = 0;
+	for (i=1;i<len;i+=2)
+	{
+		csum = csum + (uint32_t)(*(wptr++));	
+	}
+	if( len & 1 )  //See if there's an odd number of bytes?
+	{
+		uint8_t * tt = (uint8_t*)wptr;
+		csum += *tt;
+	}
+	while (csum>>16)
+		csum = (csum & 0xFFFF)+(csum >> 16);
+	csum = (csum>>8) | ((csum&0xff)<<8);
+	ETchecksum = ~csum;
 }
+
+
 
 void et_copy_memory( uint16_t to, uint16_t from, uint16_t length, uint16_t range_start, uint16_t range_end )
 {
-	//XXX !!! TODO
+	uint16_t i;
+	if( to == from )
+	{
+		return;
+	}
+	else if( to < from )
+	{
+		for( i = 0; i < length; i++ )
+		{
+			ETbuffer[to++] = ETbuffer[from++];
+		}
+	}
+	else
+	{
+		to += length;
+		from += length;
+		for( i = 0; i < length; i++ )
+		{
+			ETbuffer[to--] = ETbuffer[from--];
+		}
+	}
+}
+
+void et_write_ctrl_reg16( uint8_t addy, uint16_t value )
+{
+	switch (addy )
+	{
+		case EERXRDPTL:
+		case EEGPWRPTL:
+			ETsendplace = value;
+		default:
+			break;
+	}
+}
+
+uint16_t et_read_ctrl_reg16( uint8_t addy )
+{
+	switch( addy )
+	{
+		case EERXRDPTL:
+		case EEGPWRPTL:
+			return ETsendplace;
+		default:
+			return 0;
+	}
 }
 
 

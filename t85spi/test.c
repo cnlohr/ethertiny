@@ -34,11 +34,13 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
+#include <string.h>
 
 #include "net_compat.h"
 #include "sendpack.h"
 #include "packetmater.h"
 #include "hlprocess.h"
+#include "iparpetc.h"
 
 void delay_ms(uint32_t time) {
   uint32_t i;
@@ -67,7 +69,16 @@ static void setup_clock( void )
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
+uint8_t MyMAC[6] = { 0x00, 0x55, 0x00, 0x55, 0x00, 0x55 };
+uint8_t MyIP[4] = { 192, 168, 0, 153 };
+uint8_t MyMask[4] = { 255, 255, 255, 0 };
 
+void HandleUDP( uint16_t len )
+{
+	//Do nothing (yet)
+}
+
+char strbuffer[32];
 
 int main( )
 {
@@ -77,6 +88,8 @@ int main( )
 	setup_clock();
 
 	DDRB = _BV(1);
+
+	LRP( "Boot OK.\n" );
 
 	//1st let's see how fast we can clock the pin.
 	et_init( MyMAC );
@@ -102,21 +115,37 @@ int main( )
 
 		if( i == 20 )
 		{
-#ifdef SMARTPWR
-			DDRB |= _BV(1);
-#endif
 
 			//UDP Data starts at byte #50
-			struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
+//			struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
 //			sbe->payload[0] = 0xBB;
 //			sbe->payload[1] = frame++;
-			sbe->addyfrom = 0x450a000a;
-			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
+//			sbe->addyfrom = 0x450a000a;
 
-			SendTestASM( ETbuffer, rr/4 + 3 - 2 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+
+			//How to send a UDP Packet.
+			et_stopop();
+			et_startsend( 0 );
+			memset( macfrom, 0xff, 6 );
+			send_etherlink_header( 0x0800 );
+			send_ip_header( 0, "\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
+			et_push16( 13312 ); //To port
+			et_push16( 1024 ); //from port
+			et_push16( 0 ); //length for later
+			et_push16( 0 ); //csum for later
+			et_pushblob( strbuffer, 32 );
+			util_finish_udp_packet();
+
+//			et_xmitpacket( 0, 340 );
+
+//			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
+//			SendTestASM( ETbuffer, rr/4 + 3 - 2 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+
+/*
 #ifdef SMARTPWR
 			DDRB &= ~_BV(1);
 #endif
+*/
 			i = 0;
 		}
 	}
