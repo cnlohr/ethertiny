@@ -35,6 +35,7 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 
+#include "net_compat.h"
 #include "sendpack.h"
 #include "packetmater.h"
 #include "hlprocess.h"
@@ -48,11 +49,6 @@ void delay_ms(uint32_t time) {
 
 #define NOOP asm volatile("nop" ::)
 
-#define OSC20 0xB6
-//#define OSCHIGH 0xda  //~25 MHz???
-#define OSCHIGH 0xFF  //~30 MHz?
-
-
 static void setup_clock( void )
 {
 	/*Examine Page 33*/
@@ -61,83 +57,16 @@ static void setup_clock( void )
 	CLKPR = 0x00;	/*No scalar*/
 
 
-	PLLCSR = _BV(PLLE) | _BV( PCKE );
-	PLLCSR |= _BV(LSM);
-	OSCCAL = OSC20;
-
 }
 
 //#define SMARTPWR
 
-//Inverting the manchester seems to universally make things worse.
-//#define INVERT_MANCHESTER
 
-//Do not split this across byte-addressing boundaries.
-//We do some fancy stuff when we send the manchester out.
-char ManchesterTable[16] __attribute__ ((aligned (16))) = {
-	0b10101010, 0b01101010, 0b10011010, 0b01011010,
-	0b10100110, 0b01100110, 0b10010110, 0b01010110,
-	0b10101001, 0b01101001, 0b10011001, 0b01011001,
-	0b10100101, 0b01100101, 0b10010101, 0b01010101,
-};
+//unsigned char ETbuffer[390];
 
-unsigned char sendbuffer[390];
-
-//From the ASM file.
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
-//Attempt to return rough estimate of processing time.
-int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
-{
-	int byr = 0;
-
-	byr = Demanchestrate( machesterized, mlen );
-
-	//Don't do anything yet...
-
-	return byr;
-}
-
-void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
-{
-		OSCCAL = OSCHIGH;
-
-	//Make sure we're not walking in on something.
-	while( ltime-- > 0 )
-	{
-		if( USIBR == 0x00 ) break;
-		if( USIBR == 0xFF ) break;
-		NOOP;
-	}
-
-
-	while( ltime-- > 0 )
-	{
-		if( USIBR && (USIBR != 0xFF ) )
-		{
-			int r = MaybeHaveDataASM( buffer, len );
-			if( r > 1 )
-			{
-				r += GotPack( buffer, r, len );
-			}
-			ltime-=(len-r)*4+3; //About how long the function takes to execute.
-			break;
-		}
-	}
-
-
-	while( ltime-- > 0 )
-	{
-		NOOP;
-		NOOP;
-		NOOP;
-		NOOP;
-		NOOP;
-	}
-
-	OSCCAL = OSC20;
-}
 
 
 int main( )
@@ -150,52 +79,24 @@ int main( )
 	DDRB = _BV(1);
 
 	//1st let's see how fast we can clock the pin.
-
-
-	TCCR0A = _BV(WGM01);
-	TCCR0B = _BV(CS00);
-	OCR0A = 0;
-
-	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
+	et_init( MyMAC );
 
 	for( i = 0; i < PacketABytes; i++ )
 	{
-		sendbuffer[i] = pgm_read_word( &PacketA[i] );
+		ETbuffer[i] = pgm_read_word( &PacketA[i] );
 	}
 
 	i = 0;
 
 	int frame = 0;
 
-	struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
-
-//	PORTB |= _BV(0);  //Enable pullups.
-	PORTB &= ~_BV(0); 
-	DDRB &= ~_BV(0);
-	PORTB &= ~_BV(1);
-	USICR &= ~_BV(USIWM0);  //Disable USICR
+	struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
 
 	while(1)
 	{
-	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+	//	SendTestASM( ETbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 	//	continue;
-
-#define LIMITSIZE  sizeof( sendbuffer )/2-30
-//#define LIMITSIZE 10
-
-		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
-//		_delay_ms(8);
-#ifdef SMARTPWR
-		DDRB |= _BV(1);
-#endif
-		PORTB|=_BV(1);
-		NOOP;
-		PORTB &=~_BV(1);
-#ifdef SMARTPWR
-		DDRB &= ~_BV(1);
-#endif
-		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
-// 		_delay_ms(8);
+		et_recvpack();
 
 		i++;
 
@@ -206,13 +107,13 @@ int main( )
 #endif
 
 			//UDP Data starts at byte #50
-			struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
+			struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
 //			sbe->payload[0] = 0xBB;
 //			sbe->payload[1] = frame++;
 			sbe->addyfrom = 0x450a000a;
-			int rr = Ethernetize( sendbuffer, PacketABytes, 320);
+			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
 
-			SendTestASM( sendbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+			SendTestASM( ETbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 #ifdef SMARTPWR
 			DDRB &= ~_BV(1);
 #endif

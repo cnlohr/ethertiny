@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccJEqBf2.s 			page 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
 
 
    1               		.file	"test.c"
@@ -49,24 +49,25 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   35:test.c        **** #include <avr/sleep.h>
   36:test.c        **** #include <util/delay.h>
   37:test.c        **** 
-  38:test.c        **** #include "sendpack.h"
-  39:test.c        **** #include "packetmater.h"
-  40:test.c        **** #include "hlprocess.h"
-  41:test.c        **** 
-  42:test.c        **** void delay_ms(uint32_t time) {
+  38:test.c        **** #include "net_compat.h"
+  39:test.c        **** #include "sendpack.h"
+  40:test.c        **** #include "packetmater.h"
+  41:test.c        **** #include "hlprocess.h"
+  42:test.c        **** 
+  43:test.c        **** void delay_ms(uint32_t time) {
  119               	.LM0:
  120               	.LFBB1:
  121 0000 0F93      		push r16
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
+
+
  122 0002 1F93      		push r17
-GAS LISTING /tmp/ccJEqBf2.s 			page 2
-
-
  123               	/* prologue: function */
  124               	/* frame size = 0 */
  125               	/* stack size = 2 */
  126               	.L__stack_usage = 2
-  43:test.c        ****   uint32_t i;
-  44:test.c        ****   for (i = 0; i < time; i++) {
+  44:test.c        ****   uint32_t i;
+  45:test.c        ****   for (i = 0; i < time; i++) {
  128               	.LM1:
  129 0004 00E0      		ldi r16,0
  130 0006 10E0      		ldi r17,0
@@ -78,8 +79,8 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  137 000e 2807      		cpc r18,r24
  138 0010 3907      		cpc r19,r25
  139 0012 01F0      		breq .L5
- 140               	.LBB7:
- 141               	.LBB8:
+ 140               	.LBB4:
+ 141               	.LBB5:
  143               	.Ltext1:
    1:/usr/lib/avr/include/util/delay.h **** /* Copyright (c) 2002, Marek Michalkiewicz
    2:/usr/lib/avr/include/util/delay.h ****    Copyright (c) 2004,2005,2007 Joerg Wunsch
@@ -117,10 +118,10 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   34:/usr/lib/avr/include/util/delay.h **** 
   35:/usr/lib/avr/include/util/delay.h **** #ifndef _UTIL_DELAY_H_
   36:/usr/lib/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
+
+
   37:/usr/lib/avr/include/util/delay.h **** 
-GAS LISTING /tmp/ccJEqBf2.s 			page 3
-
-
   38:/usr/lib/avr/include/util/delay.h **** #ifndef __HAS_DELAY_CYCLES
   39:/usr/lib/avr/include/util/delay.h **** #define __HAS_DELAY_CYCLES 1
   40:/usr/lib/avr/include/util/delay.h **** #endif
@@ -177,10 +178,10 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   91:/usr/lib/avr/include/util/delay.h **** # define F_CPU 1000000UL
   92:/usr/lib/avr/include/util/delay.h **** #endif
   93:/usr/lib/avr/include/util/delay.h **** 
+GAS LISTING /tmp/ccCeDQZH.s 			page 4
+
+
   94:/usr/lib/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
-GAS LISTING /tmp/ccJEqBf2.s 			page 4
-
-
   95:/usr/lib/avr/include/util/delay.h **** # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
   96:/usr/lib/avr/include/util/delay.h **** #endif
   97:/usr/lib/avr/include/util/delay.h **** 
@@ -237,10 +238,10 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  148:/usr/lib/avr/include/util/delay.h ****   __STDC_HOSTED__
  149:/usr/lib/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
  150:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
+GAS LISTING /tmp/ccCeDQZH.s 			page 5
+
+
  151:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
-GAS LISTING /tmp/ccJEqBf2.s 			page 5
-
-
  152:/usr/lib/avr/include/util/delay.h **** 
  153:/usr/lib/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
  154:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)fabs(__tmp);
@@ -261,8 +262,8 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  149 001a 01F4      		brne 1b
  150 001c 00C0      		rjmp .
  151 001e 0000      		nop
- 152               	.LBE8:
- 153               	.LBE7:
+ 152               	.LBE5:
+ 153               	.LBE4:
  155               	.Ltext2:
  157               	.LM4:
  158 0020 0F5F      		subi r16,-1
@@ -272,589 +273,229 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  162 0028 00C0      		rjmp .L2
  163               	.L5:
  164               	/* epilogue start */
-  45:test.c        ****     _delay_ms(1);
-  46:test.c        ****   }
-  47:test.c        **** }
+  46:test.c        ****     _delay_ms(1);
+  47:test.c        ****   }
+  48:test.c        **** }
  166               	.LM5:
  167 002a 1F91      		pop r17
  168 002c 0F91      		pop r16
  169 002e 0895      		ret
  174               	.Lscope1:
  176               		.stabd	78,0,0
- 181               	.global	GotPack
- 183               	GotPack:
- 184               		.stabd	46,0,0
-  48:test.c        **** 
-  49:test.c        **** #define NOOP asm volatile("nop" ::)
-  50:test.c        **** 
-  51:test.c        **** #define OSC20 0xB6
-  52:test.c        **** //#define OSCHIGH 0xda  //~25 MHz???
-  53:test.c        **** #define OSCHIGH 0xFF  //~30 MHz?
-  54:test.c        **** 
+ 177               		.section	.text.startup,"ax",@progbits
+ 179               	.global	main
+ 181               	main:
+ 182               		.stabd	46,0,0
+  49:test.c        **** 
+  50:test.c        **** #define NOOP asm volatile("nop" ::)
+  51:test.c        **** 
+  52:test.c        **** static void setup_clock( void )
+  53:test.c        **** {
+  54:test.c        **** 	/*Examine Page 33*/
   55:test.c        **** 
-  56:test.c        **** static void setup_clock( void )
-  57:test.c        **** {
-  58:test.c        **** 	/*Examine Page 33*/
+  56:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
+  57:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
+  58:test.c        **** 
   59:test.c        **** 
-  60:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
-  61:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
-GAS LISTING /tmp/ccJEqBf2.s 			page 6
+  60:test.c        **** }
+GAS LISTING /tmp/ccCeDQZH.s 			page 6
 
 
-  62:test.c        **** 
+  61:test.c        **** 
+  62:test.c        **** //#define SMARTPWR
   63:test.c        **** 
-  64:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
-  65:test.c        **** 	PLLCSR |= _BV(LSM);
-  66:test.c        **** 	OSCCAL = OSC20;
-  67:test.c        **** 
-  68:test.c        **** }
+  64:test.c        **** 
+  65:test.c        **** //unsigned char ETbuffer[390];
+  66:test.c        **** 
+  67:test.c        **** void SendTestASM( const unsigned char * c, uint8_t len );
+  68:test.c        **** int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
   69:test.c        **** 
-  70:test.c        **** //#define SMARTPWR
+  70:test.c        **** 
   71:test.c        **** 
-  72:test.c        **** //Inverting the manchester seems to universally make things worse.
-  73:test.c        **** //#define INVERT_MANCHESTER
-  74:test.c        **** 
-  75:test.c        **** //Do not split this across byte-addressing boundaries.
-  76:test.c        **** //We do some fancy stuff when we send the manchester out.
-  77:test.c        **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
-  78:test.c        **** 	0b10101010, 0b01101010, 0b10011010, 0b01011010,
-  79:test.c        **** 	0b10100110, 0b01100110, 0b10010110, 0b01010110,
-  80:test.c        **** 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
-  81:test.c        **** 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
-  82:test.c        **** };
+  72:test.c        **** int main( )
+  73:test.c        **** {
+ 184               	.LM6:
+ 185               	.LFBB2:
+ 186               	/* prologue: function */
+ 187               	/* frame size = 0 */
+ 188               	/* stack size = 0 */
+ 189               	.L__stack_usage = 0
+  74:test.c        **** 	int i;
+  75:test.c        **** 	cli();
+ 191               	.LM7:
+ 192               	/* #APP */
+ 193               	 ;  75 "test.c" 1
+ 194 0000 F894      		cli
+ 195               	 ;  0 "" 2
+ 196               	/* #NOAPP */
+ 197               	.LBB10:
+ 198               	.LBB11:
+  56:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
+ 200               	.LM8:
+ 201 0002 80E8      		ldi r24,lo8(-128)
+ 202 0004 86BD      		out 0x26,r24
+  57:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
+ 204               	.LM9:
+ 205 0006 16BC      		out 0x26,__zero_reg__
+ 206               	.LBE11:
+ 207               	.LBE10:
+  76:test.c        **** 
+  77:test.c        **** 	setup_clock();
+  78:test.c        **** 
+  79:test.c        **** 	DDRB = _BV(1);
+ 209               	.LM10:
+ 210 0008 82E0      		ldi r24,lo8(2)
+ 211 000a 87BB      		out 0x17,r24
+  80:test.c        **** 
+  81:test.c        **** 	//1st let's see how fast we can clock the pin.
+  82:test.c        **** 	et_init( MyMAC );
+ 213               	.LM11:
+ 214 000c 80E0      		ldi r24,lo8(MyMAC)
+ 215 000e 90E0      		ldi r25,hi8(MyMAC)
+ 216 0010 00D0      		rcall et_init
+ 217 0012 80E0      		ldi r24,lo8(PacketA)
+ 218 0014 90E0      		ldi r25,hi8(PacketA)
+ 219 0016 A0E0      		ldi r26,lo8(ETbuffer)
+ 220 0018 B0E0      		ldi r27,hi8(ETbuffer)
+ 221               	.L8:
+GAS LISTING /tmp/ccCeDQZH.s 			page 7
+
+
+ 222               	.LBB12:
   83:test.c        **** 
-  84:test.c        **** unsigned char sendbuffer[390];
-  85:test.c        **** 
-  86:test.c        **** //From the ASM file.
-  87:test.c        **** void SendTestASM( const unsigned char * c, uint8_t len );
-  88:test.c        **** int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
-  89:test.c        **** 
-  90:test.c        **** //Attempt to return rough estimate of processing time.
-  91:test.c        **** int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
-  92:test.c        **** {
- 186               	.LM6:
- 187               	.LFBB2:
- 188               	/* prologue: function */
- 189               	/* frame size = 0 */
- 190               	/* stack size = 0 */
- 191               	.L__stack_usage = 0
-  93:test.c        **** 	int byr = 0;
+  84:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
+  85:test.c        **** 	{
+  86:test.c        **** 		ETbuffer[i] = pgm_read_word( &PacketA[i] );
+ 224               	.LM12:
+ 225 001a FC01      		movw r30,r24
+ 226               	/* #APP */
+ 227               	 ;  86 "test.c" 1
+ 228 001c 2591      		lpm r18, Z+
+ 229 001e 3491      		lpm r19, Z
+ 230               		
+ 231               	 ;  0 "" 2
+ 232               	/* #NOAPP */
+ 233               	.LBE12:
+ 234 0020 2D93      		st X+,r18
+ 235 0022 0196      		adiw r24,1
+  84:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
+ 237               	.LM13:
+ 238 0024 20E0      		ldi r18,hi8(PacketA+76)
+ 239 0026 8030      		cpi r24,lo8(PacketA+76)
+ 240 0028 9207      		cpc r25,r18
+ 241 002a 01F4      		brne .L8
+ 242               	.LBB13:
+  87:test.c        **** 	}
+  88:test.c        **** 
+  89:test.c        **** 	i = 0;
+  90:test.c        **** 
+  91:test.c        **** 	int frame = 0;
+  92:test.c        **** 
+  93:test.c        **** 	struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
   94:test.c        **** 
-  95:test.c        **** 	byr = Demanchestrate( machesterized, mlen );
- 193               	.LM7:
- 194 0030 BA01      		movw r22,r20
- 195 0032 00C0      		rjmp Demanchestrate
- 197               	.Lscope2:
- 199               		.stabd	78,0,0
- 204               	.global	waitforpacket
- 206               	waitforpacket:
- 207               		.stabd	46,0,0
-  96:test.c        **** 
-  97:test.c        **** 	//Don't do anything yet...
-  98:test.c        **** 
-  99:test.c        **** 	return byr;
- 100:test.c        **** }
- 101:test.c        **** 
- 102:test.c        **** void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
- 103:test.c        **** {
- 209               	.LM8:
-GAS LISTING /tmp/ccJEqBf2.s 			page 7
+  95:test.c        **** 	while(1)
+  96:test.c        **** 	{
+  97:test.c        **** 	//	SendTestASM( ETbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+  98:test.c        **** 	//	continue;
+  99:test.c        **** 		et_recvpack();
+ 100:test.c        **** 
+ 101:test.c        **** 		i++;
+ 102:test.c        **** 
+ 103:test.c        **** 		if( i == 20 )
+ 104:test.c        **** 		{
+ 105:test.c        **** #ifdef SMARTPWR
+ 106:test.c        **** 			DDRB |= _BV(1);
+ 107:test.c        **** #endif
+ 108:test.c        **** 
+ 109:test.c        **** 			//UDP Data starts at byte #50
+ 110:test.c        **** 			struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
+ 111:test.c        **** //			sbe->payload[0] = 0xBB;
+ 112:test.c        **** //			sbe->payload[1] = frame++;
+ 113:test.c        **** 			sbe->addyfrom = 0x450a000a;
+ 244               	.LM14:
+ 245 002c 9AE0      		ldi r25,lo8(10)
+ 246 002e C92E      		mov r12,r25
+ 247 0030 D12C      		mov r13,__zero_reg__
+ 248 0032 EC2C      		mov r14,r12
+ 249 0034 95E4      		ldi r25,lo8(69)
+GAS LISTING /tmp/ccCeDQZH.s 			page 8
 
 
- 210               	.LFBB3:
- 211 0034 CF92      		push r12
- 212 0036 DF92      		push r13
- 213 0038 EF92      		push r14
- 214 003a FF92      		push r15
- 215 003c 0F93      		push r16
- 216 003e 1F93      		push r17
- 217 0040 CF93      		push r28
- 218 0042 DF93      		push r29
- 219               	/* prologue: function */
- 220               	/* frame size = 0 */
- 221               	/* stack size = 8 */
- 222               	.L__stack_usage = 8
- 223 0044 6C01      		movw r12,r24
- 224 0046 7B01      		movw r14,r22
- 225 0048 EA01      		movw r28,r20
- 104:test.c        **** 		OSCCAL = OSCHIGH;
- 227               	.LM9:
- 228 004a 8FEF      		ldi r24,lo8(-1)
- 229 004c 81BF      		out 0x31,r24
- 230               	.L8:
- 105:test.c        **** 
- 106:test.c        **** 	//Make sure we're not walking in on something.
- 107:test.c        **** 	while( ltime-- > 0 )
- 232               	.LM10:
- 233 004e 2197      		sbiw r28,1
- 234 0050 CE01      		movw r24,r28
- 235 0052 0196      		adiw r24,1
- 236 0054 1816      		cp __zero_reg__,r24
- 237 0056 1906      		cpc __zero_reg__,r25
- 238 0058 04F4      		brge .L14
- 108:test.c        **** 	{
- 109:test.c        **** 		if( USIBR == 0x00 ) break;
- 240               	.LM11:
- 241 005a 80B3      		in r24,0x10
- 242 005c 8823      		tst r24
- 243 005e 01F0      		breq .L14
- 110:test.c        **** 		if( USIBR == 0xFF ) break;
- 245               	.LM12:
- 246 0060 80B3      		in r24,0x10
- 247 0062 8F3F      		cpi r24,lo8(-1)
- 248 0064 01F0      		breq .L14
- 111:test.c        **** 		NOOP;
- 250               	.LM13:
- 251               	/* #APP */
- 252               	 ;  111 "test.c" 1
- 253 0066 0000      		nop
- 254               	 ;  0 "" 2
- 255               	/* #NOAPP */
- 256 0068 00C0      		rjmp .L8
- 257               	.L15:
- 112:test.c        **** 	}
- 113:test.c        **** 
- 114:test.c        **** 
- 115:test.c        **** 	while( ltime-- > 0 )
- 116:test.c        **** 	{
- 117:test.c        **** 		if( USIBR && (USIBR != 0xFF ) )
-GAS LISTING /tmp/ccJEqBf2.s 			page 8
-
-
- 259               	.LM14:
- 260 006a 80B3      		in r24,0x10
- 261 006c 8111      		cpse r24,__zero_reg__
- 262 006e 00C0      		rjmp .L30
- 263               	.L14:
- 115:test.c        **** 	while( ltime-- > 0 )
- 265               	.LM15:
- 266 0070 2197      		sbiw r28,1
- 267 0072 CE01      		movw r24,r28
- 268 0074 0196      		adiw r24,1
- 269 0076 1816      		cp __zero_reg__,r24
- 270 0078 1906      		cpc __zero_reg__,r25
- 271 007a 04F0      		brlt .L15
- 272 007c 00C0      		rjmp .L13
- 273               	.L30:
- 275               	.LM16:
- 276 007e 80B3      		in r24,0x10
- 277 0080 8F3F      		cpi r24,lo8(-1)
- 278 0082 01F0      		breq .L14
- 279               	.LBB9:
- 118:test.c        **** 		{
- 119:test.c        **** 			int r = MaybeHaveDataASM( buffer, len );
- 281               	.LM17:
- 282 0084 6E2D      		mov r22,r14
- 283 0086 C601      		movw r24,r12
- 284 0088 00D0      		rcall MaybeHaveDataASM
- 285 008a 8C01      		movw r16,r24
- 120:test.c        **** 			if( r > 1 )
- 287               	.LM18:
- 288 008c 8230      		cpi r24,2
- 289 008e 9105      		cpc r25,__zero_reg__
- 290 0090 04F0      		brlt .L12
- 291               	.LBB10:
- 292               	.LBB11:
-  95:test.c        **** 	byr = Demanchestrate( machesterized, mlen );
- 294               	.LM19:
- 295 0092 B701      		movw r22,r14
- 296 0094 C601      		movw r24,r12
- 297 0096 00D0      		rcall Demanchestrate
- 298               	.LBE11:
- 299               	.LBE10:
- 121:test.c        **** 			{
- 122:test.c        **** 				r += GotPack( buffer, r, len );
- 301               	.LM20:
- 302 0098 080F      		add r16,r24
- 303 009a 191F      		adc r17,r25
- 304               	.L12:
- 123:test.c        **** 			}
- 124:test.c        **** 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
- 306               	.LM21:
- 307 009c 2397      		sbiw r28,3
- 308 009e E01A      		sub r14,r16
- 309 00a0 F10A      		sbc r15,r17
- 310 00a2 EE0C      		lsl r14
- 311 00a4 FF1C      		rol r15
- 312 00a6 EE0C      		lsl r14
- 313 00a8 FF1C      		rol r15
-GAS LISTING /tmp/ccJEqBf2.s 			page 9
-
-
- 314 00aa CE19      		sub r28,r14
- 315 00ac DF09      		sbc r29,r15
- 316               	.L13:
- 317               	.LBE9:
- 125:test.c        **** 			break;
- 126:test.c        **** 		}
- 127:test.c        **** 	}
- 128:test.c        **** 
- 129:test.c        **** 
- 130:test.c        **** 	while( ltime-- > 0 )
- 319               	.LM22:
- 320 00ae 1C16      		cp __zero_reg__,r28
- 321 00b0 1D06      		cpc __zero_reg__,r29
- 322 00b2 04F4      		brge .L31
- 131:test.c        **** 	{
- 132:test.c        **** 		NOOP;
- 324               	.LM23:
- 325               	/* #APP */
- 326               	 ;  132 "test.c" 1
- 327 00b4 0000      		nop
- 328               	 ;  0 "" 2
- 133:test.c        **** 		NOOP;
- 330               	.LM24:
- 331               	 ;  133 "test.c" 1
- 332 00b6 0000      		nop
- 333               	 ;  0 "" 2
- 134:test.c        **** 		NOOP;
- 335               	.LM25:
- 336               	 ;  134 "test.c" 1
- 337 00b8 0000      		nop
- 338               	 ;  0 "" 2
- 135:test.c        **** 		NOOP;
- 340               	.LM26:
- 341               	 ;  135 "test.c" 1
- 342 00ba 0000      		nop
- 343               	 ;  0 "" 2
- 136:test.c        **** 		NOOP;
- 345               	.LM27:
- 346               	 ;  136 "test.c" 1
- 347 00bc 0000      		nop
- 348               	 ;  0 "" 2
- 349               	/* #NOAPP */
- 350 00be 2197      		sbiw r28,1
- 351 00c0 00C0      		rjmp .L13
- 352               	.L31:
- 137:test.c        **** 	}
- 138:test.c        **** 
- 139:test.c        **** 	OSCCAL = OSC20;
- 354               	.LM28:
- 355 00c2 86EB      		ldi r24,lo8(-74)
- 356 00c4 81BF      		out 0x31,r24
- 357               	/* epilogue start */
- 140:test.c        **** }
- 359               	.LM29:
- 360 00c6 DF91      		pop r29
- 361 00c8 CF91      		pop r28
- 362 00ca 1F91      		pop r17
-GAS LISTING /tmp/ccJEqBf2.s 			page 10
-
-
- 363 00cc 0F91      		pop r16
- 364 00ce FF90      		pop r15
- 365 00d0 EF90      		pop r14
- 366 00d2 DF90      		pop r13
- 367 00d4 CF90      		pop r12
- 368 00d6 0895      		ret
- 373               	.Lscope3:
- 375               		.stabd	78,0,0
- 376               		.section	.text.startup,"ax",@progbits
- 378               	.global	main
- 380               	main:
- 381               		.stabd	46,0,0
- 141:test.c        **** 
- 142:test.c        **** 
- 143:test.c        **** int main( )
- 144:test.c        **** {
- 383               	.LM30:
- 384               	.LFBB4:
- 385               	/* prologue: function */
- 386               	/* frame size = 0 */
- 387               	/* stack size = 0 */
- 388               	.L__stack_usage = 0
- 145:test.c        **** 	int i;
- 146:test.c        **** 	cli();
- 390               	.LM31:
- 391               	/* #APP */
- 392               	 ;  146 "test.c" 1
- 393 0000 F894      		cli
- 394               	 ;  0 "" 2
- 395               	/* #NOAPP */
- 396               	.LBB16:
- 397               	.LBB17:
-  60:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
- 399               	.LM32:
- 400 0002 80E8      		ldi r24,lo8(-128)
- 401 0004 86BD      		out 0x26,r24
-  61:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
- 403               	.LM33:
- 404 0006 16BC      		out 0x26,__zero_reg__
-  64:test.c        **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
- 406               	.LM34:
- 407 0008 86E0      		ldi r24,lo8(6)
- 408 000a 87BD      		out 0x27,r24
-  65:test.c        **** 	PLLCSR |= _BV(LSM);
- 410               	.LM35:
- 411 000c 87B5      		in r24,0x27
- 412 000e 8068      		ori r24,lo8(-128)
- 413 0010 87BD      		out 0x27,r24
-  66:test.c        **** 	OSCCAL = OSC20;
- 415               	.LM36:
- 416 0012 86EB      		ldi r24,lo8(-74)
- 417 0014 81BF      		out 0x31,r24
- 418               	.LBE17:
- 419               	.LBE16:
- 147:test.c        **** 
- 148:test.c        **** 	setup_clock();
- 149:test.c        **** 
-GAS LISTING /tmp/ccJEqBf2.s 			page 11
-
-
- 150:test.c        **** 	DDRB = _BV(1);
- 421               	.LM37:
- 422 0016 82E0      		ldi r24,lo8(2)
- 423 0018 87BB      		out 0x17,r24
- 151:test.c        **** 
- 152:test.c        **** 	//1st let's see how fast we can clock the pin.
- 153:test.c        **** 
- 154:test.c        **** 
- 155:test.c        **** 	TCCR0A = _BV(WGM01);
- 425               	.LM38:
- 426 001a 8ABD      		out 0x2a,r24
- 156:test.c        **** 	TCCR0B = _BV(CS00);
- 428               	.LM39:
- 429 001c 81E0      		ldi r24,lo8(1)
- 430 001e 83BF      		out 0x33,r24
- 157:test.c        **** 	OCR0A = 0;
- 432               	.LM40:
- 433 0020 19BC      		out 0x29,__zero_reg__
- 158:test.c        **** 
- 159:test.c        **** 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
- 435               	.LM41:
- 436 0022 85E1      		ldi r24,lo8(21)
- 437 0024 8DB9      		out 0xd,r24
- 438 0026 80E0      		ldi r24,lo8(PacketA)
- 439 0028 90E0      		ldi r25,hi8(PacketA)
- 440 002a A0E0      		ldi r26,lo8(sendbuffer)
- 441 002c B0E0      		ldi r27,hi8(sendbuffer)
- 442               	.L34:
- 443               	.LBB18:
- 160:test.c        **** 
- 161:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
- 162:test.c        **** 	{
- 163:test.c        **** 		sendbuffer[i] = pgm_read_word( &PacketA[i] );
- 445               	.LM42:
- 446 002e FC01      		movw r30,r24
- 447               	/* #APP */
- 448               	 ;  163 "test.c" 1
- 449 0030 2591      		lpm r18, Z+
- 450 0032 3491      		lpm r19, Z
- 451               		
- 452               	 ;  0 "" 2
- 453               	/* #NOAPP */
- 454               	.LBE18:
- 455 0034 2D93      		st X+,r18
- 456 0036 0196      		adiw r24,1
- 161:test.c        **** 	for( i = 0; i < PacketABytes; i++ )
- 458               	.LM43:
- 459 0038 20E0      		ldi r18,hi8(PacketA+76)
- 460 003a 8030      		cpi r24,lo8(PacketA+76)
- 461 003c 9207      		cpc r25,r18
- 462 003e 01F4      		brne .L34
- 164:test.c        **** 	}
- 165:test.c        **** 
- 166:test.c        **** 	i = 0;
- 167:test.c        **** 
- 168:test.c        **** 	int frame = 0;
- 169:test.c        **** 
-GAS LISTING /tmp/ccJEqBf2.s 			page 12
-
-
- 170:test.c        **** 	struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
- 171:test.c        **** 
- 172:test.c        **** //	PORTB |= _BV(0);  //Enable pullups.
- 173:test.c        **** 	PORTB &= ~_BV(0); 
- 464               	.LM44:
- 465 0040 C098      		cbi 0x18,0
- 174:test.c        **** 	DDRB &= ~_BV(0);
- 467               	.LM45:
- 468 0042 B898      		cbi 0x17,0
- 175:test.c        **** 	PORTB &= ~_BV(1);
- 470               	.LM46:
- 471 0044 C198      		cbi 0x18,1
- 176:test.c        **** 	USICR &= ~_BV(USIWM0);  //Disable USICR
- 473               	.LM47:
- 474 0046 6C98      		cbi 0xd,4
- 475               	.LBB19:
- 177:test.c        **** 
- 178:test.c        **** 	while(1)
- 179:test.c        **** 	{
- 180:test.c        **** 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
- 181:test.c        **** 	//	continue;
- 182:test.c        **** 
- 183:test.c        **** #define LIMITSIZE  sizeof( sendbuffer )/2-30
- 184:test.c        **** //#define LIMITSIZE 10
- 185:test.c        **** 
- 186:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 
- 187:test.c        **** //		_delay_ms(8);
- 188:test.c        **** #ifdef SMARTPWR
- 189:test.c        **** 		DDRB |= _BV(1);
- 190:test.c        **** #endif
- 191:test.c        **** 		PORTB|=_BV(1);
- 192:test.c        **** 		NOOP;
- 193:test.c        **** 		PORTB &=~_BV(1);
- 194:test.c        **** #ifdef SMARTPWR
- 195:test.c        **** 		DDRB &= ~_BV(1);
- 196:test.c        **** #endif
- 197:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
- 198:test.c        **** // 		_delay_ms(8);
- 199:test.c        **** 
- 200:test.c        **** 		i++;
- 201:test.c        **** 
- 202:test.c        **** 		if( i == 20 )
- 203:test.c        **** 		{
- 204:test.c        **** #ifdef SMARTPWR
- 205:test.c        **** 			DDRB |= _BV(1);
- 206:test.c        **** #endif
- 207:test.c        **** 
- 208:test.c        **** 			//UDP Data starts at byte #50
- 209:test.c        **** 			struct EthernetPacket * sbe = (struct EthernetPacket*)sendbuffer;
- 210:test.c        **** //			sbe->payload[0] = 0xBB;
- 211:test.c        **** //			sbe->payload[1] = frame++;
- 212:test.c        **** 			sbe->addyfrom = 0x450a000a;
- 477               	.LM48:
- 478 0048 2AE0      		ldi r18,lo8(10)
- 479 004a C22E      		mov r12,r18
- 480 004c D12C      		mov r13,__zero_reg__
- 481 004e EC2C      		mov r14,r12
-GAS LISTING /tmp/ccJEqBf2.s 			page 13
-
-
- 482 0050 25E4      		ldi r18,lo8(69)
- 483 0052 F22E      		mov r15,r18
- 484               	.L38:
- 485               	.LBE19:
- 144:test.c        **** {
- 487               	.LM49:
- 488 0054 C4E1      		ldi r28,lo8(20)
- 489 0056 D0E0      		ldi r29,0
- 490               	.L36:
- 186:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 
- 492               	.LM50:
- 493 0058 40E2      		ldi r20,lo8(32)
- 494 005a 5EE4      		ldi r21,lo8(78)
- 495 005c 65EA      		ldi r22,lo8(-91)
- 496 005e 70E0      		ldi r23,0
- 497 0060 80E0      		ldi r24,lo8(sendbuffer+50)
- 498 0062 90E0      		ldi r25,hi8(sendbuffer+50)
- 499 0064 00D0      		rcall waitforpacket
- 191:test.c        **** 		PORTB|=_BV(1);
- 501               	.LM51:
- 502 0066 C19A      		sbi 0x18,1
- 192:test.c        **** 		NOOP;
- 504               	.LM52:
- 505               	/* #APP */
- 506               	 ;  192 "test.c" 1
- 507 0068 0000      		nop
- 508               	 ;  0 "" 2
- 193:test.c        **** 		PORTB &=~_BV(1);
- 510               	.LM53:
- 511               	/* #NOAPP */
- 512 006a C198      		cbi 0x18,1
- 197:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
- 514               	.LM54:
- 515 006c 40E2      		ldi r20,lo8(32)
- 516 006e 5EE4      		ldi r21,lo8(78)
- 517 0070 65EA      		ldi r22,lo8(-91)
- 518 0072 70E0      		ldi r23,0
- 519 0074 80E0      		ldi r24,lo8(sendbuffer+50)
- 520 0076 90E0      		ldi r25,hi8(sendbuffer+50)
- 521 0078 00D0      		rcall waitforpacket
- 522 007a 2197      		sbiw r28,1
- 202:test.c        **** 		if( i == 20 )
- 524               	.LM55:
- 525 007c 2097      		sbiw r28,0
- 526 007e 01F4      		brne .L36
- 527               	.LBB20:
- 529               	.LM56:
- 530 0080 C092 0000 		sts sendbuffer+34,r12
- 531 0084 D092 0000 		sts sendbuffer+34+1,r13
- 532 0088 E092 0000 		sts sendbuffer+34+2,r14
- 533 008c F092 0000 		sts sendbuffer+34+3,r15
- 213:test.c        **** 			int rr = Ethernetize( sendbuffer, PacketABytes, 320);
- 535               	.LM57:
- 536 0090 40E4      		ldi r20,lo8(64)
- 537 0092 51E0      		ldi r21,lo8(1)
- 538 0094 6CE4      		ldi r22,lo8(76)
- 539 0096 70E0      		ldi r23,0
-GAS LISTING /tmp/ccJEqBf2.s 			page 14
-
-
- 540 0098 80E0      		ldi r24,lo8(sendbuffer)
- 541 009a 90E0      		ldi r25,hi8(sendbuffer)
- 542 009c 00D0      		rcall Ethernetize
- 214:test.c        **** 
- 215:test.c        **** 			SendTestASM( sendbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
- 544               	.LM58:
- 545 009e 97FD      		sbrc r25,7
- 546 00a0 0396      		adiw r24,3
- 547               	.L37:
- 548 00a2 BC01      		movw r22,r24
- 549 00a4 7595      		asr r23
- 550 00a6 6795      		ror r22
- 551 00a8 7595      		asr r23
- 552 00aa 6795      		ror r22
- 553 00ac 6D5F      		subi r22,lo8(-(3))
- 554 00ae 80E0      		ldi r24,lo8(sendbuffer)
- 555 00b0 90E0      		ldi r25,hi8(sendbuffer)
- 556 00b2 00D0      		rcall SendTestASM
- 557 00b4 00C0      		rjmp .L38
- 558               	.LBE20:
- 560               	.Lscope4:
- 562               		.stabd	78,0,0
- 563               		.comm	sendbuffer,390,1
- 564               	.global	ManchesterTable
- 565               		.data
- 566               		.p2align	4
- 569               	ManchesterTable:
- 570 0000 AA        		.byte	-86
- 571 0001 6A        		.byte	106
- 572 0002 9A        		.byte	-102
- 573 0003 5A        		.byte	90
- 574 0004 A6        		.byte	-90
- 575 0005 66        		.byte	102
- 576 0006 96        		.byte	-106
- 577 0007 56        		.byte	86
- 578 0008 A9        		.byte	-87
- 579 0009 69        		.byte	105
- 580 000a 99        		.byte	-103
- 581 000b 59        		.byte	89
- 582 000c A5        		.byte	-91
- 583 000d 65        		.byte	101
- 584 000e 95        		.byte	-107
- 585 000f 55        		.byte	85
- 588               		.text
- 590               	.Letext0:
- 591               		.ident	"GCC: (GNU) 4.8.2"
- 592               	.global __do_copy_data
- 593               	.global __do_clear_bss
-GAS LISTING /tmp/ccJEqBf2.s 			page 15
+ 250 0036 F92E      		mov r15,r25
+ 251               	.L12:
+ 252               	.LBE13:
+  73:test.c        **** {
+ 254               	.LM15:
+ 255 0038 C4E1      		ldi r28,lo8(20)
+ 256 003a D0E0      		ldi r29,0
+ 257               	.L10:
+  99:test.c        **** 		et_recvpack();
+ 259               	.LM16:
+ 260 003c 00D0      		rcall et_recvpack
+ 261 003e 2197      		sbiw r28,1
+ 103:test.c        **** 		if( i == 20 )
+ 263               	.LM17:
+ 264 0040 2097      		sbiw r28,0
+ 265 0042 01F4      		brne .L10
+ 266               	.LBB14:
+ 268               	.LM18:
+ 269 0044 C092 0000 		sts ETbuffer+34,r12
+ 270 0048 D092 0000 		sts ETbuffer+34+1,r13
+ 271 004c E092 0000 		sts ETbuffer+34+2,r14
+ 272 0050 F092 0000 		sts ETbuffer+34+3,r15
+ 114:test.c        **** 			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
+ 274               	.LM19:
+ 275 0054 40E4      		ldi r20,lo8(64)
+ 276 0056 51E0      		ldi r21,lo8(1)
+ 277 0058 6CE4      		ldi r22,lo8(76)
+ 278 005a 70E0      		ldi r23,0
+ 279 005c 80E0      		ldi r24,lo8(ETbuffer)
+ 280 005e 90E0      		ldi r25,hi8(ETbuffer)
+ 281 0060 00D0      		rcall Ethernetize
+ 115:test.c        **** 
+ 116:test.c        **** 			SendTestASM( ETbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
+ 283               	.LM20:
+ 284 0062 97FD      		sbrc r25,7
+ 285 0064 0396      		adiw r24,3
+ 286               	.L11:
+ 287 0066 BC01      		movw r22,r24
+ 288 0068 7595      		asr r23
+ 289 006a 6795      		ror r22
+ 290 006c 7595      		asr r23
+ 291 006e 6795      		ror r22
+ 292 0070 6D5F      		subi r22,lo8(-(3))
+ 293 0072 80E0      		ldi r24,lo8(ETbuffer)
+ 294 0074 90E0      		ldi r25,hi8(ETbuffer)
+ 295 0076 00D0      		rcall SendTestASM
+ 296 0078 00C0      		rjmp .L12
+ 297               	.LBE14:
+ 299               	.Lscope2:
+ 301               		.stabd	78,0,0
+ 302               		.text
+ 304               	.Letext0:
+ 305               		.ident	"GCC: (GNU) 4.8.2"
+GAS LISTING /tmp/ccCeDQZH.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 test.c
-     /tmp/ccJEqBf2.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccJEqBf2.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccJEqBf2.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccJEqBf2.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccJEqBf2.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccJEqBf2.s:116    .text:0000000000000000 delay_ms
-     /tmp/ccJEqBf2.s:183    .text:0000000000000030 GotPack
-     /tmp/ccJEqBf2.s:206    .text:0000000000000034 waitforpacket
-     /tmp/ccJEqBf2.s:380    .text.startup:0000000000000000 main
-                            *COM*:0000000000000186 sendbuffer
-     /tmp/ccJEqBf2.s:569    .data:0000000000000000 ManchesterTable
+     /tmp/ccCeDQZH.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccCeDQZH.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccCeDQZH.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccCeDQZH.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccCeDQZH.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccCeDQZH.s:116    .text:0000000000000000 delay_ms
+     /tmp/ccCeDQZH.s:181    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
-Demanchestrate
-MaybeHaveDataASM
+MyMAC
+et_init
 PacketA
+ETbuffer
+et_recvpack
 Ethernetize
 SendTestASM
-__do_copy_data
-__do_clear_bss
-GAS LISTING /tmp/ccJEqBf2.s 			page 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
 
 
    1               	# 1 "asmtest.S"
@@ -914,7 +555,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   23               	  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
   24               	  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
   25               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-GAS LISTING /tmp/ccJEqBf2.s 			page 2
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
 
 
   26               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -974,7 +615,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   80               	    The last EEPROM address.
   81               	    <br>
   82               	    - \b FLASHEND
-GAS LISTING /tmp/ccJEqBf2.s 			page 3
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
 
 
   83               	    <br>
@@ -1034,7 +675,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  136               	#  include <avr/iom32c1.h>
  137               	#elif defined (__AVR_ATmega32M1__)
  138               	#  include <avr/iom32m1.h>
-GAS LISTING /tmp/ccJEqBf2.s 			page 4
+GAS LISTING /tmp/ccCeDQZH.s 			page 4
 
 
  139               	#elif defined (__AVR_ATmega32U2__)
@@ -1094,7 +735,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  193               	#elif defined (__AVR_ATmega6450__) || defined (__AVR_ATmega6450A__) || defined (__AVR_ATmega6450P__
  194               	#  include <avr/iom6450.h>
  195               	#elif defined (__AVR_ATmega649__) || defined (__AVR_ATmega649A__)
-GAS LISTING /tmp/ccJEqBf2.s 			page 5
+GAS LISTING /tmp/ccCeDQZH.s 			page 5
 
 
  196               	#  include <avr/iom649.h>
@@ -1154,7 +795,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  250               	#  include <avr/iom165.h>
  251               	#elif defined (__AVR_ATmega165P__)
  252               	#  include <avr/iom165p.h>
-GAS LISTING /tmp/ccJEqBf2.s 			page 6
+GAS LISTING /tmp/ccCeDQZH.s 			page 6
 
 
  253               	#elif defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
@@ -1214,7 +855,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  307               	#elif defined (__AVR_AT90S2333__)
  308               	#  include <avr/io2333.h>
  309               	#elif defined (__AVR_AT90S2323__)
-GAS LISTING /tmp/ccJEqBf2.s 			page 7
+GAS LISTING /tmp/ccCeDQZH.s 			page 7
 
 
  310               	#  include <avr/io2323.h>
@@ -1274,7 +915,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   24               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
   25               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
   26               	  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-GAS LISTING /tmp/ccJEqBf2.s 			page 8
+GAS LISTING /tmp/ccCeDQZH.s 			page 8
 
 
   27               	  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
@@ -1334,7 +975,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  381               	#elif defined (__AVR_ATxmega32A4__)
  382               	#  include <avr/iox32a4.h>
  383               	#elif defined (__AVR_ATxmega32D4__)
-GAS LISTING /tmp/ccJEqBf2.s 			page 9
+GAS LISTING /tmp/ccCeDQZH.s 			page 9
 
 
  384               	#  include <avr/iox32d4.h>
@@ -1394,7 +1035,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  436               	#include <avr/version.h>
    1               	/* Copyright (c) 2005, Joerg Wunsch                               -*- c -*-
  437               	
-GAS LISTING /tmp/ccJEqBf2.s 			page 10
+GAS LISTING /tmp/ccCeDQZH.s 			page 10
 
 
  438               	/* Include fuse.h after individual IO header files. */
@@ -1454,7 +1095,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   76               	KeepGoing:			///subi r26,lo8(-(ManchesterTable))
   77               	
   78               		//Heavily interleved code.  Need a new OUTB every 8 cycles exactly.
-GAS LISTING /tmp/ccJEqBf2.s 			page 11
+GAS LISTING /tmp/ccCeDQZH.s 			page 11
 
 
   79:asmtest.S     ****     nop           //1 //Look, ma ONE EXTRA CYCLE!
@@ -1514,7 +1155,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  133:asmtest.S     **** 	out USEBR, r19 //1 ** OK
  134               	
  135:asmtest.S     **** 	dec r16         //1
-GAS LISTING /tmp/ccJEqBf2.s 			page 12
+GAS LISTING /tmp/ccCeDQZH.s 			page 12
 
 
  136:asmtest.S     **** 	brne KeepGoing  //2
@@ -1574,7 +1215,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  190:asmtest.S     **** 	dec r22       //1
  191:asmtest.S     **** 	brne rloop    //2
  192               	
-GAS LISTING /tmp/ccJEqBf2.s 			page 13
+GAS LISTING /tmp/ccCeDQZH.s 			page 13
 
 
  193               	rlend:
@@ -1585,7 +1226,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  198:asmtest.S     **** 	pop r22
  199:asmtest.S     **** 	pop r16
  200:asmtest.S     **** 	ret
-GAS LISTING /tmp/ccJEqBf2.s 			page 14
+GAS LISTING /tmp/ccCeDQZH.s 			page 14
 
 
 DEFINED SYMBOLS
@@ -1600,7 +1241,7 @@ DEFINED SYMBOLS
 
 UNDEFINED SYMBOLS
 ManchesterTable
-GAS LISTING /tmp/ccJEqBf2.s 			page 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
 
 
    1               		.file	"sendpack.c"
@@ -1660,7 +1301,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  155 002b 00        		.byte	0
  156 002c 34        		.byte	52
  157 002d 00        		.byte	0
-GAS LISTING /tmp/ccJEqBf2.s 			page 2
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
 
 
  158 002e 00        		.byte	0
@@ -1696,20 +1337,20 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  189               		.text
  191               	.Letext0:
  192               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccJEqBf2.s 			page 3
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sendpack.c
-     /tmp/ccJEqBf2.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccJEqBf2.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccJEqBf2.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccJEqBf2.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccJEqBf2.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccJEqBf2.s:111    .progmem.data:0000000000000000 PacketA
+     /tmp/ccCeDQZH.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccCeDQZH.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccCeDQZH.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccCeDQZH.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccCeDQZH.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccCeDQZH.s:111    .progmem.data:0000000000000000 PacketA
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccJEqBf2.s 			page 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
 
 
    1               		.file	"packetmater.c"
@@ -1769,7 +1410,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   44:packetmater.c **** 		packet[17] = fullpacklen&0xff;
   45:packetmater.c **** 		packet[24] = 0;
   46:packetmater.c **** 		packet[25] = 0;
-GAS LISTING /tmp/ccJEqBf2.s 			page 2
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
 
 
   47:packetmater.c **** 		uint16_t csumr;
@@ -1829,7 +1470,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  119 0014 5901      		movw r10,r18
   85:packetmater.c ****    int i, j;
   86:packetmater.c ****    uint32_t mask;
-GAS LISTING /tmp/ccJEqBf2.s 			page 3
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
 
 
   87:packetmater.c **** 	uint8_t byte;
@@ -1889,7 +1530,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  169 0058 8E09      		sbc r24,r14
  170 005a 9F09      		sbc r25,r15
  172               	.LM8:
-GAS LISTING /tmp/ccJEqBf2.s 			page 4
+GAS LISTING /tmp/ccCeDQZH.s 			page 4
 
 
  173 005c 6072      		andi r22,32
@@ -1949,7 +1590,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  231 0096 9B01      		movw r18,r22
  232 0098 DC01      		movw r26,r24
  106:packetmater.c **** 	uint16_t i;
-GAS LISTING /tmp/ccJEqBf2.s 			page 5
+GAS LISTING /tmp/ccCeDQZH.s 			page 5
 
 
  107:packetmater.c **** 	const uint16_t * wptr = (uint16_t*) start;
@@ -2009,7 +1650,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  282 00d2 AA27      		clr r26
  283 00d4 BB27      		clr r27
  284 00d6 0097      		sbiw r24,0
-GAS LISTING /tmp/ccJEqBf2.s 			page 6
+GAS LISTING /tmp/ccCeDQZH.s 			page 6
 
 
  285 00d8 A105      		cpc r26,__zero_reg__
@@ -2069,7 +1710,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  349 0120 0F93      		push r16
  350 0122 1F93      		push r17
  351 0124 CF93      		push r28
-GAS LISTING /tmp/ccJEqBf2.s 			page 7
+GAS LISTING /tmp/ccCeDQZH.s 			page 7
 
 
  352 0126 DF93      		push r29
@@ -2129,7 +1770,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  406 016a 00C0      		rjmp .L24
  407               	.LBB3:
   42:packetmater.c **** 		uint16_t fullpacklen = plen-14;
-GAS LISTING /tmp/ccJEqBf2.s 			page 8
+GAS LISTING /tmp/ccCeDQZH.s 			page 8
 
 
  409               	.LM33:
@@ -2189,7 +1830,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  463               	.LM47:
  464 019e E9AA      		std Y+49,r14
   64:packetmater.c **** 			csumr = internet_checksum( &packet[26], udppacklen+8 );
-GAS LISTING /tmp/ccJEqBf2.s 			page 9
+GAS LISTING /tmp/ccCeDQZH.s 			page 9
 
 
  466               	.LM48:
@@ -2249,7 +1890,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  520 01dc 1F91      		pop r17
  521 01de 0F91      		pop r16
  522 01e0 FF90      		pop r15
-GAS LISTING /tmp/ccJEqBf2.s 			page 10
+GAS LISTING /tmp/ccCeDQZH.s 			page 10
 
 
  523 01e2 EF90      		pop r14
@@ -2262,22 +1903,22 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  535               		.stabd	78,0,0
  537               	.Letext0:
  538               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccJEqBf2.s 			page 11
+GAS LISTING /tmp/ccCeDQZH.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 packetmater.c
-     /tmp/ccJEqBf2.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccJEqBf2.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccJEqBf2.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccJEqBf2.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccJEqBf2.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccJEqBf2.s:100    .text:0000000000000000 crc32b
-     /tmp/ccJEqBf2.s:220    .text:0000000000000092 internet_checksum
-     /tmp/ccJEqBf2.s:338    .text:0000000000000114 Ethernetize
+     /tmp/ccCeDQZH.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccCeDQZH.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccCeDQZH.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccCeDQZH.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccCeDQZH.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccCeDQZH.s:100    .text:0000000000000000 crc32b
+     /tmp/ccCeDQZH.s:220    .text:0000000000000092 internet_checksum
+     /tmp/ccCeDQZH.s:338    .text:0000000000000114 Ethernetize
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccJEqBf2.s 			page 1
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
 
 
    1               		.file	"hlprocess.c"
@@ -2337,7 +1978,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  127 0018 A0E0      		ldi r26,0
   13:hlprocess.c   **** 	uint16_t plen = 0;
  129               	.LM5:
-GAS LISTING /tmp/ccJEqBf2.s 			page 2
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
 
 
  130 001a 20E0      		ldi r18,0
@@ -2397,7 +2038,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  176 0048 00C0      		rjmp .L20
  177               	.L4:
   32:hlprocess.c   **** 				{
-GAS LISTING /tmp/ccJEqBf2.s 			page 3
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
 
 
   33:hlprocess.c   **** 					in_preamble--;
@@ -2457,7 +2098,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
   69:hlprocess.c   **** 					}
   70:hlprocess.c   **** 					if( mark_emit )
   71:hlprocess.c   **** 					{
-GAS LISTING /tmp/ccJEqBf2.s 			page 4
+GAS LISTING /tmp/ccCeDQZH.s 			page 4
 
 
   72:hlprocess.c   **** 						//Emit cemitbit. 
@@ -2517,7 +2158,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  235               	.LM28:
  236 0078 6B2F      		mov r22,r27
  237               	.L14:
-GAS LISTING /tmp/ccJEqBf2.s 			page 5
+GAS LISTING /tmp/ccCeDQZH.s 			page 5
 
 
   73:hlprocess.c   **** 						cemitbyte |= cemitbit?cemitmask:0;
@@ -2577,7 +2218,7 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  292 00aa 8FEF      		ldi r24,lo8(-1)
  293 00ac 9FEF      		ldi r25,lo8(-1)
  294               	.L19:
-GAS LISTING /tmp/ccJEqBf2.s 			page 6
+GAS LISTING /tmp/ccCeDQZH.s 			page 6
 
 
  295               	/* epilogue start */
@@ -2602,16 +2243,914 @@ GAS LISTING /tmp/ccJEqBf2.s 			page 1
  321               		.stabd	78,0,0
  323               	.Letext0:
  324               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccJEqBf2.s 			page 7
+GAS LISTING /tmp/ccCeDQZH.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 hlprocess.c
-     /tmp/ccJEqBf2.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccJEqBf2.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccJEqBf2.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccJEqBf2.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccJEqBf2.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccJEqBf2.s:98     .text:0000000000000000 Demanchestrate
+     /tmp/ccCeDQZH.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccCeDQZH.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccCeDQZH.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccCeDQZH.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccCeDQZH.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccCeDQZH.s:98     .text:0000000000000000 Demanchestrate
 
 NO UNDEFINED SYMBOLS
+GAS LISTING /tmp/ccCeDQZH.s 			page 1
+
+
+   1               		.file	"net_compat.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   9               		.text
+  10               	.Ltext0:
+ 110               	et_push8:
+ 111               		.stabd	46,0,0
+ 113               	.Ltext1:
+   1:net_compat.h  **** #ifndef _ENC424JCOMPAT_H
+   2:net_compat.h  **** #define _ENC424JCOMPAT_H
+   3:net_compat.h  **** 
+   4:net_compat.h  **** //et compat lib.
+   5:net_compat.h  **** //We're using the IP library from AVRCraft
+   6:net_compat.h  **** 
+   7:net_compat.h  **** //TODO: Should probably use Timer1 (since we can't use Timer0)
+   8:net_compat.h  **** //to make sure we send media detect pulses at the right points.
+   9:net_compat.h  **** //Also, as a user, you cannot use the USI or Timer0
+  10:net_compat.h  **** 
+  11:net_compat.h  **** #include <stdint.h>
+  12:net_compat.h  **** #include "eth_config.h"
+  13:net_compat.h  **** 
+  14:net_compat.h  **** //MyMAC is included in this driver.
+  15:net_compat.h  **** extern unsigned char MyMAC[6];
+  16:net_compat.h  **** extern unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+  17:net_compat.h  **** extern unsigned short ETsendplace;
+  18:net_compat.h  **** //For telling where the current transaction started.
+  19:net_compat.h  **** extern uint16_t sendbaseaddress;
+  20:net_compat.h  **** extern unsigned short ETchecksum;
+  21:net_compat.h  **** 
+  22:net_compat.h  **** //Do not split this across byte-addressing boundaries.
+  23:net_compat.h  **** //We do some fancy stuff when we send the manchester out.
+  24:net_compat.h  **** extern char ManchesterTable[16];
+  25:net_compat.h  **** 
+  26:net_compat.h  **** //return 0 if OK, otherwise nonzero.
+  27:net_compat.h  **** int8_t et_init( const unsigned char * macaddy );
+  28:net_compat.h  **** 
+  29:net_compat.h  **** int8_t et_xmitpacket( uint16_t start, uint16_t len );
+  30:net_compat.h  **** 
+  31:net_compat.h  **** //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
+  32:net_compat.h  **** //Ordinarily this would if packets were processed and still ned processing, but
+  33:net_compat.h  **** //that doesn't make sense for this driver.  Do not put this in a loop unto itself.
+  34:net_compat.h  **** unsigned short et_recvpack();
+  35:net_compat.h  **** 
+  36:net_compat.h  **** //You have to write this! (Or the underlying IP core must)
+  37:net_compat.h  **** void et_receivecallback( uint16_t packetlen );
+  38:net_compat.h  **** 
+  39:net_compat.h  **** //Finish up any reading. 							//CLOSURE
+  40:net_compat.h  **** static inline void et_finish_callback_now() { }
+  41:net_compat.h  **** 
+  42:net_compat.h  **** //Raw, on-wire pops. (assuming already in read)
+  43:net_compat.h  **** void et_popblob( uint8_t * data, uint8_t len );
+  44:net_compat.h  **** static inline void et_dumpbytes( uint8_t len ) { ETsendplace += len; }
+  45:net_compat.h  **** static inline uint16_t et_pop16() { return ETbuffer[ETsendplace++]; }
+  46:net_compat.h  **** static inline uint8_t et_pop8() { return ETbuffer[ETsendplace++]; }
+GAS LISTING /tmp/ccCeDQZH.s 			page 2
+
+
+  47:net_compat.h  **** 
+  48:net_compat.h  **** //Raw, on-wire push. (assuming already in write)
+  49:net_compat.h  **** void et_pushpgmstr( const char * msg );
+  50:net_compat.h  **** void et_pushstr( const char * msg );
+  51:net_compat.h  **** void et_pushblob( const uint8_t * data, uint8_t len );
+  52:net_compat.h  **** void et_pushpgmblob( const uint8_t * data, uint8_t len );
+  53:net_compat.h  **** static inline void et_push8( uint8_t d ) { ETbuffer[ETsendplace++] = d; }
+ 115               	.LM0:
+ 116               	.LFBB1:
+ 117               	/* prologue: function */
+ 118               	/* frame size = 0 */
+ 119               	/* stack size = 0 */
+ 120               	.L__stack_usage = 0
+ 122               	.LM1:
+ 123 0000 2091 0000 		lds r18,ETsendplace
+ 124 0004 3091 0000 		lds r19,ETsendplace+1
+ 125 0008 A901      		movw r20,r18
+ 126 000a 4F5F      		subi r20,-1
+ 127 000c 5F4F      		sbci r21,-1
+ 128 000e 5093 0000 		sts ETsendplace+1,r21
+ 129 0012 4093 0000 		sts ETsendplace,r20
+ 130 0016 F901      		movw r30,r18
+ 131 0018 E050      		subi r30,lo8(-(ETbuffer))
+ 132 001a F040      		sbci r31,hi8(-(ETbuffer))
+ 133 001c 8083      		st Z,r24
+ 134 001e 0895      		ret
+ 136               	.Lscope1:
+ 138               		.stabd	78,0,0
+ 143               	.global	GotPack
+ 145               	GotPack:
+ 146               		.stabd	46,0,0
+ 148               	.Ltext2:
+   1:net_compat.c  **** #include "net_compat.h"
+   2:net_compat.c  **** #include <avr/pgmspace.h>
+   3:net_compat.c  **** #include <string.h>
+   4:net_compat.c  **** 
+   5:net_compat.c  **** #define NOOP asm volatile("nop" ::)
+   6:net_compat.c  **** 
+   7:net_compat.c  **** 
+   8:net_compat.c  **** unsigned char MyMAC[6];
+   9:net_compat.c  **** unsigned char ETbuffer[ETBUFFERSIZE+PREAMBLE];
+  10:net_compat.c  **** unsigned short ETsendplace;
+  11:net_compat.c  **** uint16_t sendbaseaddress;
+  12:net_compat.c  **** unsigned short ETchecksum;
+  13:net_compat.c  **** 
+  14:net_compat.c  **** 
+  15:net_compat.c  **** //Do not split this across byte-addressing boundaries.
+  16:net_compat.c  **** //We do some fancy stuff when we send the manchester out.
+  17:net_compat.c  **** char ManchesterTable[16] __attribute__ ((aligned (16))) = {
+  18:net_compat.c  **** 	0b10101010, 0b01101010, 0b10011010, 0b01011010,
+  19:net_compat.c  **** 	0b10100110, 0b01100110, 0b10010110, 0b01010110,
+  20:net_compat.c  **** 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
+  21:net_compat.c  **** 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
+  22:net_compat.c  **** };
+  23:net_compat.c  **** 
+  24:net_compat.c  **** 
+  25:net_compat.c  **** //Internal functs
+GAS LISTING /tmp/ccCeDQZH.s 			page 3
+
+
+  26:net_compat.c  **** 
+  27:net_compat.c  **** //From the ASM file.
+  28:net_compat.c  **** void SendTestASM( const unsigned char * c, uint8_t len );
+  29:net_compat.c  **** int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
+  30:net_compat.c  **** 
+  31:net_compat.c  **** //Attempt to return rough estimate of processing time.
+  32:net_compat.c  **** int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
+  33:net_compat.c  **** {
+ 150               	.LM2:
+ 151               	.LFBB2:
+ 152               	/* prologue: function */
+ 153               	/* frame size = 0 */
+ 154               	/* stack size = 0 */
+ 155               	.L__stack_usage = 0
+  34:net_compat.c  **** 	int byr = 0;
+  35:net_compat.c  **** 
+  36:net_compat.c  **** 	byr = Demanchestrate( machesterized, mlen );
+ 157               	.LM3:
+ 158 0020 BA01      		movw r22,r20
+ 159 0022 00C0      		rjmp Demanchestrate
+ 161               	.Lscope2:
+ 163               		.stabd	78,0,0
+ 168               	.global	waitforpacket
+ 170               	waitforpacket:
+ 171               		.stabd	46,0,0
+  37:net_compat.c  **** 
+  38:net_compat.c  **** 	//Don't do anything yet...
+  39:net_compat.c  **** 
+  40:net_compat.c  **** 	return byr;
+  41:net_compat.c  **** }
+  42:net_compat.c  **** 
+  43:net_compat.c  **** void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
+  44:net_compat.c  **** {
+ 173               	.LM4:
+ 174               	.LFBB3:
+ 175 0024 CF92      		push r12
+ 176 0026 DF92      		push r13
+ 177 0028 EF92      		push r14
+ 178 002a FF92      		push r15
+ 179 002c 0F93      		push r16
+ 180 002e 1F93      		push r17
+ 181 0030 CF93      		push r28
+ 182 0032 DF93      		push r29
+ 183               	/* prologue: function */
+ 184               	/* frame size = 0 */
+ 185               	/* stack size = 8 */
+ 186               	.L__stack_usage = 8
+ 187 0034 6C01      		movw r12,r24
+ 188 0036 7B01      		movw r14,r22
+ 189 0038 EA01      		movw r28,r20
+  45:net_compat.c  **** 	OSCCAL = OSCHIGH;
+ 191               	.LM5:
+ 192 003a 8FEF      		ldi r24,lo8(-1)
+ 193 003c 81BF      		out 0x31,r24
+ 194               	.L4:
+  46:net_compat.c  **** 
+  47:net_compat.c  **** 	//Make sure we're not walking in on something.
+GAS LISTING /tmp/ccCeDQZH.s 			page 4
+
+
+  48:net_compat.c  **** 	while( ltime-- > 0 )
+ 196               	.LM6:
+ 197 003e 2197      		sbiw r28,1
+ 198 0040 CE01      		movw r24,r28
+ 199 0042 0196      		adiw r24,1
+ 200 0044 1816      		cp __zero_reg__,r24
+ 201 0046 1906      		cpc __zero_reg__,r25
+ 202 0048 04F4      		brge .L10
+  49:net_compat.c  **** 	{
+  50:net_compat.c  **** 		if( USIBR == 0x00 ) break;
+ 204               	.LM7:
+ 205 004a 80B3      		in r24,0x10
+ 206 004c 8823      		tst r24
+ 207 004e 01F0      		breq .L10
+  51:net_compat.c  **** 		if( USIBR == 0xFF ) break;
+ 209               	.LM8:
+ 210 0050 80B3      		in r24,0x10
+ 211 0052 8F3F      		cpi r24,lo8(-1)
+ 212 0054 01F0      		breq .L10
+  52:net_compat.c  **** 		NOOP;
+ 214               	.LM9:
+ 215               	/* #APP */
+ 216               	 ;  52 "net_compat.c" 1
+ 217 0056 0000      		nop
+ 218               	 ;  0 "" 2
+ 219               	/* #NOAPP */
+ 220 0058 00C0      		rjmp .L4
+ 221               	.L11:
+  53:net_compat.c  **** 	}
+  54:net_compat.c  **** 
+  55:net_compat.c  **** 
+  56:net_compat.c  **** 	while( ltime-- > 0 )
+  57:net_compat.c  **** 	{
+  58:net_compat.c  **** 		if( USIBR && (USIBR != 0xFF ) )
+ 223               	.LM10:
+ 224 005a 80B3      		in r24,0x10
+ 225 005c 8111      		cpse r24,__zero_reg__
+ 226 005e 00C0      		rjmp .L27
+ 227               	.L10:
+  56:net_compat.c  **** 	while( ltime-- > 0 )
+ 229               	.LM11:
+ 230 0060 2197      		sbiw r28,1
+ 231 0062 CE01      		movw r24,r28
+ 232 0064 0196      		adiw r24,1
+ 233 0066 1816      		cp __zero_reg__,r24
+ 234 0068 1906      		cpc __zero_reg__,r25
+ 235 006a 04F0      		brlt .L11
+ 236 006c 00C0      		rjmp .L9
+ 237               	.L27:
+ 239               	.LM12:
+ 240 006e 80B3      		in r24,0x10
+ 241 0070 8F3F      		cpi r24,lo8(-1)
+ 242 0072 01F0      		breq .L10
+ 243               	.LBB5:
+  59:net_compat.c  **** 		{
+  60:net_compat.c  **** 			int r = MaybeHaveDataASM( buffer, len );
+ 245               	.LM13:
+GAS LISTING /tmp/ccCeDQZH.s 			page 5
+
+
+ 246 0074 6E2D      		mov r22,r14
+ 247 0076 C601      		movw r24,r12
+ 248 0078 00D0      		rcall MaybeHaveDataASM
+ 249 007a 8C01      		movw r16,r24
+  61:net_compat.c  **** 			if( r > 1 )
+ 251               	.LM14:
+ 252 007c 8230      		cpi r24,2
+ 253 007e 9105      		cpc r25,__zero_reg__
+ 254 0080 04F0      		brlt .L8
+ 255               	.LBB6:
+ 256               	.LBB7:
+  36:net_compat.c  **** 	byr = Demanchestrate( machesterized, mlen );
+ 258               	.LM15:
+ 259 0082 B701      		movw r22,r14
+ 260 0084 C601      		movw r24,r12
+ 261 0086 00D0      		rcall Demanchestrate
+ 262               	.LBE7:
+ 263               	.LBE6:
+  62:net_compat.c  **** 			{
+  63:net_compat.c  **** 				r += GotPack( buffer, r, len );
+ 265               	.LM16:
+ 266 0088 080F      		add r16,r24
+ 267 008a 191F      		adc r17,r25
+ 268               	.L8:
+  64:net_compat.c  **** 			}
+  65:net_compat.c  **** 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
+ 270               	.LM17:
+ 271 008c 2397      		sbiw r28,3
+ 272 008e E01A      		sub r14,r16
+ 273 0090 F10A      		sbc r15,r17
+ 274 0092 EE0C      		lsl r14
+ 275 0094 FF1C      		rol r15
+ 276 0096 EE0C      		lsl r14
+ 277 0098 FF1C      		rol r15
+ 278 009a CE19      		sub r28,r14
+ 279 009c DF09      		sbc r29,r15
+ 280               	.L9:
+ 281               	.LBE5:
+  66:net_compat.c  **** 			break;
+  67:net_compat.c  **** 		}
+  68:net_compat.c  **** 	}
+  69:net_compat.c  **** 
+  70:net_compat.c  **** 
+  71:net_compat.c  **** 	while( ltime-- > 0 )
+ 283               	.LM18:
+ 284 009e 1C16      		cp __zero_reg__,r28
+ 285 00a0 1D06      		cpc __zero_reg__,r29
+ 286 00a2 04F4      		brge .L28
+  72:net_compat.c  **** 	{
+  73:net_compat.c  **** 		NOOP;
+ 288               	.LM19:
+ 289               	/* #APP */
+ 290               	 ;  73 "net_compat.c" 1
+ 291 00a4 0000      		nop
+ 292               	 ;  0 "" 2
+  74:net_compat.c  **** 		NOOP;
+ 294               	.LM20:
+GAS LISTING /tmp/ccCeDQZH.s 			page 6
+
+
+ 295               	 ;  74 "net_compat.c" 1
+ 296 00a6 0000      		nop
+ 297               	 ;  0 "" 2
+  75:net_compat.c  **** 		NOOP;
+ 299               	.LM21:
+ 300               	 ;  75 "net_compat.c" 1
+ 301 00a8 0000      		nop
+ 302               	 ;  0 "" 2
+  76:net_compat.c  **** 		NOOP;
+ 304               	.LM22:
+ 305               	 ;  76 "net_compat.c" 1
+ 306 00aa 0000      		nop
+ 307               	 ;  0 "" 2
+  77:net_compat.c  **** 		NOOP;
+ 309               	.LM23:
+ 310               	 ;  77 "net_compat.c" 1
+ 311 00ac 0000      		nop
+ 312               	 ;  0 "" 2
+ 313               	/* #NOAPP */
+ 314 00ae 2197      		sbiw r28,1
+ 315 00b0 00C0      		rjmp .L9
+ 316               	.L28:
+  78:net_compat.c  **** 	}
+  79:net_compat.c  **** 
+  80:net_compat.c  **** 	OSCCAL = OSC20;
+ 318               	.LM24:
+ 319 00b2 86EB      		ldi r24,lo8(-74)
+ 320 00b4 81BF      		out 0x31,r24
+ 321               	/* epilogue start */
+  81:net_compat.c  **** }
+ 323               	.LM25:
+ 324 00b6 DF91      		pop r29
+ 325 00b8 CF91      		pop r28
+ 326 00ba 1F91      		pop r17
+ 327 00bc 0F91      		pop r16
+ 328 00be FF90      		pop r15
+ 329 00c0 EF90      		pop r14
+ 330 00c2 DF90      		pop r13
+ 331 00c4 CF90      		pop r12
+ 332 00c6 0895      		ret
+ 337               	.Lscope3:
+ 339               		.stabd	78,0,0
+ 343               	.global	et_popblob
+ 345               	et_popblob:
+ 346               		.stabd	46,0,0
+  82:net_compat.c  **** 
+  83:net_compat.c  **** 
+  84:net_compat.c  **** 
+  85:net_compat.c  **** 
+  86:net_compat.c  **** 
+  87:net_compat.c  **** 
+  88:net_compat.c  **** 
+  89:net_compat.c  **** 
+  90:net_compat.c  **** 
+  91:net_compat.c  **** //
+  92:net_compat.c  **** 
+  93:net_compat.c  **** void et_popblob( uint8_t * data, uint8_t len )
+GAS LISTING /tmp/ccCeDQZH.s 			page 7
+
+
+  94:net_compat.c  **** {
+ 348               	.LM26:
+ 349               	.LFBB4:
+ 350               	/* prologue: function */
+ 351               	/* frame size = 0 */
+ 352               	/* stack size = 0 */
+ 353               	.L__stack_usage = 0
+ 354               	.L30:
+  95:net_compat.c  **** 	while( len-- )
+ 356               	.LM27:
+ 357 00c8 6150      		subi r22,1
+ 358 00ca 00F0      		brcs .L32
+ 359               	.LBB10:
+ 360               	.LBB11:
+ 362               	.Ltext3:
+  46:net_compat.h  **** static inline uint8_t et_pop8() { return ETbuffer[ETsendplace++]; }
+ 364               	.LM28:
+ 365 00cc 2091 0000 		lds r18,ETsendplace
+ 366 00d0 3091 0000 		lds r19,ETsendplace+1
+ 367 00d4 A901      		movw r20,r18
+ 368 00d6 4F5F      		subi r20,-1
+ 369 00d8 5F4F      		sbci r21,-1
+ 370 00da 5093 0000 		sts ETsendplace+1,r21
+ 371 00de 4093 0000 		sts ETsendplace,r20
+ 372 00e2 F901      		movw r30,r18
+ 373 00e4 E050      		subi r30,lo8(-(ETbuffer))
+ 374 00e6 F040      		sbci r31,hi8(-(ETbuffer))
+ 375 00e8 2081      		ld r18,Z
+ 376               	.LBE11:
+ 377               	.LBE10:
+ 379               	.Ltext4:
+  96:net_compat.c  **** 	{
+  97:net_compat.c  **** 		*(data++) = et_pop8();
+ 381               	.LM29:
+ 382 00ea FC01      		movw r30,r24
+ 383 00ec 2193      		st Z+,r18
+ 384 00ee CF01      		movw r24,r30
+ 385 00f0 00C0      		rjmp .L30
+ 386               	.L32:
+ 387               	/* epilogue start */
+  98:net_compat.c  **** 	}
+  99:net_compat.c  **** }
+ 389               	.LM30:
+ 390 00f2 0895      		ret
+ 392               	.Lscope4:
+ 394               		.stabd	78,0,0
+ 397               	.global	et_pushpgmstr
+ 399               	et_pushpgmstr:
+ 400               		.stabd	46,0,0
+ 100:net_compat.c  **** 
+ 101:net_compat.c  **** void et_pushpgmstr( const char * msg )
+ 102:net_compat.c  **** {
+ 402               	.LM31:
+ 403               	.LFBB5:
+ 404 00f4 CF93      		push r28
+ 405 00f6 DF93      		push r29
+ 406               	/* prologue: function */
+GAS LISTING /tmp/ccCeDQZH.s 			page 8
+
+
+ 407               	/* frame size = 0 */
+ 408               	/* stack size = 2 */
+ 409               	.L__stack_usage = 2
+ 410 00f8 FC01      		movw r30,r24
+ 411               	.L35:
+ 412               	.LBB12:
+ 103:net_compat.c  **** 	uint8_t r;
+ 104:net_compat.c  **** 	do
+ 105:net_compat.c  **** 	{
+ 106:net_compat.c  **** 		r = pgm_read_byte(msg++);
+ 414               	.LM32:
+ 415               	/* #APP */
+ 416               	 ;  106 "net_compat.c" 1
+ 417 00fa 8491      		lpm r24, Z
+ 418               		
+ 419               	 ;  0 "" 2
+ 420               	/* #NOAPP */
+ 421 00fc EF01      		movw r28,r30
+ 422 00fe 2196      		adiw r28,1
+ 423               	.LBE12:
+ 107:net_compat.c  **** 		if( !r ) break;
+ 425               	.LM33:
+ 426 0100 8823      		tst r24
+ 427 0102 01F0      		breq .L33
+ 108:net_compat.c  **** 		et_push8( r );
+ 429               	.LM34:
+ 430 0104 00D0      		rcall et_push8
+ 431 0106 FE01      		movw r30,r28
+ 109:net_compat.c  **** 	} while( 1 );
+ 433               	.LM35:
+ 434 0108 00C0      		rjmp .L35
+ 435               	.L33:
+ 436               	/* epilogue start */
+ 110:net_compat.c  **** }
+ 438               	.LM36:
+ 439 010a DF91      		pop r29
+ 440 010c CF91      		pop r28
+ 441 010e 0895      		ret
+ 446               	.Lscope5:
+ 448               		.stabd	78,0,0
+ 451               	.global	et_pushpgmblob
+ 453               	et_pushpgmblob:
+ 454               		.stabd	46,0,0
+ 111:net_compat.c  **** 
+ 112:net_compat.c  **** void et_pushpgmblob( const uint8_t * data, uint8_t len )
+ 113:net_compat.c  **** {
+ 456               	.LM37:
+ 457               	.LFBB6:
+ 458 0110 0F93      		push r16
+ 459 0112 1F93      		push r17
+ 460 0114 CF93      		push r28
+ 461 0116 DF93      		push r29
+ 462 0118 1F92      		push __zero_reg__
+ 463 011a CDB7      		in r28,__SP_L__
+ 464 011c DEB7      		in r29,__SP_H__
+ 465               	/* prologue: function */
+ 466               	/* frame size = 1 */
+GAS LISTING /tmp/ccCeDQZH.s 			page 9
+
+
+ 467               	/* stack size = 5 */
+ 468               	.L__stack_usage = 5
+ 114:net_compat.c  **** 	while( len-- )
+ 470               	.LM38:
+ 471 011e 8C01      		movw r16,r24
+ 472 0120 680F      		add r22,r24
+ 473               	.L37:
+ 475               	.LM39:
+ 476 0122 6017      		cp r22,r16
+ 477 0124 01F0      		breq .L39
+ 478               	.LBB13:
+ 115:net_compat.c  **** 	{
+ 116:net_compat.c  **** 		et_push8( pgm_read_byte(data++) );
+ 480               	.LM40:
+ 481 0126 F801      		movw r30,r16
+ 482               	/* #APP */
+ 483               	 ;  116 "net_compat.c" 1
+ 484 0128 8491      		lpm r24, Z
+ 485               		
+ 486               	 ;  0 "" 2
+ 487               	/* #NOAPP */
+ 488               	.LBE13:
+ 489 012a 6983      		std Y+1,r22
+ 490 012c 00D0      		rcall et_push8
+ 491 012e 0F5F      		subi r16,-1
+ 492 0130 1F4F      		sbci r17,-1
+ 493 0132 6981      		ldd r22,Y+1
+ 494 0134 00C0      		rjmp .L37
+ 495               	.L39:
+ 496               	/* epilogue start */
+ 117:net_compat.c  **** 	}
+ 118:net_compat.c  **** }
+ 498               	.LM41:
+ 499 0136 0F90      		pop __tmp_reg__
+ 500 0138 DF91      		pop r29
+ 501 013a CF91      		pop r28
+ 502 013c 1F91      		pop r17
+ 503 013e 0F91      		pop r16
+ 504 0140 0895      		ret
+ 509               	.Lscope6:
+ 511               		.stabd	78,0,0
+ 514               	.global	et_pushstr
+ 516               	et_pushstr:
+ 517               		.stabd	46,0,0
+ 119:net_compat.c  **** 
+ 120:net_compat.c  **** 
+ 121:net_compat.c  **** void et_pushstr( const char * msg )
+ 122:net_compat.c  **** {
+ 519               	.LM42:
+ 520               	.LFBB7:
+ 521 0142 CF93      		push r28
+ 522 0144 DF93      		push r29
+ 523               	/* prologue: function */
+ 524               	/* frame size = 0 */
+ 525               	/* stack size = 2 */
+ 526               	.L__stack_usage = 2
+ 527 0146 EC01      		movw r28,r24
+GAS LISTING /tmp/ccCeDQZH.s 			page 10
+
+
+ 528               	.L41:
+ 123:net_compat.c  **** 	for( ; *msg; msg++ ) 
+ 530               	.LM43:
+ 531 0148 8991      		ld r24,Y+
+ 532 014a 8823      		tst r24
+ 533 014c 01F0      		breq .L43
+ 124:net_compat.c  **** 		et_push8( *msg );
+ 535               	.LM44:
+ 536 014e 00D0      		rcall et_push8
+ 537 0150 00C0      		rjmp .L41
+ 538               	.L43:
+ 539               	/* epilogue start */
+ 125:net_compat.c  **** }
+ 541               	.LM45:
+ 542 0152 DF91      		pop r29
+ 543 0154 CF91      		pop r28
+ 544 0156 0895      		ret
+ 546               	.Lscope7:
+ 548               		.stabd	78,0,0
+ 551               	.global	et_pushblob
+ 553               	et_pushblob:
+ 554               		.stabd	46,0,0
+ 126:net_compat.c  **** 
+ 127:net_compat.c  **** void et_pushblob( const uint8_t * data, uint8_t len )
+ 128:net_compat.c  **** {
+ 556               	.LM46:
+ 557               	.LFBB8:
+ 558 0158 0F93      		push r16
+ 559 015a 1F93      		push r17
+ 560 015c CF93      		push r28
+ 561 015e DF93      		push r29
+ 562 0160 1F92      		push __zero_reg__
+ 563 0162 CDB7      		in r28,__SP_L__
+ 564 0164 DEB7      		in r29,__SP_H__
+ 565               	/* prologue: function */
+ 566               	/* frame size = 1 */
+ 567               	/* stack size = 5 */
+ 568               	.L__stack_usage = 5
+ 129:net_compat.c  **** 	while( len-- )
+ 570               	.LM47:
+ 571 0166 8C01      		movw r16,r24
+ 572 0168 680F      		add r22,r24
+ 573               	.L45:
+ 575               	.LM48:
+ 576 016a 6017      		cp r22,r16
+ 577 016c 01F0      		breq .L47
+ 130:net_compat.c  **** 	{
+ 131:net_compat.c  **** 		et_push8( *(data++) );
+ 579               	.LM49:
+ 580 016e F801      		movw r30,r16
+ 581 0170 8191      		ld r24,Z+
+ 582 0172 8F01      		movw r16,r30
+ 583 0174 6983      		std Y+1,r22
+ 584 0176 00D0      		rcall et_push8
+ 585 0178 6981      		ldd r22,Y+1
+ 586 017a 00C0      		rjmp .L45
+ 587               	.L47:
+GAS LISTING /tmp/ccCeDQZH.s 			page 11
+
+
+ 588               	/* epilogue start */
+ 132:net_compat.c  **** 	}
+ 133:net_compat.c  **** }
+ 590               	.LM50:
+ 591 017c 0F90      		pop __tmp_reg__
+ 592 017e DF91      		pop r29
+ 593 0180 CF91      		pop r28
+ 594 0182 1F91      		pop r17
+ 595 0184 0F91      		pop r16
+ 596 0186 0895      		ret
+ 598               	.Lscope8:
+ 600               		.stabd	78,0,0
+ 603               	.global	et_init
+ 605               	et_init:
+ 606               		.stabd	46,0,0
+ 134:net_compat.c  **** 
+ 135:net_compat.c  **** 
+ 136:net_compat.c  **** //return 0 if OK, otherwise nonzero.
+ 137:net_compat.c  **** int8_t et_init( const unsigned char * macaddy )
+ 138:net_compat.c  **** {
+ 608               	.LM51:
+ 609               	.LFBB9:
+ 610               	/* prologue: function */
+ 611               	/* frame size = 0 */
+ 612               	/* stack size = 0 */
+ 613               	.L__stack_usage = 0
+ 614 0188 FC01      		movw r30,r24
+ 139:net_compat.c  **** 	MyMAC[0] = macaddy[0];
+ 616               	.LM52:
+ 617 018a 8081      		ld r24,Z
+ 618 018c 8093 0000 		sts MyMAC,r24
+ 140:net_compat.c  **** 	MyMAC[1] = macaddy[1];
+ 620               	.LM53:
+ 621 0190 8181      		ldd r24,Z+1
+ 622 0192 8093 0000 		sts MyMAC+1,r24
+ 141:net_compat.c  **** 	MyMAC[2] = macaddy[2];
+ 624               	.LM54:
+ 625 0196 8281      		ldd r24,Z+2
+ 626 0198 8093 0000 		sts MyMAC+2,r24
+ 142:net_compat.c  **** 	MyMAC[3] = macaddy[3];
+ 628               	.LM55:
+ 629 019c 8381      		ldd r24,Z+3
+ 630 019e 8093 0000 		sts MyMAC+3,r24
+ 143:net_compat.c  **** 	MyMAC[4] = macaddy[4];
+ 632               	.LM56:
+ 633 01a2 8481      		ldd r24,Z+4
+ 634 01a4 8093 0000 		sts MyMAC+4,r24
+ 144:net_compat.c  **** 	MyMAC[5] = macaddy[5];
+ 636               	.LM57:
+ 637 01a8 8581      		ldd r24,Z+5
+ 638 01aa 8093 0000 		sts MyMAC+5,r24
+ 145:net_compat.c  **** 
+ 146:net_compat.c  **** 	PLLCSR = _BV(PLLE) | _BV( PCKE );
+ 640               	.LM58:
+ 641 01ae 86E0      		ldi r24,lo8(6)
+ 642 01b0 87BD      		out 0x27,r24
+ 147:net_compat.c  **** 	PLLCSR |= _BV(LSM);
+GAS LISTING /tmp/ccCeDQZH.s 			page 12
+
+
+ 644               	.LM59:
+ 645 01b2 87B5      		in r24,0x27
+ 646 01b4 8068      		ori r24,lo8(-128)
+ 647 01b6 87BD      		out 0x27,r24
+ 148:net_compat.c  **** 	OSCCAL = OSC20;
+ 649               	.LM60:
+ 650 01b8 86EB      		ldi r24,lo8(-74)
+ 651 01ba 81BF      		out 0x31,r24
+ 149:net_compat.c  **** 
+ 150:net_compat.c  **** 
+ 151:net_compat.c  **** 	//Setup timer 0 to speed along.
+ 152:net_compat.c  **** 	//Yes, this means you can't use it.
+ 153:net_compat.c  **** 	TCCR0A = _BV(WGM01);
+ 653               	.LM61:
+ 654 01bc 82E0      		ldi r24,lo8(2)
+ 655 01be 8ABD      		out 0x2a,r24
+ 154:net_compat.c  **** 	TCCR0B = _BV(CS00);
+ 657               	.LM62:
+ 658 01c0 81E0      		ldi r24,lo8(1)
+ 659 01c2 83BF      		out 0x33,r24
+ 155:net_compat.c  **** 	OCR0A = 0;
+ 661               	.LM63:
+ 662 01c4 19BC      		out 0x29,__zero_reg__
+ 156:net_compat.c  **** 
+ 157:net_compat.c  **** 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
+ 664               	.LM64:
+ 665 01c6 85E1      		ldi r24,lo8(21)
+ 666 01c8 8DB9      		out 0xd,r24
+ 158:net_compat.c  **** 
+ 159:net_compat.c  **** 	//setup port B
+ 160:net_compat.c  **** 
+ 161:net_compat.c  **** 	PORTB &= ~_BV(0); 
+ 668               	.LM65:
+ 669 01ca C098      		cbi 0x18,0
+ 162:net_compat.c  **** 	DDRB &= ~_BV(0);
+ 671               	.LM66:
+ 672 01cc B898      		cbi 0x17,0
+ 163:net_compat.c  **** 	PORTB &= ~_BV(1);
+ 674               	.LM67:
+ 675 01ce C198      		cbi 0x18,1
+ 164:net_compat.c  **** 	USICR &= ~_BV(USIWM0);  //Disable USICR
+ 677               	.LM68:
+ 678 01d0 6C98      		cbi 0xd,4
+ 165:net_compat.c  **** 
+ 166:net_compat.c  **** }
+ 680               	.LM69:
+ 681 01d2 0895      		ret
+ 683               	.Lscope9:
+ 685               		.stabd	78,0,0
+ 689               	.global	et_xmitpacket
+ 691               	et_xmitpacket:
+ 692               		.stabd	46,0,0
+ 167:net_compat.c  **** 
+ 168:net_compat.c  **** int8_t et_xmitpacket( uint16_t start, uint16_t len )
+ 169:net_compat.c  **** {
+ 694               	.LM70:
+ 695               	.LFBB10:
+GAS LISTING /tmp/ccCeDQZH.s 			page 13
+
+
+ 696               	/* prologue: function */
+ 697               	/* frame size = 0 */
+ 698               	/* stack size = 0 */
+ 699               	.L__stack_usage = 0
+ 170:net_compat.c  **** 	//XXX !!! TODO
+ 171:net_compat.c  **** }
+ 701               	.LM71:
+ 702 01d4 0895      		ret
+ 704               	.Lscope10:
+ 706               		.stabd	78,0,0
+ 708               	.global	et_recvpack
+ 710               	et_recvpack:
+ 711               		.stabd	46,0,0
+ 172:net_compat.c  **** 
+ 173:net_compat.c  **** //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
+ 174:net_compat.c  **** unsigned short et_recvpack()
+ 175:net_compat.c  **** {
+ 713               	.LM72:
+ 714               	.LFBB11:
+ 715               	/* prologue: function */
+ 716               	/* frame size = 0 */
+ 717               	/* stack size = 0 */
+ 718               	.L__stack_usage = 0
+ 176:net_compat.c  **** 
+ 177:net_compat.c  **** #define LIMITSIZE  sizeof( ETbuffer )/2-30
+ 178:net_compat.c  **** //#define LIMITSIZE 10
+ 179:net_compat.c  **** 
+ 180:net_compat.c  **** 		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MH
+ 720               	.LM73:
+ 721 01d6 40E2      		ldi r20,lo8(32)
+ 722 01d8 5EE4      		ldi r21,lo8(78)
+ 723 01da 64E8      		ldi r22,lo8(-124)
+ 724 01dc 70E0      		ldi r23,0
+ 725 01de 80E0      		ldi r24,lo8(ETbuffer+48)
+ 726 01e0 90E0      		ldi r25,hi8(ETbuffer+48)
+ 727 01e2 00D0      		rcall waitforpacket
+ 181:net_compat.c  **** //		_delay_ms(8);
+ 182:net_compat.c  **** #ifdef SMARTPWR
+ 183:net_compat.c  **** 		DDRB |= _BV(1);
+ 184:net_compat.c  **** #endif
+ 185:net_compat.c  **** 		PORTB|=_BV(1);
+ 729               	.LM74:
+ 730 01e4 C19A      		sbi 0x18,1
+ 186:net_compat.c  **** 		NOOP;
+ 732               	.LM75:
+ 733               	/* #APP */
+ 734               	 ;  186 "net_compat.c" 1
+ 735 01e6 0000      		nop
+ 736               	 ;  0 "" 2
+ 187:net_compat.c  **** 		PORTB &=~_BV(1);
+ 738               	.LM76:
+ 739               	/* #NOAPP */
+ 740 01e8 C198      		cbi 0x18,1
+ 188:net_compat.c  **** #ifdef SMARTPWR
+ 189:net_compat.c  **** 		DDRB &= ~_BV(1);
+ 190:net_compat.c  **** #endif
+ 191:net_compat.c  **** 		waitforpacket(&ETbuffer[PREAMBLE+40], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30
+GAS LISTING /tmp/ccCeDQZH.s 			page 14
+
+
+ 742               	.LM77:
+ 743 01ea 40E2      		ldi r20,lo8(32)
+ 744 01ec 5EE4      		ldi r21,lo8(78)
+ 745 01ee 64E8      		ldi r22,lo8(-124)
+ 746 01f0 70E0      		ldi r23,0
+ 747 01f2 80E0      		ldi r24,lo8(ETbuffer+48)
+ 748 01f4 90E0      		ldi r25,hi8(ETbuffer+48)
+ 749 01f6 00D0      		rcall waitforpacket
+ 192:net_compat.c  **** // 		_delay_ms(8);
+ 193:net_compat.c  **** 
+ 194:net_compat.c  **** }
+ 751               	.LM78:
+ 752 01f8 0895      		ret
+ 754               	.Lscope11:
+ 756               		.stabd	78,0,0
+ 760               	.global	et_start_checksum
+ 762               	et_start_checksum:
+ 763               		.stabd	46,0,0
+ 195:net_compat.c  **** 
+ 196:net_compat.c  **** void et_start_checksum( uint16_t start, uint16_t len )
+ 197:net_compat.c  **** {
+ 765               	.LM79:
+ 766               	.LFBB12:
+ 767               	/* prologue: function */
+ 768               	/* frame size = 0 */
+ 769               	/* stack size = 0 */
+ 770               	.L__stack_usage = 0
+ 771 01fa 0895      		ret
+ 773               	.Lscope12:
+ 775               		.stabd	78,0,0
+ 782               	.global	et_copy_memory
+ 784               	et_copy_memory:
+ 785               		.stabd	46,0,0
+ 198:net_compat.c  **** 	//XXX !!! TODO
+ 199:net_compat.c  **** }
+ 200:net_compat.c  **** 
+ 201:net_compat.c  **** void et_copy_memory( uint16_t to, uint16_t from, uint16_t length, uint16_t range_start, uint16_t ra
+ 202:net_compat.c  **** {
+ 787               	.LM80:
+ 788               	.LFBB13:
+ 789               	/* prologue: function */
+ 790               	/* frame size = 0 */
+ 791               	/* stack size = 0 */
+ 792               	.L__stack_usage = 0
+ 793 01fc 0895      		ret
+ 795               	.Lscope13:
+ 797               		.stabd	78,0,0
+ 798               	.global	ManchesterTable
+ 799               		.data
+ 800               		.p2align	4
+ 803               	ManchesterTable:
+ 804 0000 AA        		.byte	-86
+ 805 0001 6A        		.byte	106
+ 806 0002 9A        		.byte	-102
+ 807 0003 5A        		.byte	90
+ 808 0004 A6        		.byte	-90
+ 809 0005 66        		.byte	102
+GAS LISTING /tmp/ccCeDQZH.s 			page 15
+
+
+ 810 0006 96        		.byte	-106
+ 811 0007 56        		.byte	86
+ 812 0008 A9        		.byte	-87
+ 813 0009 69        		.byte	105
+ 814 000a 99        		.byte	-103
+ 815 000b 59        		.byte	89
+ 816 000c A5        		.byte	-91
+ 817 000d 65        		.byte	101
+ 818 000e 95        		.byte	-107
+ 819 000f 55        		.byte	85
+ 820               		.comm	ETchecksum,2,1
+ 821               		.comm	sendbaseaddress,2,1
+ 822               		.comm	ETsendplace,2,1
+ 823               		.comm	ETbuffer,324,1
+ 824               		.comm	MyMAC,6,1
+ 831               		.text
+ 833               	.Letext0:
+ 834               		.ident	"GCC: (GNU) 4.8.2"
+ 835               	.global __do_copy_data
+ 836               	.global __do_clear_bss
+GAS LISTING /tmp/ccCeDQZH.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 net_compat.c
+     /tmp/ccCeDQZH.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccCeDQZH.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccCeDQZH.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccCeDQZH.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccCeDQZH.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccCeDQZH.s:110    .text:0000000000000000 et_push8
+                            *COM*:0000000000000002 ETsendplace
+                            *COM*:0000000000000144 ETbuffer
+     /tmp/ccCeDQZH.s:145    .text:0000000000000020 GotPack
+     /tmp/ccCeDQZH.s:170    .text:0000000000000024 waitforpacket
+     /tmp/ccCeDQZH.s:345    .text:00000000000000c8 et_popblob
+     /tmp/ccCeDQZH.s:399    .text:00000000000000f4 et_pushpgmstr
+     /tmp/ccCeDQZH.s:453    .text:0000000000000110 et_pushpgmblob
+     /tmp/ccCeDQZH.s:516    .text:0000000000000142 et_pushstr
+     /tmp/ccCeDQZH.s:553    .text:0000000000000158 et_pushblob
+     /tmp/ccCeDQZH.s:605    .text:0000000000000188 et_init
+                            *COM*:0000000000000006 MyMAC
+     /tmp/ccCeDQZH.s:691    .text:00000000000001d4 et_xmitpacket
+     /tmp/ccCeDQZH.s:710    .text:00000000000001d6 et_recvpack
+     /tmp/ccCeDQZH.s:762    .text:00000000000001fa et_start_checksum
+     /tmp/ccCeDQZH.s:784    .text:00000000000001fc et_copy_memory
+     /tmp/ccCeDQZH.s:803    .data:0000000000000000 ManchesterTable
+                            *COM*:0000000000000002 ETchecksum
+                            *COM*:0000000000000002 sendbaseaddress
+
+UNDEFINED SYMBOLS
+Demanchestrate
+MaybeHaveDataASM
+__do_copy_data
+__do_clear_bss
