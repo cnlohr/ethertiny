@@ -27,11 +27,26 @@ int main(int argc, char**argv)
       n = recvfrom(sockfd,mesg,1000,0,(struct sockaddr *)&cliaddr,&len);
       sendto(sockfd,mesg,n,0,(struct sockaddr *)&cliaddr,sizeof(cliaddr));
       mesg[n] = 0;
+//printf( "MARK\n" );
+		int j;
+	for(j = 0; j < n;j ++)
+		{
+			unsigned r = mesg[j];
+			int k;
+//			for( k = 1; k != 0x100; k<<=1 )
+			for( k = 0x80; k; k>>=1 )
+				printf( "%d", (r&k)?1:0 );
+//			printf( "%02x", (unsigned char)r );
+			printf( " " );
+		}
+		printf( "\n" );
+/*
 		if(mesg[0] == 'C' ) printf( "." );
 		else
 		      printf("%s",mesg);
 			fflush( stdout );
 //		if(mesg[0] == 'C' ) printf( "\n" );
+*/
    }
 }
 
