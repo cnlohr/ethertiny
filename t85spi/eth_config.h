@@ -22,7 +22,7 @@
 
 //OSC20 will depend on the specific chip.  Needs to be AS CLOSE TO 20 MHZ AS POSSIBLE!
 //TUNE THIS!
-#define OSC20 0xBb
+#define OSC20 0xb5
 
 //OSCHi needs to be as fast as the chip goes, but less than ~35 MHz. IT MUST EXCEED 30 MHZ!
 #define OSCHIGH 0xFF  //~30 MHz?

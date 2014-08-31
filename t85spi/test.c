@@ -87,8 +87,6 @@ int main( )
 
 	setup_clock();
 
-	DDRB = _BV(1);
-
 	LRP( "Boot OK.\n" );
 
 	//1st let's see how fast we can clock the pin.
@@ -104,6 +102,8 @@ int main( )
 	int frame = 0;
 
 	struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
+
+
 
 	while(1)
 	{

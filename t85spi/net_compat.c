@@ -194,6 +194,9 @@ int8_t et_init( const unsigned char * macaddy )
 	PORTB &= ~_BV(1);
 	USICR &= ~_BV(USIWM0);  //Disable USICR
 
+	DDRB |= _BV(1);
+	PORTB |= _BV(0);
+
 	return 0;
 }
 
