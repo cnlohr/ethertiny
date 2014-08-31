@@ -11,10 +11,10 @@ CC=avr-gcc
 test.hex : test.elf
 	avr-objcopy -j .text -j .data -O ihex test.elf test.hex 
 
-test.elf : test.o asmtest.o sendpack.o packetmater.o
+test.elf : test.o asmtest.o sendpack.o packetmater.o hlprocess.o
 	avr-gcc -I  -g -Wall -Os    -mmcu=$(PART) -Wl,-Map,test.map -o $@ $^ -L/usr/lib/binutils/avr/2.18
 
-test.lst : test.c asmtest.S sendpack.c packetmater.c
+test.lst : test.c asmtest.S sendpack.c packetmater.c hlprocess.c
 	avr-gcc -c -g -Wa,-a,-ad $(CFLAGS) $^ > $@
 
 burn : test.hex

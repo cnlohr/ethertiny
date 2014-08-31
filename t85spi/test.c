@@ -37,6 +37,7 @@
 
 #include "sendpack.h"
 #include "packetmater.h"
+#include "hlprocess.h"
 
 void delay_ms(uint32_t time) {
   uint32_t i;
@@ -71,46 +72,32 @@ static void setup_clock( void )
 //Inverting the manchester seems to universally make things worse.
 //#define INVERT_MANCHESTER
 
-#ifndef INVERT_MANCHESTER
 //Do not split this across byte-addressing boundaries.
+//We do some fancy stuff when we send the manchester out.
 char ManchesterTable[16] __attribute__ ((aligned (16))) = {
 	0b10101010, 0b01101010, 0b10011010, 0b01011010,
 	0b10100110, 0b01100110, 0b10010110, 0b01010110,
 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
 };
-#else
-//Inverted
-char ManchesterTable[16] __attribute__ ((aligned (16))) = {
-	0b01010101, 0b10010101, 0b01100101, 0b10100101,
-	0b01011001, 0b10011001, 0b01101001, 0b10101001,
-	0b01010110, 0b10010110, 0b01100110, 0b10100110,
-	0b01011010, 0b10011010, 0b01101010, 0b10101010,
-};
-#endif
-/*
-//Debug
-char ManchesterTableDEBUG[16] __attribute__ ((aligned (16))) = {
-	0b00000000, 0b11000000, 0b00110000, 0b11110000,
-	0b00001100, 0b11001100, 0b00111100, 0b11111100,
-	0b00000011, 0b11000011, 0b00110011, 0b11110011,
-	0b00001111, 0b11001111, 0b00111111, 0b11111111,
-};
-*/
+
 unsigned char sendbuffer[390];
 
+//From the ASM file.
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
-/*
-void MaybeHaveDataTest( unsigned char * c, uint8_t lenX2 ) //LenX2 = 128->256, i.e. put in half the size.
+//Attempt to return rough estimate of processing time.
+int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
 {
-	while( lenX2-- )
-	{
-		*(c++) = USIBR;
-		*(c++) = USIBR;
-	}
-}*/
+	int byr = 0;
+
+	byr = Demanchestrate( machesterized, mlen );
+
+	//Don't do anything yet...
+
+	return byr;
+}
 
 void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 {
@@ -130,10 +117,15 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 		if( USIBR && (USIBR != 0xFF ) )
 		{
 			int r = MaybeHaveDataASM( buffer, len );
+			if( r > 1 )
+			{
+				r += GotPack( buffer, r, len );
+			}
 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
 			break;
 		}
 	}
+
 
 	while( ltime-- > 0 )
 	{
