@@ -97,7 +97,7 @@ char ManchesterTableDEBUG[16] __attribute__ ((aligned (16))) = {
 	0b00001111, 0b11001111, 0b00111111, 0b11111111,
 };
 */
-unsigned char sendbuffer[370];
+unsigned char sendbuffer[390];
 
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
@@ -133,9 +133,6 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 			ltime-=(len-r)*4+3; //About how long the function takes to execute.
 			break;
 		}
-//		NOOP;
-//		NOOP;
-//		NOOP;
 	}
 
 	while( ltime-- > 0 )
@@ -191,7 +188,7 @@ int main( )
 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 	//	continue;
 
-#define LIMITSIZE  sizeof( sendbuffer )/2-50
+#define LIMITSIZE  sizeof( sendbuffer )/2-30
 //#define LIMITSIZE 10
 
 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
@@ -221,7 +218,7 @@ int main( )
 //			sbe->payload[0] = 0xBB;
 //			sbe->payload[1] = frame++;
 			sbe->addyfrom = 0x450a000a;
-			int rr = Ethernetize( sendbuffer, PacketABytes, 300);
+			int rr = Ethernetize( sendbuffer, PacketABytes, 320);
 
 			SendTestASM( sendbuffer, rr/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
 #ifdef SMARTPWR

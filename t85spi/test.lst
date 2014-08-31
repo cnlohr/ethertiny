@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccypg2Yv.s 			page 1
+GAS LISTING /tmp/ccLNiDUh.s 			page 1
 
 
    1               		.file	"test.c"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  121 0000 0F93      		push r16
  122 0002 1F93      		push r17
  123               	/* prologue: function */
-GAS LISTING /tmp/ccypg2Yv.s 			page 2
+GAS LISTING /tmp/ccLNiDUh.s 			page 2
 
 
  124               	/* frame size = 0 */
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   36:/usr/lib/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
   37:/usr/lib/avr/include/util/delay.h **** 
   38:/usr/lib/avr/include/util/delay.h **** #ifndef __HAS_DELAY_CYCLES
-GAS LISTING /tmp/ccypg2Yv.s 			page 3
+GAS LISTING /tmp/ccLNiDUh.s 			page 3
 
 
   39:/usr/lib/avr/include/util/delay.h **** #define __HAS_DELAY_CYCLES 1
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   93:/usr/lib/avr/include/util/delay.h **** 
   94:/usr/lib/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
   95:/usr/lib/avr/include/util/delay.h **** # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-GAS LISTING /tmp/ccypg2Yv.s 			page 4
+GAS LISTING /tmp/ccLNiDUh.s 			page 4
 
 
   96:/usr/lib/avr/include/util/delay.h **** #endif
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  150:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
  151:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
  152:/usr/lib/avr/include/util/delay.h **** 
-GAS LISTING /tmp/ccypg2Yv.s 			page 5
+GAS LISTING /tmp/ccLNiDUh.s 			page 5
 
 
  153:/usr/lib/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   59:test.c        **** 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
   60:test.c        **** 	CLKPR = 0x00;	/*No scalar*/
   61:test.c        **** 
-GAS LISTING /tmp/ccypg2Yv.s 			page 6
+GAS LISTING /tmp/ccLNiDUh.s 			page 6
 
 
   62:test.c        **** 
@@ -339,7 +339,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   97:test.c        **** 	0b00001111, 0b11001111, 0b00111111, 0b11111111,
   98:test.c        **** };
   99:test.c        **** */
- 100:test.c        **** unsigned char sendbuffer[370];
+ 100:test.c        **** unsigned char sendbuffer[390];
  101:test.c        **** 
  102:test.c        **** void SendTestASM( const unsigned char * c, uint8_t len );
  103:test.c        **** int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  116:test.c        **** {
  186               	.LM6:
  187               	.LFBB2:
-GAS LISTING /tmp/ccypg2Yv.s 			page 7
+GAS LISTING /tmp/ccLNiDUh.s 			page 7
 
 
  188 0030 0F93      		push r16
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  234 0060 2111      		cpse r18,__zero_reg__
  235 0062 00C0      		rjmp .L28
  236               	.L12:
-GAS LISTING /tmp/ccypg2Yv.s 			page 8
+GAS LISTING /tmp/ccLNiDUh.s 			page 8
 
 
  128:test.c        **** 	while( ltime-- > 0 )
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  144:test.c        **** 		NOOP;
  284               	.LM19:
  285               	 ;  144 "test.c" 1
-GAS LISTING /tmp/ccypg2Yv.s 			page 9
+GAS LISTING /tmp/ccLNiDUh.s 			page 9
 
 
  286 009a 0000      		nop
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  338               	/* #APP */
  339               	 ;  157 "test.c" 1
  340 0000 F894      		cli
-GAS LISTING /tmp/ccypg2Yv.s 			page 10
+GAS LISTING /tmp/ccLNiDUh.s 			page 10
 
 
  341               	 ;  0 "" 2
@@ -598,7 +598,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  387 002a A0E0      		ldi r26,lo8(sendbuffer)
  388 002c B0E0      		ldi r27,hi8(sendbuffer)
  389               	.L32:
-GAS LISTING /tmp/ccypg2Yv.s 			page 11
+GAS LISTING /tmp/ccLNiDUh.s 			page 11
 
 
  390               	.LBB13:
@@ -652,13 +652,13 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  191:test.c        **** 	//	SendTestASM( sendbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
  192:test.c        **** 	//	continue;
  193:test.c        **** 
- 194:test.c        **** #define LIMITSIZE  sizeof( sendbuffer )/2-50
+ 194:test.c        **** #define LIMITSIZE  sizeof( sendbuffer )/2-30
  195:test.c        **** //#define LIMITSIZE 10
  196:test.c        **** 
  197:test.c        **** 		waitforpacket(sbe->payload, LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 
  198:test.c        **** //		_delay_ms(8);
  199:test.c        **** #ifdef SMARTPWR
-GAS LISTING /tmp/ccypg2Yv.s 			page 12
+GAS LISTING /tmp/ccLNiDUh.s 			page 12
 
 
  200:test.c        **** 		DDRB |= _BV(1);
@@ -703,7 +703,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  439               	.LM45:
  440 0058 40E2      		ldi r20,lo8(32)
  441 005a 5EE4      		ldi r21,lo8(78)
- 442 005c 67E8      		ldi r22,lo8(-121)
+ 442 005c 65EA      		ldi r22,lo8(-91)
  443 005e 70E0      		ldi r23,0
  444 0060 80E0      		ldi r24,lo8(sendbuffer+50)
  445 0062 90E0      		ldi r25,hi8(sendbuffer+50)
@@ -718,7 +718,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  454 0068 0000      		nop
  455               	 ;  0 "" 2
  204:test.c        **** 		PORTB &=~_BV(1);
-GAS LISTING /tmp/ccypg2Yv.s 			page 13
+GAS LISTING /tmp/ccLNiDUh.s 			page 13
 
 
  457               	.LM48:
@@ -728,7 +728,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  461               	.LM49:
  462 006c 40E2      		ldi r20,lo8(32)
  463 006e 5EE4      		ldi r21,lo8(78)
- 464 0070 67E8      		ldi r22,lo8(-121)
+ 464 0070 65EA      		ldi r22,lo8(-91)
  465 0072 70E0      		ldi r23,0
  466 0074 80E0      		ldi r24,lo8(sendbuffer+50)
  467 0076 90E0      		ldi r25,hi8(sendbuffer+50)
@@ -744,9 +744,9 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  478 0084 D092 0000 		sts sendbuffer+34+1,r13
  479 0088 E092 0000 		sts sendbuffer+34+2,r14
  480 008c F092 0000 		sts sendbuffer+34+3,r15
- 224:test.c        **** 			int rr = Ethernetize( sendbuffer, PacketABytes, 300);
+ 224:test.c        **** 			int rr = Ethernetize( sendbuffer, PacketABytes, 320);
  482               	.LM52:
- 483 0090 4CE2      		ldi r20,lo8(44)
+ 483 0090 40E4      		ldi r20,lo8(64)
  484 0092 51E0      		ldi r21,lo8(1)
  485 0094 6CE4      		ldi r22,lo8(76)
  486 0096 70E0      		ldi r23,0
@@ -772,13 +772,13 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  505               	.LBE15:
  507               	.Lscope3:
  509               		.stabd	78,0,0
- 510               		.comm	sendbuffer,370,1
+ 510               		.comm	sendbuffer,390,1
  511               	.global	ManchesterTable
  512               		.data
  513               		.p2align	4
  516               	ManchesterTable:
  517 0000 AA        		.byte	-86
-GAS LISTING /tmp/ccypg2Yv.s 			page 14
+GAS LISTING /tmp/ccLNiDUh.s 			page 14
 
 
  518 0001 6A        		.byte	106
@@ -801,21 +801,21 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  538               		.ident	"GCC: (GNU) 4.8.2"
  539               	.global __do_copy_data
  540               	.global __do_clear_bss
-GAS LISTING /tmp/ccypg2Yv.s 			page 15
+GAS LISTING /tmp/ccLNiDUh.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 test.c
-     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccypg2Yv.s:116    .text:0000000000000000 delay_ms
-     /tmp/ccypg2Yv.s:183    .text:0000000000000030 waitforpacket
-     /tmp/ccypg2Yv.s:327    .text.startup:0000000000000000 main
-                            *COM*:0000000000000172 sendbuffer
-     /tmp/ccypg2Yv.s:516    .data:0000000000000000 ManchesterTable
+     /tmp/ccLNiDUh.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccLNiDUh.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccLNiDUh.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccLNiDUh.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccLNiDUh.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccLNiDUh.s:116    .text:0000000000000000 delay_ms
+     /tmp/ccLNiDUh.s:183    .text:0000000000000030 waitforpacket
+     /tmp/ccLNiDUh.s:327    .text.startup:0000000000000000 main
+                            *COM*:0000000000000186 sendbuffer
+     /tmp/ccLNiDUh.s:516    .data:0000000000000000 ManchesterTable
 
 UNDEFINED SYMBOLS
 MaybeHaveDataASM
@@ -824,7 +824,7 @@ Ethernetize
 SendTestASM
 __do_copy_data
 __do_clear_bss
-GAS LISTING /tmp/ccypg2Yv.s 			page 1
+GAS LISTING /tmp/ccLNiDUh.s 			page 1
 
 
    1               	# 1 "asmtest.S"
@@ -884,7 +884,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   23               	  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
   24               	  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
   25               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-GAS LISTING /tmp/ccypg2Yv.s 			page 2
+GAS LISTING /tmp/ccLNiDUh.s 			page 2
 
 
   26               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -944,7 +944,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   80               	    The last EEPROM address.
   81               	    <br>
   82               	    - \b FLASHEND
-GAS LISTING /tmp/ccypg2Yv.s 			page 3
+GAS LISTING /tmp/ccLNiDUh.s 			page 3
 
 
   83               	    <br>
@@ -1004,7 +1004,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  136               	#  include <avr/iom32c1.h>
  137               	#elif defined (__AVR_ATmega32M1__)
  138               	#  include <avr/iom32m1.h>
-GAS LISTING /tmp/ccypg2Yv.s 			page 4
+GAS LISTING /tmp/ccLNiDUh.s 			page 4
 
 
  139               	#elif defined (__AVR_ATmega32U2__)
@@ -1064,7 +1064,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  193               	#elif defined (__AVR_ATmega6450__) || defined (__AVR_ATmega6450A__) || defined (__AVR_ATmega6450P__
  194               	#  include <avr/iom6450.h>
  195               	#elif defined (__AVR_ATmega649__) || defined (__AVR_ATmega649A__)
-GAS LISTING /tmp/ccypg2Yv.s 			page 5
+GAS LISTING /tmp/ccLNiDUh.s 			page 5
 
 
  196               	#  include <avr/iom649.h>
@@ -1124,7 +1124,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  250               	#  include <avr/iom165.h>
  251               	#elif defined (__AVR_ATmega165P__)
  252               	#  include <avr/iom165p.h>
-GAS LISTING /tmp/ccypg2Yv.s 			page 6
+GAS LISTING /tmp/ccLNiDUh.s 			page 6
 
 
  253               	#elif defined (__AVR_ATmega168__) || defined (__AVR_ATmega168A__)
@@ -1184,7 +1184,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  307               	#elif defined (__AVR_AT90S2333__)
  308               	#  include <avr/io2333.h>
  309               	#elif defined (__AVR_AT90S2323__)
-GAS LISTING /tmp/ccypg2Yv.s 			page 7
+GAS LISTING /tmp/ccLNiDUh.s 			page 7
 
 
  310               	#  include <avr/io2323.h>
@@ -1244,7 +1244,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   24               	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
   25               	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
   26               	  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-GAS LISTING /tmp/ccypg2Yv.s 			page 8
+GAS LISTING /tmp/ccLNiDUh.s 			page 8
 
 
   27               	  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
@@ -1304,7 +1304,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  381               	#elif defined (__AVR_ATxmega32A4__)
  382               	#  include <avr/iox32a4.h>
  383               	#elif defined (__AVR_ATxmega32D4__)
-GAS LISTING /tmp/ccypg2Yv.s 			page 9
+GAS LISTING /tmp/ccLNiDUh.s 			page 9
 
 
  384               	#  include <avr/iox32d4.h>
@@ -1364,7 +1364,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  436               	#include <avr/version.h>
    1               	/* Copyright (c) 2005, Joerg Wunsch                               -*- c -*-
  437               	
-GAS LISTING /tmp/ccypg2Yv.s 			page 10
+GAS LISTING /tmp/ccLNiDUh.s 			page 10
 
 
  438               	/* Include fuse.h after individual IO header files. */
@@ -1424,7 +1424,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   76               	KeepGoing:			///subi r26,lo8(-(ManchesterTable))
   77               	
   78               		//Heavily interleved code.  Need a new OUTB every 8 cycles exactly.
-GAS LISTING /tmp/ccypg2Yv.s 			page 11
+GAS LISTING /tmp/ccLNiDUh.s 			page 11
 
 
   79:asmtest.S     ****     nop           //1 //Look, ma ONE EXTRA CYCLE!
@@ -1484,7 +1484,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  133:asmtest.S     **** 	out USEBR, r19 //1 ** OK
  134               	
  135:asmtest.S     **** 	dec r16         //1
-GAS LISTING /tmp/ccypg2Yv.s 			page 12
+GAS LISTING /tmp/ccLNiDUh.s 			page 12
 
 
  136:asmtest.S     **** 	brne KeepGoing  //2
@@ -1544,7 +1544,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  190:asmtest.S     **** 	dec r22       //1
  191:asmtest.S     **** 	brne rloop    //2
  192               	
-GAS LISTING /tmp/ccypg2Yv.s 			page 13
+GAS LISTING /tmp/ccLNiDUh.s 			page 13
 
 
  193               	rlend:
@@ -1555,7 +1555,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  198:asmtest.S     **** 	pop r22
  199:asmtest.S     **** 	pop r16
  200:asmtest.S     **** 	ret
-GAS LISTING /tmp/ccypg2Yv.s 			page 14
+GAS LISTING /tmp/ccLNiDUh.s 			page 14
 
 
 DEFINED SYMBOLS
@@ -1570,7 +1570,7 @@ DEFINED SYMBOLS
 
 UNDEFINED SYMBOLS
 ManchesterTable
-GAS LISTING /tmp/ccypg2Yv.s 			page 1
+GAS LISTING /tmp/ccLNiDUh.s 			page 1
 
 
    1               		.file	"sendpack.c"
@@ -1630,7 +1630,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  155 002b 00        		.byte	0
  156 002c 34        		.byte	52
  157 002d 00        		.byte	0
-GAS LISTING /tmp/ccypg2Yv.s 			page 2
+GAS LISTING /tmp/ccLNiDUh.s 			page 2
 
 
  158 002e 00        		.byte	0
@@ -1666,20 +1666,20 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  189               		.text
  191               	.Letext0:
  192               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccypg2Yv.s 			page 3
+GAS LISTING /tmp/ccLNiDUh.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sendpack.c
-     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccypg2Yv.s:111    .progmem.data:0000000000000000 PacketA
+     /tmp/ccLNiDUh.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccLNiDUh.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccLNiDUh.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccLNiDUh.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccLNiDUh.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccLNiDUh.s:111    .progmem.data:0000000000000000 PacketA
 
 NO UNDEFINED SYMBOLS
-GAS LISTING /tmp/ccypg2Yv.s 			page 1
+GAS LISTING /tmp/ccLNiDUh.s 			page 1
 
 
    1               		.file	"packetmater.c"
@@ -1739,7 +1739,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
   44:packetmater.c **** 		packet[17] = fullpacklen&0xff;
   45:packetmater.c **** 		packet[24] = 0;
   46:packetmater.c **** 		packet[25] = 0;
-GAS LISTING /tmp/ccypg2Yv.s 			page 2
+GAS LISTING /tmp/ccLNiDUh.s 			page 2
 
 
   47:packetmater.c **** 		uint16_t csumr;
@@ -1799,7 +1799,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  119 0014 5901      		movw r10,r18
   85:packetmater.c ****    int i, j;
   86:packetmater.c ****    uint32_t mask;
-GAS LISTING /tmp/ccypg2Yv.s 			page 3
+GAS LISTING /tmp/ccLNiDUh.s 			page 3
 
 
   87:packetmater.c **** 	uint8_t byte;
@@ -1859,7 +1859,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  169 0058 8E09      		sbc r24,r14
  170 005a 9F09      		sbc r25,r15
  172               	.LM8:
-GAS LISTING /tmp/ccypg2Yv.s 			page 4
+GAS LISTING /tmp/ccLNiDUh.s 			page 4
 
 
  173 005c 6072      		andi r22,32
@@ -1919,7 +1919,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  231 0096 9B01      		movw r18,r22
  232 0098 DC01      		movw r26,r24
  106:packetmater.c **** 	uint16_t i;
-GAS LISTING /tmp/ccypg2Yv.s 			page 5
+GAS LISTING /tmp/ccLNiDUh.s 			page 5
 
 
  107:packetmater.c **** 	const uint16_t * wptr = (uint16_t*) start;
@@ -1979,7 +1979,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  282 00d2 AA27      		clr r26
  283 00d4 BB27      		clr r27
  284 00d6 0097      		sbiw r24,0
-GAS LISTING /tmp/ccypg2Yv.s 			page 6
+GAS LISTING /tmp/ccLNiDUh.s 			page 6
 
 
  285 00d8 A105      		cpc r26,__zero_reg__
@@ -2039,7 +2039,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  349 0120 0F93      		push r16
  350 0122 1F93      		push r17
  351 0124 CF93      		push r28
-GAS LISTING /tmp/ccypg2Yv.s 			page 7
+GAS LISTING /tmp/ccLNiDUh.s 			page 7
 
 
  352 0126 DF93      		push r29
@@ -2099,7 +2099,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  406 016a 00C0      		rjmp .L24
  407               	.LBB3:
   42:packetmater.c **** 		uint16_t fullpacklen = plen-14;
-GAS LISTING /tmp/ccypg2Yv.s 			page 8
+GAS LISTING /tmp/ccLNiDUh.s 			page 8
 
 
  409               	.LM33:
@@ -2159,7 +2159,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  463               	.LM47:
  464 019e E9AA      		std Y+49,r14
   64:packetmater.c **** 			csumr = internet_checksum( &packet[26], udppacklen+8 );
-GAS LISTING /tmp/ccypg2Yv.s 			page 9
+GAS LISTING /tmp/ccLNiDUh.s 			page 9
 
 
  466               	.LM48:
@@ -2219,7 +2219,7 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  520 01dc 1F91      		pop r17
  521 01de 0F91      		pop r16
  522 01e0 FF90      		pop r15
-GAS LISTING /tmp/ccypg2Yv.s 			page 10
+GAS LISTING /tmp/ccLNiDUh.s 			page 10
 
 
  523 01e2 EF90      		pop r14
@@ -2232,18 +2232,18 @@ GAS LISTING /tmp/ccypg2Yv.s 			page 1
  535               		.stabd	78,0,0
  537               	.Letext0:
  538               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccypg2Yv.s 			page 11
+GAS LISTING /tmp/ccLNiDUh.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 packetmater.c
-     /tmp/ccypg2Yv.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccypg2Yv.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccypg2Yv.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccypg2Yv.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccypg2Yv.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccypg2Yv.s:100    .text:0000000000000000 crc32b
-     /tmp/ccypg2Yv.s:220    .text:0000000000000092 internet_checksum
-     /tmp/ccypg2Yv.s:338    .text:0000000000000114 Ethernetize
+     /tmp/ccLNiDUh.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccLNiDUh.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccLNiDUh.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccLNiDUh.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccLNiDUh.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccLNiDUh.s:100    .text:0000000000000000 crc32b
+     /tmp/ccLNiDUh.s:220    .text:0000000000000092 internet_checksum
+     /tmp/ccLNiDUh.s:338    .text:0000000000000114 Ethernetize
 
 NO UNDEFINED SYMBOLS

@@ -30,7 +30,7 @@
 
 .global SendTick
 SendTick:
-	ori r18, 0b00010101
+	ori r18, 0b00010111
 	ori r19, 0b00001101
 	ori r20, 0b00000101
 	out PORTB, r19

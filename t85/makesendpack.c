@@ -27,6 +27,85 @@
 #include <stdint.h>
 #include "parsehelp.h"
 
+int lastbit = -1;
+
+void NewEmit()
+{
+	printf( "\tout PORTB, r18\n" );
+	lastbit = -1;
+	printf( "\teor r18, r18\n" );
+	printf( "\teor r19, r19\n" );
+	printf( "\teor r20, r20\n" );
+	printf( "\tori r18, 0b00010101\n" );
+	printf( "\tori r19, 0b00001111\n" );
+	printf( "\tori r20, 0b00000101\n" );
+	printf( "\tldi XH, hi8(PORTB*2)\n" );
+	printf( "\tldi XL, lo8(PORTB*2)\n" );
+}
+
+void LEmit( int bit )
+{
+#define NAIEVE
+#ifdef NAIEVE
+	lastbit = -1;
+	if( bit )
+	{
+		printf( "\tout PORTB, r18\n" );
+	}
+	else
+	{
+		printf( "\tout PORTB, r19\n" );
+	}
+
+#else
+	int tlastbit = lastbit;
+
+	if( tlastbit == bit )
+	{
+		if( bit )
+		{
+			printf( "\tst Z, r19\n" );
+		}
+		else
+		{
+			printf( "\tst Z, r18\n" );
+		}
+		lastbit = -1;
+	}
+	else
+	{
+		if( tlastbit != -1 )
+		{
+			if( bit )
+			{
+				printf( "\tout PORTB, r18\n" );
+			}
+			else
+			{
+				printf( "\tout PORTB, r19\n" );
+			}
+		}
+		lastbit = bit;
+	}
+#endif
+}
+
+void DoneEmit()
+{
+	if( lastbit != -1 )
+	{
+		if( lastbit )
+		{
+			printf( "\tout PORTB, r19\n" );
+		}
+		else
+		{
+			printf( "\tout PORTB, r18\n" );
+		}
+	}
+	printf( "\tout PORTB, r20\n\tret\n\n" );
+}
+
 void Emit( unsigned char hv )
 {
 	int lastbit = -1;
@@ -36,29 +115,22 @@ void Emit( unsigned char hv )
 	for( ; bit & 0xff; bit<<=1 )
 	{
 		int thisbit = (hv & bit)?1:0;
-//#define NOPTEST
+		LEmit( thisbit );
+		LEmit( !thisbit );
+/*
 		if( thisbit )
 		{
-#ifdef NOPTEST
-			if( lastbit == 0 )
-				printf( "\tnop\n" );
-			else
-#endif
-				printf( "\tout PORTB, r18\n" );
+			printf( "\tout PORTB, r18\n" );
 			printf( "\tout PORTB, r19\n" );
 			lastbit = 1;
 		}
 		else
 		{
-#ifdef NOPTEST
-			if( lastbit == 1 )
-				printf( "\tnop\n" );
-			else
-#endif
-				printf( "\tout PORTB, r19\n" );
+			printf( "\tout PORTB, r19\n" );
 			printf( "\tout PORTB, r18\n" );
 			lastbit = 0;
 		}
+*/
 	}
 	printf( "\n" );
 }
@@ -138,14 +210,18 @@ void EndEmit()
 	Emit( (crc>>16)&0xff );
 	Emit( (crc>>24)&0xff );
 
+//TODO XXX Figure out how to send short packets.
+/*
 	for( i = sbp; i < 60; i++ )
 	{
 		Emit( 0x00 );
 	}
+*/
 
 	sbp = 0;
 
-	printf( "\tout PORTB, r20\n\tret\n\n" );
+	DoneEmit();
+
 }
 
 int main()
@@ -182,13 +258,8 @@ int main()
 			sbp = 0;
 			hassent = 1;	
 			printf( ".global %s\n%s:\n", &buffer[1], &buffer[1] );
-			printf( "\teor r18, r18\n" );
-			printf( "\teor r19, r19\n" );
-			printf( "\teor r20, r20\n" );
-			printf( "\tori r18, 0b00010101\n" );
-			printf( "\tori r19, 0b00001101\n" );
-			printf( "\tori r20, 0b00000101\n" );
-			printf( "\tout PORTB, r18\n" );
+
+			NewEmit();
 
 			Emit( 0x55 );
 			Emit( 0x55 );

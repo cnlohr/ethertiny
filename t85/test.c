@@ -82,16 +82,23 @@ int main( )
 
 	int suppress = 10;
 
+#define STREAM
 	for( ;; )
 	{
+#ifdef STREAM
 		_delay_ms(8);
+			SendCPacket();
+		continue;
+#endif
+
+		_delay_ms(8);
+//		PORTB |= _BV(1);
 		SendTick();
+//		PORTB |= _BV(1);
 		_delay_ms(8);
 
 //			SendCPacket();
 //continue;
-		isa = !(PINB & _BV(0));
-		isb = !(PINB & _BV(2));
 
 		i++;
 
@@ -114,20 +121,10 @@ int main( )
 			}
 		}*/
 
-		if( i == 1 )
-		{
-			if( isa )
-				SendAPacket();
-		}
-		if( i == 2 )
-		{
-			if( isb )
-				SendBPacket();
-		}
-
-		if( i == 3 )
+		if( i == 20 )
 		{
 			SendCPacket();
+//			PORTB |= _BV(1);
 			if( suppress ) suppress--;
 			i = 0;
 		}

@@ -74,7 +74,11 @@ int main(int argc, char**argv)
 						}
 						else
 						{
-							if( primedshort )
+							if( primedshort == -1 )
+							{
+								primedshort = 0;
+							}
+							else if( primedshort )
 							{
 								outputbuffer[progress++] = curbit?'1':'0';
 								primedshort = 0;
@@ -90,9 +94,9 @@ int main(int argc, char**argv)
 						if( count < 2 && j > 2 )
 						{
 							progress = 0;
-							outputbuffer[progress++] = '1';
+							//outputbuffer[progress++] = '1';
 							curbit = 1;
-							primedshort = 1;
+							primedshort = -1;
 						}
 					}
 				}
@@ -144,6 +148,33 @@ done:
 		printf( "\n" );
 
 		puts( outputbuffer );
+
+		printf( "\n" );
+
+		unsigned outputdata[1024];
+		int by = 0;
+		int pl = 1;
+		int sofar = 0;
+		for( j = 0; j < strlen( outputbuffer ); j++ )
+		{
+			sofar |= (outputbuffer[j]=='1')?pl:0;
+			pl<<=1;
+			if( pl > 0x80 )
+			{
+				outputdata[by++] = sofar;
+				sofar = 0; pl = 1;
+			}
+		}
+
+		for( j = 0; j < by; j++ )
+		{
+			if( outputdata[j] >= ' ' && outputdata[j] < 127 )
+				printf( "%02x[%c] ", outputdata[j], outputdata[j] );
+			else
+				printf( "%02x ", outputdata[j] );
+		}
+		printf( "\n" );
+
 /*
 		if(mesg[0] == 'C' ) printf( "." );
 		else
