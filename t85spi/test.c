@@ -107,13 +107,6 @@ int main( )
 		if( i == 20 )
 		{
 
-			//UDP Data starts at byte #50
-//			struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
-//			sbe->payload[0] = 0xBB;
-//			sbe->payload[1] = frame++;
-//			sbe->addyfrom = 0x450a000a;
-
-
 			//How to send a UDP Packet.
 			et_stopop();
 			et_startsend( 0 );
@@ -127,16 +120,6 @@ int main( )
 //			et_pushblob( strbuffer, 32 );
 			util_finish_udp_packet();
 
-//			et_xmitpacket( 0, 340 );
-
-//			int rr = Ethernetize( ETbuffer, PacketABytes, 320);
-//			SendTestASM( ETbuffer, rr/4 + 3 - 2 ); //MUST BE DIVISIBLE BY 2 # of bytes.
-
-/*
-#ifdef SMARTPWR
-			DDRB &= ~_BV(1);
-#endif
-*/
 			i = 0;
 		}
 	}
