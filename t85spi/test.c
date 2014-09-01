@@ -36,7 +36,7 @@ static void setup_clock( void )
 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
 	CLKPR = 0x00;	/*No scalar*/
 
-
+	OSCCAL = OSC20;
 }
 
 //#define SMARTPWR
@@ -49,15 +49,66 @@ uint8_t MyMAC[6] = { 0x00, 0x55, 0x00, 0x55, 0x00, 0x55 };
 uint8_t MyIP[4] = { 192, 168, 0, 153 };
 uint8_t MyMask[4] = { 255, 255, 255, 0 };
 
+/////////////////////////////////Sending for WS2812B///////////////////////////
+
+#define WSPORT PORTB
+#define WSPIN  _BV(3)
+#define WSDDR  DDRB
+
+//SEND_WS at 20MHz on WS2812B
+
+#define SEND_WS( var ) \
+				mask = 0x80; \
+				v = var; \
+				while( mask ) \
+				{ \
+					if( mask & v )  \
+					{ \
+						WSPORT |= WSPIN;  mask>>=1;   \
+						NOOP; NOOP; NOOP; NOOP; \
+						NOOP; NOOP; NOOP; NOOP;NOOP;NOOP;\
+						WSPORT &= ~WSPIN; NOOP; NOOP; NOOP; NOOP;\
+					} \
+					else \
+					{ \
+						WSPORT |= WSPIN; NOOP; NOOP;\
+						WSPORT &= ~WSPIN; \
+						mask>>=1; \
+						NOOP; NOOP; NOOP; NOOP;NOOP; NOOP; NOOP;\
+					} \
+					\
+				}
+
+
+
 void HandleUDP( uint16_t len )
 {
-	//Do nothing (yet)
+	uint8_t mask;
+	uint8_t v;
+	/*uint16_t epcs = */et_pop16(); //Checksum
+	len -= 8; //remove header.
+
+	if( localport == 7799 )
+	{
+		uint8_t i;
+
+		for( i = 0; i < len; i++ )
+		{
+			SEND_WS( et_pop8() );
+		}
+
+		WSPORT &= ~WSPIN;
+	}
+
 }
 
 
 int main( )
 {
 	int i;
+	uint16_t adcT = 0;  //ADC Temp
+	uint16_t adcP = 0;  //ADC Pin
+
 	cli();
 
 	setup_clock();
@@ -70,14 +121,48 @@ int main( )
 	int frame = 0;
 
 
+	//Assumed setup:
+	//
+	// PB2: Disconnect this (I don't know if you can use it at all)
+	// PB1: TX (From this device, out) Put a 47nF capcaitor in series.
+
+	//Enable ADC.  (For reading in pin ADC2)
+	PORTB &= ~_BV(4);
+	PORTB |= _BV(4);
+	ADCSRA = _BV(ADEN) | _BV(ADPS1) | _BV(ADPS0) | _BV(ADSC) | _BV(ADATE);
+
+	//Enable port B for the WS2812B.
+	WSDDR |= WSPIN;
+	WSPORT &= ~WSPIN;
+
 	while(1)
 	{
 		et_recvpack();
 
 		i++;
 
-		if( i == 20 )
+		if( i == 1 )
 		{
+			ADMUX = 2;
+//			ADCSRA |= _BV(ADSC);
+		}
+
+		if( i == 2 )
+		{
+			adcP = ADC;
+			ADMUX = _BV(REFS1) | 0x0f;
+//			ADCSRA |= _BV(ADSC);
+		}
+
+		if( i == 3 )
+		{
+			adcT = ADC;
+		}
+
+		if( i == 5)
+		{
+			frame++;
+
 			//How to send a UDP Packet.
 			et_stopop();
 			et_startsend( 0 );
@@ -88,7 +173,9 @@ int main( )
 			et_push16( 1024 ); //from port
 			et_push16( 0 ); //length for later
 			et_push16( 0 ); //csum for later
-			et_pushpgmstr( PSTR( "HELLO!\n" ) ); //csum for later
+			et_pushpgmstr( PSTR( "TPIN" ) ); //csum for later
+			et_push16( adcT ); //length for later
+			et_push16( adcP ); //csum for later
 			util_finish_udp_packet();
 
 			i = 0;
