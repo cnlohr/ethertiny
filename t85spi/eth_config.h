@@ -21,7 +21,7 @@
 // less than 1/3 the size of preamble + etbuffersize.
 //I.E. a buffer size of 410 will support roughly 94 bytes on-wire.
 
-#define ETBUFFERSIZE 410
+#define ETBUFFERSIZE 360
 #define MAX_FRAMELEN (ETBUFFERSIZE-30)
 #define TX_SCRATCHES 1
 #define RX_BUFFER_START 0
@@ -30,7 +30,7 @@
 
 //OSC20 will depend on the specific chip.  Needs to be AS CLOSE TO 20 MHZ AS POSSIBLE!
 //TUNE THIS!
-#define OSC20 0xb5
+#define OSC20 0xb9
 
 //OSCHi needs to be as fast as the chip goes, but less than ~35 MHz. IT MUST EXCEED 30 MHZ!
 #define OSCHIGH 0xFF  //~30 MHz?

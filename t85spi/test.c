@@ -6,34 +6,12 @@
 
 */
 
-/*
-    Copyright (C) 2014 <>< Charles Lohr
-
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-	copy of this software and associated documentation files (the "Software"),
-	to deal in the Software without restriction, including without limitation
-	the rights to use, copy, modify, merge, publish, distribute, sublicense,
-	and/or sell copies of the Software, and to permit persons to whom the
-	Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included
-	in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
+#include <avr/pgmspace.h>
 #include <string.h>
 
 #include "net_compat.h"
@@ -73,10 +51,9 @@ uint8_t MyMask[4] = { 255, 255, 255, 0 };
 
 void HandleUDP( uint16_t len )
 {
-	
+	//Do nothing (yet)
 }
 
-//char strbuffer[32];
 
 int main( )
 {
@@ -92,32 +69,26 @@ int main( )
 
 	int frame = 0;
 
-	struct EthernetPacket * sbe = (struct EthernetPacket*)ETbuffer;
-
-
 
 	while(1)
 	{
-	//	SendTestASM( ETbuffer, PacketABytes/4 + 3 ); //MUST BE DIVISIBLE BY 2 # of bytes.
-	//	continue;
 		et_recvpack();
 
 		i++;
 
 		if( i == 20 )
 		{
-
 			//How to send a UDP Packet.
 			et_stopop();
 			et_startsend( 0 );
 			memset( macfrom, 0xff, 6 );
 			send_etherlink_header( 0x0800 );
-			send_ip_header( 0, "\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
+			send_ip_header( 0, (unsigned char*)"\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
 			et_push16( 13312 ); //To port
 			et_push16( 1024 ); //from port
 			et_push16( 0 ); //length for later
 			et_push16( 0 ); //csum for later
-//			et_pushblob( strbuffer, 32 );
+			et_pushpgmstr( PSTR( "HELLO!\n" ) ); //csum for later
 			util_finish_udp_packet();
 
 			i = 0;
@@ -128,3 +99,26 @@ int main( )
 
 	return 0;
 } 
+/*
+    Copyright (C) 2014 <>< Charles Lohr
+
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+	copy of this software and associated documentation files (the "Software"),
+	to deal in the Software without restriction, including without limitation
+	the rights to use, copy, modify, merge, publish, distribute, sublicense,
+	and/or sell copies of the Software, and to permit persons to whom the
+	Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+	in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
