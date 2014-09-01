@@ -1,4 +1,7 @@
-all : udp udp-histo2
+all : udp udp-histo2 udpcontrol
+
+udpcontrol : udpcontrol.c
+	gcc -o $@ $^ -lm
 
 udp-histo2 : udp-histo2.c
 	gcc -o $@ $^ -lm

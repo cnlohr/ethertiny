@@ -57,6 +57,7 @@ int16_t ParseEthernet( unsigned char * raw_data_packet, uint16_t max_packet_data
 					{
 						if( shortflag )
 						{
+							printf( "SHORTMISMATCH\n" );
 							return -1;
 						}
 						//invert bit.
@@ -134,6 +135,8 @@ int main(int argc, char**argv)
 	unsigned char copiedpack[1024];
 	memcpy( copiedpack, mesg, n );
 	int parsedlen = ParseEthernet( copiedpack, 1024 );
+
+
 //printf( "MARK\n" );
 		int j;
 
@@ -153,6 +156,8 @@ int main(int argc, char**argv)
 		char outputbuffer[8192];
 		memset( outputbuffer, 0, sizeof( outputbuffer ) );
 		FILE * lastpack = fopen( "lastpack.txt", "w" );
+
+		printf( "START:\n" );
 		for(j = 1; j < n;j ++)
 		{
 			unsigned r = mesg[j];

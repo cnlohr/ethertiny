@@ -88,7 +88,7 @@ void HandleUDP( uint16_t len )
 	/*uint16_t epcs = */et_pop16(); //Checksum
 	len -= 8; //remove header.
 
-	if( localport == 7799 )
+	if( localport == 13313 )
 	{
 		uint8_t i;
 
@@ -169,13 +169,14 @@ int main( )
 			memset( macfrom, 0xff, 6 );
 			send_etherlink_header( 0x0800 );
 			send_ip_header( 0, (unsigned char*)"\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
-			et_push16( 13312 ); //To port
-			et_push16( 1024 ); //from port
+			et_push16( 13313 ); //to port
+			et_push16( 13312 ); //from port
 			et_push16( 0 ); //length for later
 			et_push16( 0 ); //csum for later
 			et_pushpgmstr( PSTR( "TPIN" ) ); //csum for later
 			et_push16( adcT ); //length for later
 			et_push16( adcP ); //csum for later
+			et_push16( icmp_out ); //csum for later
 			util_finish_udp_packet();
 
 			i = 0;
