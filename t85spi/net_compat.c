@@ -94,13 +94,14 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 	OSCCAL = OSCHIGH;
 
 	//Make sure we're not walking in on something.
-	while( ltime-- > 0 )
+	//Not sure if we should do this or not :-/
+/*	while( ltime-- > 0 )
 	{
 		if( USIBR == 0x00 ) break;
 		if( USIBR == 0xFF ) break;
 		NOOP;
 	}
-
+*/
 
 	while( ltime-- > 0 )
 	{
