@@ -35,7 +35,9 @@ int main(int argc, char**argv)
 		uint16_t t = ntohs( *((unsigned short*)&mesg[4]) );
 		uint16_t p = ntohs( *((unsigned short*)&mesg[6]) );
 		uint16_t ing = ntohs( *((unsigned short*)&mesg[8]) );
-		printf( "Value: %5d %5d   Pings: %5d\n", t, p, ing );
+		uint16_t hict = ntohs( *((unsigned short*)&mesg[10]) );
+		uint16_t loct = ntohs( *((unsigned short*)&mesg[12]) );
+		printf( "Value: %5d %5d   Pings: %5d  cts: (%d/%d)\n", t, p, ing, hict, loct );
 
 		char st[15];
 		int i;

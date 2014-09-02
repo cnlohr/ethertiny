@@ -174,9 +174,11 @@ int main( )
 			et_push16( 0 ); //length for later
 			et_push16( 0 ); //csum for later
 			et_pushpgmstr( PSTR( "TPIN" ) ); //csum for later
-			et_push16( adcT ); //length for later
-			et_push16( adcP ); //csum for later
-			et_push16( icmp_out ); //csum for later
+			et_push16( adcT ); 
+			et_push16( adcP ); 
+			et_push16( icmp_out ); 
+			et_push16( hict ); 
+			et_push16( lowct );
 			util_finish_udp_packet();
 
 			i = 0;

@@ -1,5 +1,8 @@
 #include "hlprocess.h"
 
+uint16_t lowct;
+uint16_t hict;
+
 //Note: -1 indicates unmatched short pulse.  I.e. quick transitions must pair up.
 int16_t Demanchestrate( unsigned char * raw_data_packet, uint16_t max_packet_data_len )
 {
@@ -19,12 +22,23 @@ int16_t Demanchestrate( unsigned char * raw_data_packet, uint16_t max_packet_dat
 
 	uint8_t * output = raw_data_packet;
 
+	lowct = 0;
+	hict = 0;
+
 	while( 1 )
 	{
 		t = *(raw_data_packet++);
 		for( mask = 0x80; mask; mask>>=1 )
 		{
 			bit = (t&mask)?1:0;
+			if( bit )
+			{
+				hict++;
+			}
+			else
+			{
+				lowct++;
+			}
 			if( bit != lastbit )
 			{
 				//Ignore first two changes.

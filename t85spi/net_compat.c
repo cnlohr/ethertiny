@@ -284,6 +284,7 @@ unsigned short et_recvpack()
 #endif
 		PORTB|=_BV(1);
 		NOOP;
+		NOOP;
 		PORTB &=~_BV(1);
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);

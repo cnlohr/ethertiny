@@ -37,6 +37,10 @@
 //which is not allowed with manchester encoding.
 int16_t Demanchestrate( unsigned char * raw_data_packet, uint16_t max_packet_data_len );
 
+//How many high's & lows to help with biasing.
+extern uint16_t lowct;
+extern uint16_t hict;
+
 
 #endif
 

@@ -21,7 +21,7 @@
 // less than 1/3 the size of preamble + etbuffersize.
 //I.E. a buffer size of 410 will support roughly 94 bytes on-wire.
 
-#define ETBUFFERSIZE 360
+#define ETBUFFERSIZE 352
 #define MAX_FRAMELEN (ETBUFFERSIZE-30)
 #define TX_SCRATCHES 1
 #define RX_BUFFER_START 0
