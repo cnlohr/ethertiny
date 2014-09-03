@@ -221,26 +221,27 @@ int8_t et_init( const unsigned char * macaddy )
 	MyMAC[5] = macaddy[5];
 
 	PLLCSR = _BV(PLLE) | _BV( PCKE );
-	PLLCSR |= _BV(LSM);
+	PLLCSR |= _BV(LSM); //Should have no effect.
 	OSCCAL = OSC20;
 
 
 	//Setup timer 0 to speed along.
-	//Yes, this means you can't use it.
-	TCCR0A = _BV(WGM01);
-	TCCR0B = _BV(CS00);
+	//It will become useless for any other uses.
+	TCCR0A = _BV(WGM01); //CTC mode.
+	TCCR0B = _BV(CS00);  //Use system clock with no divisor.
 	OCR0A = 0;
 
 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
 
 	//setup port B
-
 	PORTB &= ~_BV(0); 
 	DDRB &= ~_BV(0);
 	PORTB &= ~_BV(1);
 	USICR &= ~_BV(USIWM0);  //Disable USICR
 
 	DDRB |= _BV(1);
+
+	//Optional, changes bias.
 	PORTB |= _BV(0);
 
 	return 0;

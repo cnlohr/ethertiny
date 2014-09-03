@@ -54,13 +54,10 @@ SendTestASM:
 	ldi r26,0
 	subi r26,lo8(-(ManchesterTable))
 	sbci r27,hi8(-(ManchesterTable))
-//	mov r17, r26 // For backup
-	  //Manchester table now in X.
+	//Manchester table now in X.
 
 	//Move "Packet to send" into Z (R30, 31)
 	movw r30,r24
-//	add r22,r24
-//	adc r23,r25
 
 	//r22 = how big to send.
 	
@@ -130,8 +127,6 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 	ld r18,Z+      //2  //Read off the bytes.
 	mov r26, r18   //1
 	out USEBR, r19 //1  **OK
-
-
 	andi r26, 0x0f //1
 	subi r26,lo8(-(ManchesterTable)) //1
 	ld r19, X      //2
