@@ -73,35 +73,10 @@ uint16_t internet_checksum( const unsigned char * start, uint16_t len )
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
-/*
-//Attempt to return rough estimate of processing time.
-int GotPack( unsigned char * machesterized, int estlen, uint16_t mlen )
-{
-	int byr = 0;
-
-	byr = Demanchestrate( machesterized, mlen );
-	et_receivecallback( 
-
-	//Don't do anything yet...
-	//XXX TODO THIS will be some good stuff in here.
-
-	return byr;
-}
-*/
 
 void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 {
 	OSCCAL = OSCHIGH;
-
-	//Make sure we're not walking in on something.
-	//Not sure if we should do this or not :-/
-/*	while( ltime-- > 0 )
-	{
-		if( USIBR == 0x00 ) break;
-		if( USIBR == 0xFF ) break;
-		NOOP;
-	}
-*/
 
 	while( ltime-- > 0 )
 	{
@@ -221,7 +196,6 @@ int8_t et_init( const unsigned char * macaddy )
 	MyMAC[5] = macaddy[5];
 
 	PLLCSR = _BV(PLLE) | _BV( PCKE );
-	PLLCSR |= _BV(LSM); //Should have no effect.
 	OSCCAL = OSC20;
 
 
@@ -242,7 +216,10 @@ int8_t et_init( const unsigned char * macaddy )
 	DDRB |= _BV(1);
 
 	//Optional, changes bias.
-	PORTB |= _BV(0);
+	//2k -> GND/2k ->5V seems best with this on
+	//PORTB |= _BV(0);
+	//Doesn't change much with it off. 2k/2k it is.
+	PORTB &= ~_BV(0);
 
 	return 0;
 }
