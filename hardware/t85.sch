@@ -1,0 +1,266 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:attinyx5
+LIBS:6multi
+LIBS:1206network
+LIBS:4427
+LIBS:5050RGB
+LIBS:a4447sljtr
+LIBS:adc-ltc2450
+LIBS:ap1117
+LIBS:atmega48_88_168_328_tqfp32
+LIBS:atmegaxu2
+LIBS:atmel_kk
+LIBS:attinyx4
+LIBS:avr6pin
+LIBS:avr_usb_3v3-cache
+LIBS:BELFuse_Ethernet
+LIBS:bridge-MB2S-TP
+LIBS:crystal-4p
+LIBS:dmp2240udm
+LIBS:ds2438z
+LIBS:enc424j600
+LIBS:exb-a
+LIBS:halleffect-tcs20dlr
+LIBS:lsm303c
+LIBS:lsm303d
+LIBS:lsm303dlhc
+LIBS:ltc2471cms
+LIBS:ltv-846s
+LIBS:max31855
+LIBS:mcp1824_ct
+LIBS:microsd_1050270001
+LIBS:mmpq2907a
+LIBS:mosfet-lfpak56
+LIBS:neon14
+LIBS:network0606
+LIBS:npn-2222
+LIBS:opa832
+LIBS:opto2-ltv-826s
+LIBS:rn-cay16-f4
+LIBS:um5k1ntr
+LIBS:ws2812b
+LIBS:zener-sot23-3
+LIBS:t85-cache
+EELAYER 27 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "2 sep 2014"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATTINYX5 U1
+U 1 1 540643F0
+P 3950 2150
+F 0 "U1" H 2400 2400 60  0000 C CNN
+F 1 "ATTINY85" H 5400 2400 60  0000 C CNN
+F 2 "SO8WIDE" H 3950 2150 60  0000 C CNN
+F 3 "" H 3950 2150 60  0000 C CNN
+	1    3950 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L AVRISP6 J1
+U 1 1 540643FF
+P 3950 2900
+F 0 "J1" H 3750 3150 60  0000 C CNN
+F 1 "AVRISP6" H 4100 2600 60  0000 C CNN
+F 2 "RIBBON6SMT" H 3950 2900 60  0000 C CNN
+F 3 "" H 3950 2900 60  0000 C CNN
+	1    3950 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR4
+U 1 1 54064418
+P 5950 1900
+F 0 "#PWR4" H 5950 2000 30  0001 C CNN
+F 1 "VCC" H 5950 2000 30  0000 C CNN
+F 2 "" H 5950 1900 60  0000 C CNN
+F 3 "" H 5950 1900 60  0000 C CNN
+	1    5950 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L VSS #PWR1
+U 1 1 54064427
+P 1950 2400
+F 0 "#PWR1" H 1950 2400 30  0001 C CNN
+F 1 "VSS" H 1950 2330 30  0000 C CNN
+F 2 "" H 1950 2400 60  0000 C CNN
+F 3 "" H 1950 2400 60  0000 C CNN
+	1    1950 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L VSS #PWR3
+U 1 1 5406443E
+P 4600 3050
+F 0 "#PWR3" H 4600 3050 30  0001 C CNN
+F 1 "VSS" H 4600 2980 30  0000 C CNN
+F 2 "" H 4600 3050 60  0000 C CNN
+F 3 "" H 4600 3050 60  0000 C CNN
+	1    4600 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR2
+U 1 1 54064444
+P 4600 2700
+F 0 "#PWR2" H 4600 2800 30  0001 C CNN
+F 1 "VCC" H 4600 2800 30  0000 C CNN
+F 2 "" H 4600 2700 60  0000 C CNN
+F 3 "" H 4600 2700 60  0000 C CNN
+	1    4600 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4600 2700 4600 2800
+Wire Wire Line
+	4600 2800 4500 2800
+Wire Wire Line
+	4500 3000 4600 3000
+Wire Wire Line
+	4600 3000 4600 3050
+Wire Wire Line
+	1950 2400 1950 2300
+Wire Wire Line
+	1950 2300 2050 2300
+Wire Wire Line
+	3400 2800 3200 2800
+Wire Wire Line
+	3200 2800 3200 2500
+Wire Wire Line
+	3200 2500 6100 2500
+Wire Wire Line
+	6100 2500 6100 2200
+Wire Wire Line
+	6100 2200 5900 2200
+Wire Wire Line
+	5900 2000 5950 2000
+Wire Wire Line
+	5950 2000 5950 1900
+Wire Wire Line
+	4500 2900 5900 2900
+Wire Wire Line
+	5900 2900 5900 2300
+Wire Wire Line
+	3400 2900 3100 2900
+Wire Wire Line
+	3100 2900 3100 2650
+Wire Wire Line
+	3100 2650 6250 2650
+Wire Wire Line
+	6250 2650 6250 2100
+Wire Wire Line
+	6250 2100 5900 2100
+Wire Wire Line
+	3400 3000 1700 3000
+Wire Wire Line
+	1700 3000 1700 2000
+Wire Wire Line
+	1700 2000 2050 2000
+Wire Wire Line
+	2050 2100 1550 2100
+Wire Wire Line
+	2050 2200 1550 2200
+Text GLabel 1550 2100 0    60   Input ~ 0
+TX+
+Text GLabel 1550 2200 0    60   Input ~ 0
+TX-
+$Comp
+L VCC #PWR5
+U 1 1 54064684
+P 6600 2000
+F 0 "#PWR5" H 6600 2100 30  0001 C CNN
+F 1 "VCC" H 6600 2100 30  0000 C CNN
+F 2 "" H 6600 2000 60  0000 C CNN
+F 3 "" H 6600 2000 60  0000 C CNN
+	1    6600 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L VSS #PWR6
+U 1 1 5406468A
+P 6600 2600
+F 0 "#PWR6" H 6600 2600 30  0001 C CNN
+F 1 "VSS" H 6600 2530 30  0000 C CNN
+F 2 "" H 6600 2600 60  0000 C CNN
+F 3 "" H 6600 2600 60  0000 C CNN
+	1    6600 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C1
+U 1 1 54064692
+P 6600 2300
+F 0 "C1" H 6600 2400 40  0000 L CNN
+F 1 ".1u" H 6606 2215 40  0000 L CNN
+F 2 "SM0805" H 6638 2150 30  0000 C CNN
+F 3 "~" H 6600 2300 60  0000 C CNN
+	1    6600 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C2
+U 1 1 540646B3
+P 6800 2300
+F 0 "C2" H 6800 2400 40  0000 L CNN
+F 1 "10u" H 6806 2215 40  0000 L CNN
+F 2 "SM0805" H 6838 2150 30  0000 C CNN
+F 3 "~" H 6800 2300 60  0000 C CNN
+	1    6800 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 2600 6600 2500
+Wire Wire Line
+	6600 2550 6800 2550
+Wire Wire Line
+	6800 2550 6800 2500
+Connection ~ 6600 2550
+Wire Wire Line
+	6800 2100 6800 2050
+Wire Wire Line
+	6800 2050 6600 2050
+Wire Wire Line
+	6600 2000 6600 2100
+Connection ~ 6600 2050
+$EndSCHEMATC
