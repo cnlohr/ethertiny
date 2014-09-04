@@ -278,19 +278,18 @@ unsigned short et_recvpack()
 #define LIMITSIZE  sizeof( ETbuffer )/2-30
 //#define LIMITSIZE 10
 
-		waitforpacket(&ETbuffer[0], LIMITSIZE, 20000); //wait for 2048 cycles (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 9000);
 //		_delay_ms(8);
 #ifdef SMARTPWR
 		DDRB |= _BV(1);
 #endif
 		PORTB|=_BV(1);
 		NOOP;
-		NOOP;
 		PORTB &=~_BV(1);
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);
 #endif
-		waitforpacket(&ETbuffer[0], LIMITSIZE, 20000); //wait for 2048  (30MHz/8 = 3.75MHz / 30000 = 8ms)
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 9000);
 // 		_delay_ms(8);
 
 	return 0;
