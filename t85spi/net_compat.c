@@ -274,11 +274,13 @@ int8_t et_xmitpacket( uint16_t start, uint16_t len )
 //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
 unsigned short et_recvpack()
 {
+	//Right up to the wire limit. 
+	//If ETBUFFERSIZE = 352, Our clock is at 31.5 MHz and this limit, we can send ping packets with
+	//92 bytes on-wire.  Keep in mind the preamble takes a little chunk.
+	//92 bytes on-wire means we can ping packets up to -s 50
+	#define LIMITSIZE  sizeof( ETbuffer )/2-4
 
-#define LIMITSIZE  sizeof( ETbuffer )/2-30
-//#define LIMITSIZE 10
-
-		waitforpacket(&ETbuffer[0], LIMITSIZE, 9000);
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 11000); //~8ms
 //		_delay_ms(8);
 #ifdef SMARTPWR
 		DDRB |= _BV(1);
@@ -289,7 +291,7 @@ unsigned short et_recvpack()
 #ifdef SMARTPWR
 		DDRB &= ~_BV(1);
 #endif
-		waitforpacket(&ETbuffer[0], LIMITSIZE, 9000);
+		waitforpacket(&ETbuffer[0], LIMITSIZE, 11000); //~8ms
 // 		_delay_ms(8);
 
 	return 0;
