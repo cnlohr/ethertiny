@@ -15,13 +15,15 @@ It has two projects in it:
 
  t85spi: uses the USI, and can send/receive arbitrary packets.
 
-Schematics are in the 
+Schematics are in the "hardware/" folder.
 
 See the youtube video for more info:
-T85 Video:    http://youtu.be/mwcvElQS-hM
-T85spi Video: [will post]
 
-Paper on T85spi is found in the paper/ folder.
+T85 Video:    http://youtu.be/mwcvElQS-hM
+
+T85spi Video: http://youtu.be/m4f4OzEyueg
+
+Paper on T85spi is found in the "paper/" folder.
 
 
 
