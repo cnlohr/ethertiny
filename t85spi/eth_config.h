@@ -20,8 +20,8 @@
 //Warning: When receiving packets, you will only be able to receive packets
 // less than 1/3 the size of preamble + etbuffersize.
 
-#define ETBUFFERSIZE (352)
-#define MAX_FRAMELEN (ETBUFFERSIZE-30)
+#define ETBUFFERSIZE (360)
+#define MAX_FRAMELEN (ETBUFFERSIZE)
 #define TX_SCRATCHES 1
 #define RX_BUFFER_START 0
 #define RX_BUFFER_END   MAX_FRAMELEN
@@ -29,14 +29,29 @@
 
 //OSC20 will depend on the specific chip.  Needs to be AS CLOSE TO 20 MHZ AS POSSIBLE!
 //TUNE THIS!
-#define OSC20 0xb9
+#define OSC20 0xbb
 
-//OSCHi needs to be as fast as the chip goes, but less than ~35 MHz. IT MUST EXCEED 30 MHZ!
-#define OSCHIGH 0xFF  //~30 MHz?
+//OSCHIGH needs to be as fast as the chip goes, but less than ~35 MHz. IT MUST EXCEED 30 MHZ!
+#define OSCHIGH 0xFF  //~31.5 MHz.
 
 #define INCLUDE_UDP
 
 
+//Turn off the DDR when the port is not in use.
+//Saves power, seems to work better?
+#define SMARTDDR
+
+//Extend the NLP by ~40ns
+//#define LONGNLP
+
+//Flip the NLP upside down.
+//#define INVERTNLP
+
+//Something is wrong with this.  don't use it.
+//Invert the TX pair.
+//#define INVERTTX
+
+#define BIAS0
 
 #endif
 

@@ -1,5 +1,6 @@
 #include "net_compat.h"
 #include <avr/pgmspace.h>
+#include <util/delay.h>
 #include <string.h>
 #include "hlprocess.h"
 #include "packetmater.h"
@@ -7,6 +8,7 @@
 #define NOOP asm volatile("nop" ::)
 
 
+void SendNLP();
 
 unsigned char ETbuffer[ETBUFFERSIZE];
 unsigned short ETsendplace;
@@ -14,6 +16,14 @@ uint16_t sendbaseaddress;
 unsigned short ETchecksum;
 
 
+#ifdef INVERTTX
+char ManchesterTable[16] __attribute__ ((aligned (16))) = {
+	0b01010101, 0b10010101, 0b01100101, 0b10100101,
+	0b01011001, 0b10011001, 0b01101001, 0b10101001,
+	0b01010110, 0b10010110, 0b01100110, 0b10100110,
+	0b01011010, 0b10011010, 0b01101010, 0b10101010,
+};
+#else
 //Do not split this across byte-addressing boundaries.
 //We do some fancy stuff when we send the manchester out.
 char ManchesterTable[16] __attribute__ ((aligned (16))) = {
@@ -22,7 +32,7 @@ char ManchesterTable[16] __attribute__ ((aligned (16))) = {
 	0b10101001, 0b01101001, 0b10011001, 0b01011001,
 	0b10100101, 0b01100101, 0b10010101, 0b01010101,
 };
-
+#endif
 
 
 //Internal functs
@@ -73,41 +83,57 @@ uint16_t internet_checksum( const unsigned char * start, uint16_t len )
 void SendTestASM( const unsigned char * c, uint8_t len );
 int MaybeHaveDataASM( unsigned char * c, uint8_t lenX2 ); //returns the number of pairs.
 
-
-void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
+//Must be at 
+uint8_t MaybeHaveAPacket()
 {
-	OSCCAL = OSCHIGH;
-
-	while( ltime-- > 0 )
+	//if( 0 )
 	{
-		if( USIBR && (USIBR != 0xFF ) )
+		uint8_t usir;
+		//Wait 8 cycles, to see what the incoming data looks like.
+		NOOP; NOOP; NOOP; NOOP; NOOP; NOOP; NOOP; NOOP; NOOP;
+		if( USIDR == 0 || USIDR == 0xFF )
 		{
-			int r = MaybeHaveDataASM( buffer, len );
-			if( r > 10 )
-			{
-				buffer[ETBUFFERSIZE-1] = 0; //Force an end-of-packet.
-				int16_t byr = Demanchestrate( buffer, r );
-				if( byr > 32 )
-				{
-					uint32_t cmpcrc = crc32b( 0, buffer, byr - 4 );
-					OSCCAL = OSC20; //Drop back to 20 MHz if we need to send.
-					if( cmpcrc == *((uint32_t*)&buffer[byr-4]) )
-					{
-						//LRP( "%d->%d\n", r, byr );
-
-						//If you ever get to this code, a miracle has happened.
-						//Pray that many more continue.
-						ETsendplace = 0;
-						et_receivecallback( byr - 4 );
-					}
-					OSCCAL = OSCHIGH;
-				}
-			}
-			ltime-=(len-r)*4+3; //About how long the function takes to execute.
-			break;
+			return 0;
 		}
 	}
 
+	int r = MaybeHaveDataASM( ETbuffer, (ETBUFFERSIZE/2)-4 );
+	if( r > 10 )
+	{
+		ETbuffer[ETBUFFERSIZE-1] = 0; //Force an end-of-packet.
+		int16_t byr = Demanchestrate( ETbuffer, ETBUFFERSIZE-1 );
+		if( byr > 32 )
+		{
+			uint32_t cmpcrc = crc32b( 0, ETbuffer, byr - 4 );
+			OSCCAL = OSC20; //Drop back to 20 MHz if we need to send.
+			if( cmpcrc == *((uint32_t*)&ETbuffer[byr-4]) )
+			{
+				//LRP( "%d->%d\n", r, byr );
+
+				//If you ever get to this code, a miracle has happened.
+				//Pray that many more continue.
+				ETsendplace = 0;
+				et_receivecallback( byr - 4 );
+			}
+		}
+		OSCCAL = OSCHIGH;
+		return byr/4+1;
+	}
+
+	return 0;
+//	ltime-=(len-r)*4+3; //About how long the function takes to execute.
+}
+
+/*
+void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
+{
+//	OSCCAL = OSCHIGH;
+
+	while( ltime-- > 0 )
+	{
+		MaybeHaveAPacket();
+	}
+	OSCCAL = OSC20;
 
 	while( ltime-- > 0 )
 	{
@@ -120,7 +146,7 @@ void waitforpacket( unsigned char * buffer, uint16_t len, int16_t ltime )
 
 	OSCCAL = OSC20;
 }
-
+*/
 
 
 
@@ -213,13 +239,20 @@ int8_t et_init( const unsigned char * macaddy )
 	PORTB &= ~_BV(1);
 	USICR &= ~_BV(USIWM0);  //Disable USICR
 
+#ifdef SMARTDDR
+	DDRB &= _BV(1);
+#else
 	DDRB |= _BV(1);
+#endif
 
 	//Optional, changes bias.
 	//2k -> GND/2k ->5V seems best with this on
-	//PORTB |= _BV(0);
 	//Doesn't change much with it off. 2k/2k it is.
+#ifdef BIAS0
 	PORTB &= ~_BV(0);
+#else
+	PORTB |= _BV(0);
+#endif
 
 	return 0;
 }
@@ -248,6 +281,7 @@ int8_t et_xmitpacket( uint16_t start, uint16_t len )
 	return 0;
 }
 
+/*
 //This waits for 8ms, sends an autoneg notice, then waits for 8 more ms.
 unsigned short et_recvpack()
 {
@@ -258,19 +292,18 @@ unsigned short et_recvpack()
 	#define LIMITSIZE  sizeof( ETbuffer )/2-4
 
 		waitforpacket(&ETbuffer[0], LIMITSIZE, 11000); //~8ms
-//		_delay_ms(8);
-#ifdef SMARTPWR
-		DDRB |= _BV(1);
-#endif
-		PORTB|=_BV(1);
-		NOOP;
-		PORTB &=~_BV(1);
-#ifdef SMARTPWR
-		DDRB &= ~_BV(1);
-#endif
+
+
+		SendNLP();
 		waitforpacket(&ETbuffer[0], LIMITSIZE, 11000); //~8ms
 // 		_delay_ms(8);
 
+	return 0;
+}
+*/
+unsigned short et_recvpack()
+{
+	//Stub function.
 	return 0;
 }
 

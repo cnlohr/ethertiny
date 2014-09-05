@@ -3,7 +3,7 @@ all : test.hex burn test.lst
 PART=attiny85
 PROGPART=t85
 
-CFLAGS=-g -Wall -Os -mmcu=$(PART) -DF_CPU=20000000UL -flto -fwhole-program
+CFLAGS=-g -Wall -Os -mmcu=$(PART) -DF_CPU=20000000UL #-flto -fwhole-program
 ASFLAGS:=$(CFLAGS)
 LDFLAGS:=$(CFLAGS)
 CC=avr-gcc

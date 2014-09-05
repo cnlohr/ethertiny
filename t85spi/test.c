@@ -35,8 +35,6 @@ static void setup_clock( void )
 
 	CLKPR = 0x80;	/*Setup CLKPCE to be receptive*/
 	CLKPR = 0x00;	/*No scalar*/
-
-	OSCCAL = OSC20;
 }
 
 //#define SMARTPWR
@@ -102,13 +100,34 @@ void HandleUDP( uint16_t len )
 
 }
 
+void SendNLP();
+volatile uint8_t timercycle;
+//Called ~1x every 4ms.
+
+ISR(TIM1_COMPA_vect)
+{
+	timercycle++;
+	if( (timercycle & 3) == 0 )
+	{
+		SendNLP();
+	}
+}
+
+
+ISR(PCINT0_vect )
+{
+	MaybeHaveAPacket();
+	GIFR |= _BV(PCIF); //The flag has likely been set from within.
+}
+
 
 int main( )
 {
-	int i;
-	uint16_t adcT = 0;  //ADC Temp
-	uint16_t adcP = 0;  //ADC Pin
-
+	uint8_t frame;
+	static uint8_t i;
+	static uint16_t adcT = 0;  //ADC Temp
+	static uint16_t adcP = 0;  //ADC Pin
+	static uint8_t last_timercycle = 0;
 	cli();
 
 	setup_clock();
@@ -117,8 +136,6 @@ int main( )
 	et_init( MyMAC );
 
 	i = 0;
-
-	int frame = 0;
 
 
 	//Assumed setup:
@@ -135,53 +152,77 @@ int main( )
 	WSDDR |= WSPIN;
 	WSPORT &= ~WSPIN;
 
+	//The burden of configuring the tick timer is on you, the user.
+	//#188 Creates a clock with period ~4ms. ~3.2ms at 31MHz, ~4.8ms at 20 MHz.
+	//Making it lower seems to help.
+	TCCR1 = _BV(CTC1) | _BV(CS13) | _BV(CS12); //HS Clock/2048
+	OCR1C = 255; 
+	OCR1A = 1;
+	TIMSK = _BV(OCIE1A);
+
+	//Enable Pin Change Interrupt.
+	//(For if we have some RX data)
+	PCMSK |= _BV(PCINT0);
+	GIMSK |= _BV(PCIE);
+
+	sei();
+
+	OSCCAL = OSCHIGH;
+	PORTB |= _BV(0);
+
 	while(1)
 	{
-		et_recvpack();
-
-		i++;
-
-		if( i == 1 )
+		if( last_timercycle != timercycle )
 		{
-			ADMUX = 2;
-//			ADCSRA |= _BV(ADSC);
-		}
+			last_timercycle = timercycle;
+			//i++;
+			i = timercycle & 0x0f;
 
-		if( i == 2 )
-		{
-			adcP = ADC;
-			ADMUX = _BV(REFS1) | 0x0f;
-//			ADCSRA |= _BV(ADSC);
-		}
+			if( i == 0 )
+			{
+				ADMUX = 2;
+			}
 
-		if( i == 3 )
-		{
-			adcT = ADC;
-		}
+			if( i == 1 )
+			{
+				adcP = ADC;
+				ADMUX = _BV(REFS1) | 0x0f;
+			}
 
-		if( i == 5)
-		{
-			frame++;
+			if( i == 2 )
+			{
+				adcT = ADC;
+			}
 
-			//How to send a UDP Packet.
-			et_stopop();
-			et_startsend( 0 );
-			memset( macfrom, 0xff, 6 );
-			send_etherlink_header( 0x0800 );
-			send_ip_header( 0, (unsigned char*)"\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
-			et_push16( 13313 ); //to port
-			et_push16( 13312 ); //from port
-			et_push16( 0 ); //length for later
-			et_push16( 0 ); //csum for later
-			et_pushpgmstr( PSTR( "TPIN" ) ); //csum for later
-			et_push16( adcT ); 
-			et_push16( adcP ); 
-			et_push16( icmp_out ); 
-			et_push16( hict ); 
-			et_push16( lowct );
-			util_finish_udp_packet();
+			if( i == 14 )
+			{
 
-			i = 0;
+				frame++;
+				//How to send a UDP Packet.
+				cli();
+				OSCCAL = OSC20;
+				et_stopop();
+				et_startsend( 0 );
+				memset( macfrom, 0xff, 6 );
+				send_etherlink_header( 0x0800 );
+				send_ip_header( 0, (unsigned char*)"\xff\xff\xff\xff", 17 ); //UDP Packet to 255.255.255.255
+				et_push16( 13313  ); //to port
+				et_push16( 13312 ); //from port
+				et_push16( 0 ); //length for later
+				et_push16( 0 ); //csum for later
+				et_pushpgmstr( PSTR( "TPIN" ) ); //csum for later
+				et_push16( adcT ); 
+				et_push16( adcP ); 
+				et_push16( icmp_out ); 
+				et_push16( hict ); 
+				et_push16( lowct );
+				util_finish_udp_packet();
+				OSCCAL = OSCHIGH;
+				sei();
+				i = 0;
+
+			}
+
 		}
 	}
 

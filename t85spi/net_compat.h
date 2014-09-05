@@ -23,6 +23,15 @@ extern unsigned short ETchecksum;
 //We do some fancy stuff when we send the manchester out.
 extern char ManchesterTable[16];
 
+
+//This tool specific functions.
+//Returns 0 if no data read.
+//Otherwise attempts to return bytes read / 4 + 1
+//WARNING: You must have been running at 31.5 MHz for a bit
+//when entering this function to allow it to settle.
+uint8_t MaybeHaveAPacket(); //Call whenever you think there may be an incoming packet.
+
+
 //return 0 if OK, otherwise nonzero.
 int8_t et_init( const unsigned char * macaddy );
 

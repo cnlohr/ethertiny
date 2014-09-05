@@ -26,23 +26,40 @@
 #define _SFR_ASM_COMPAT 1
 #define __SFR_OFFSET 0
 
+#include "eth_config.h"
 #include <avr/io.h>
 
 #define USEBR  USIDR
-.global SendTick
-SendTick:
-	ori r18, 0b00010101
-	ori r19, 0b00001101
-	ori r20, 0b00000101
-	out PORTB, r19
-	out PORTB, r19
-	out PORTB, r18
-	out PORTB, r18
-	out PORTB, r20
+.global SendNLP
+SendNLP:
+
+#if defined( INVERTTX ) || defined( INVERTNLP )
+	cbi PORTB, 1
+#else
+	sbi PORTB, 1
+#endif
+#ifdef SMARTDDR
+	sbi DDRB, 1
+#endif
+	nop  //Makes it add to around 80ns if running with high clock rate.
+#ifdef LONGNLP 
+	nop  //+40ns
+#endif
+
+#ifdef SMARTDDR
+	cbi DDRB, 1
+#endif
+
+#ifdef BIAS0
+	cbi PORTB, 1
+#endif
 	ret
 
 
 //Handles sending preamble + Packet ovr the USI
+//You must set the clock to 20 MHz well in advance of calling
+//this function to allow it to settle.
+//You also must already have interrupts turned off.
 .global SendTestASM  // ( unsigned char * ptr_to_packet, uint8_t packet_length_longs ); (longs = packet_length / 4)
 SendTestASM:
 	push r16
@@ -50,6 +67,26 @@ SendTestASM:
 	push r18
 	push r19
 	push r20
+	push r21
+	push r26
+	push r27
+	push r29
+	push r30
+	push r31
+
+	//Protect the interrupt state
+//	in r15, SREG
+//	cli
+	//Sadly, we can't protect the clock, we've just gotta be at 20 MHz :(
+/*	in r14, OSCCAL
+	ldi r27, OSC20
+	out OSCCAL, r27*/
+
+#ifdef SMARTDDR
+	in r21, DDRB
+	ori r21, 2
+#endif
+	
 	ldi r27,0
 	ldi r26,0
 	subi r26,lo8(-(ManchesterTable))
@@ -72,15 +109,44 @@ SendLoop:
 	rjmp .Done
 .SkipD:
 
+	//Make sure we start with 0's.
+#ifdef INVERTTX
+	ldi r19, 0x05
+#else
+	ldi r19, 0x0a
+#endif
+	
 
 //////////////////////////////////////////////////
 //Special: preamble.
-	ldi r20, 15   //Iterate 15 times. (the 0x55 pattern) then finish out with the 0xD5 pattern.
+	ldi r20, 14   //Iterate 15 times. (the 0x5 pattern) then finish out with the 0xD pattern.
+		//We put 14 here, because we will iterate one extra time beforehand, just in case with smartddr.
+#ifdef INVERTTX
+	ldi r19, 0b10011001  //Standard 0x55 pattern
+	ldi r17, 0b10011010  //Final pattern marker.
+#else
 	ldi r19, 0b01100110  //Standard 0x55 pattern
 	ldi r17, 0b01100101  //Final pattern marker.
+#endif
+	out USEBR, r19
+
 	//Go ahead with the preamble.
 	//Enable the USI
 	SBI USICR, USIWM0
+
+#ifdef SMARTDDR
+	nop
+	out DDRB, r21
+	nop
+	nop
+	nop
+#else
+	nop
+	nop
+	nop
+	nop
+	nop
+#endif
 
 .PreambleLoop:
 	out USEBR, r19
@@ -160,12 +226,25 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 	nop
 	nop
 	nop
+	andi r19,0 //Cleanup.
 	nop
-	andi r19,0
-	nop
-	out USEBR,r19 
+	out USEBR,r19
+#ifdef SMARTDDR
+	cbi DDRB, 1
+#endif
 	CBI USICR, USIWM0
 
+//	out OSCCAL, r14
+//	out SREG, r15
+
+//	pop r14
+//	pop r15
+	pop r31
+	pop r30
+	pop r29
+	pop r27
+	pop r26
+	pop r21
 	pop r20
 	pop r19
 	pop r18
@@ -176,7 +255,6 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 
 
 #define USEBRR  USIDR
-//#define USEBRR  ADCL
 
 .global MaybeHaveDataASM
 MaybeHaveDataASM:
@@ -190,7 +268,7 @@ MaybeHaveDataASM:
 					//r22 = words in buffer.
 	movw r30,r24    //r24:r25 = pointer to staging ram.
 
-	//In here, we're operating at 30 ~MHz (hopefully)
+	//In here, we're operating at 30+MHz (hopefully)
 	//We want to peel the data off the SPI bus as fast as possible!
 
 	tst r22
@@ -215,6 +293,7 @@ rloop:
 
 rlend:
 	mov r24,r22
+
 	pop r20
 	pop r19
 	pop r18
