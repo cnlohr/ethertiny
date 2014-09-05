@@ -36,7 +36,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "4 sep 2014"
+Date "5 sep 2014"
 Rev ""
 Comp ""
 Comment1 ""
@@ -354,12 +354,7 @@ F 3 "" H 4950 1450 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5400 1100 5400 1850
-Wire Wire Line
-	5300 1300 5400 1300
-Connection ~ 5400 1300
-Wire Wire Line
-	5300 1600 5700 1600
+	5300 1300 5550 1300
 Wire Wire Line
 	5700 800  5700 1650
 Wire Wire Line
@@ -377,10 +372,6 @@ F 3 "" H 5400 1850 60  0000 C CNN
 	1    5400 1850
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5400 1100 5300 1100
-Wire Wire Line
-	5300 1200 5750 1200
 Wire Wire Line
 	5750 1000 5750 1300
 $Comp
@@ -429,4 +420,21 @@ Connection ~ 5700 1600
 Wire Wire Line
 	5750 1000 5950 1000
 Connection ~ 5750 1200
+Wire Wire Line
+	5300 1100 5550 1100
+Wire Wire Line
+	5550 1100 5550 1200
+Wire Wire Line
+	5550 1200 5750 1200
+Wire Wire Line
+	5550 1300 5550 1600
+Wire Wire Line
+	5550 1600 5700 1600
+Wire Wire Line
+	5400 1200 5400 1850
+Wire Wire Line
+	5400 1600 5300 1600
+Wire Wire Line
+	5400 1200 5300 1200
+Connection ~ 5400 1600
 $EndSCHEMATC
