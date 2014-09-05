@@ -77,7 +77,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "2 sep 2014"
+Date "5 sep 2014"
 Rev ""
 Comp ""
 Comment1 ""
@@ -263,4 +263,6 @@ Wire Wire Line
 Wire Wire Line
 	6600 2000 6600 2100
 Connection ~ 6600 2050
+Text Notes 1200 3450 0    177  ~ 0
+Warning: This is not isolated and is unsafe.\nIsolate your ethernet sources.
 $EndSCHEMATC

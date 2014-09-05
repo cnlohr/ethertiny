@@ -437,4 +437,6 @@ Wire Wire Line
 Wire Wire Line
 	5400 1200 5300 1200
 Connection ~ 5400 1600
+Text Notes 1850 3900 0    177  ~ 0
+Warning: This is not isolated and is unsafe.\nPlease isolate your ethernet sources.
 $EndSCHEMATC
