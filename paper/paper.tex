@@ -27,7 +27,7 @@ flash, 512 bytes of RAM, and a nominal operating frequency of 20 MHz.
 10Base-T Ethernet is an interface standard supported by most modern networking
 hardware and enables devices to talk to eachother on a network.  Ordinarily,
 specialty hardware is needed to send and receive.  However, by abusing
-the USI and PLL and overclocking the ATtiny85 processor, while violating the 802.3 standard, we can communicate to some devices via 10Base-T on a network.
+the USI and PLL and overclocking the ATtiny85 processor, while violating the 802.3 standard, we can communicate to devices via 10Base-T on a network.
 \end{abstract}
 
 \begin{figure}[ht]
@@ -37,6 +37,10 @@ the USI and PLL and overclocking the ATtiny85 processor, while violating the 802
 	\label{fig:schematic}
 \end{figure}
 
+\section*{Warning}
+This project does not follow standards, and violates recommended operating ranges on the AVR.  It is unlikely
+to work with most AVRs or Ethernet-enabled devices, and is completely unacceptable for production designs.
+Follow only at your own risk.
 \pagebreak
 \section{Introduction}
 
@@ -177,11 +181,10 @@ to a switch it did not link.
 
 Hardware warnings include:
 \begin{itemize}
-\item Neither TX nor RX are terminated.  There should be termination resistors.
+\item The AVR is driving the output directly, and will often be unable to push the output hard enough to reach the needed voltages to match the spec, also it has a noisy output.
 \item There is no isolation.  There should be magnetics to help to:
 \begin{itemize}
-\item Reject common-mode noise.
-\item Clean up the signal.
+\item Reject common-mode noise, cleaning up the signal.
 \item Add safety to prevent DC transients.
 \end{itemize}
 \item There is no differential receiver. We are relying on the AVR's Schmitt trigger. \footnote{AVR ATtiny85 Datasheet (2586K-AVR-01/08), Figure 10-2}
@@ -244,7 +247,7 @@ Provided we operate on it every eight clock cycles, we can create or read
 a continuous stream of 1's and 0's at the clock rate.
 
 Listing \ref{lst:usisetup} shows the code to activate Timer 0 and configure the USI to use it. 
-When reading from the USI, it is important to use the USIBR.  When writing to it, it is important to use the USIDR.
+When reading from the USI, it is important to use the USIDR registers whenever reading or writing to it.
 
 We have to keep the USI disabled when not in use.  If we leave it enabled, data coming in will be shifted through.  
 That means that whenever the USI is enabled, we must be constantly filling the incoming buffer or reading the buffer.
@@ -254,25 +257,33 @@ set the flag to enable it once we're ready to load in new data and go.
 
 \begin{figure}
 \begin{lstlisting}[caption=USI Setup\label{lst:usisetup},language=C, frame=single]
-//Setup timer 0 to speed along.
-//Timer 0 will be dedicated.
-TCCR0A = _BV(WGM01); //CTC mode.
-TCCR0B = _BV(CS00);  //Use system clock with no divisor.
-OCR0A = 0;
 
-USICR = _BV(USIWM0) | _BV(USICS0) |
-	_BV(USITC);
+	//Setup timer 0 to speed along.
+	//It will become useless for any other uses.
+	TCCR0A = _BV(WGM01); //CTC mode.
+	TCCR0B = _BV(CS00);  //Use system clock with no divisor.
+	OCR0A = 0;
 
-//setup port B
-PORTB &= ~_BV(0); 
-DDRB &= ~_BV(0);
-PORTB &= ~_BV(1);
-USICR &= ~_BV(USIWM0);  //Disable USICR
+	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
 
-DDRB |= _BV(1);
+	//setup port B
+	PORTB &= ~_BV(0); 
+	DDRB &= ~_BV(0);
+	PORTB &= ~_BV(1);
+	USICR &= ~_BV(USIWM0);  //Disable USICR
 
-//Optional, changes bias.
-//PORTB |= _BV(0);
+#ifdef SMARTDDR
+	DDRB &= _BV(1);
+#else
+	DDRB |= _BV(1);
+#endif
+
+	//Optional, changes bias.
+	//2k -> GND/2k ->5V seems best with this on
+	//PORTB |= _BV(0);
+	//Doesn't change much with it off. 2k/2k it is.
+	PORTB &= ~_BV(0);
+
 \end{lstlisting}
 \end{figure}
 
@@ -284,15 +295,28 @@ the connected Ethernet device that this device is here, that it's alive, and tha
 10Base-T, Half-duplex device.  Instead of using the USI on the AVR to create this
 signal, we opt to manually turn the pin on and off at the correct times in
 Listing \ref{lst:nlp_code}.  Provided the USI is turned off, DDRB is configured as
-an output, and we're operating at 20 MHz.  This will produce a $\approx$.15us pulse.
+an output (or SMARTDDR is enabled), and we're operating at 30 MHz.  This will produce an $\approx$80ns to $\approx$120ns pulse.
 
 \begin{figure}
-\begin{lstlisting}[caption=NLP Code\label{lst:nlp_code},language=C, frame=single]
-PORTB |= _BV(1);  //2 cycles
-NOOP;  //1 cycle
-PORTB &=~_BV(1);  //2 cycles
+\begin{lstlisting}[caption=NLP Code\label{lst:nlp_code}, frame=single]
+	sbi PORTB, 1
+#ifdef SMARTDDR
+	sbi DDRB, 1
+#endif
+	nop  //~80ns from on to off
+#ifdef LONGNLP 
+	nop  //+40ns
+#endif
+#ifdef SMARTDDR
+	cbi DDRB, 1
+#endif
+	cbi PORTB, 1
 \end{lstlisting}
 \end{figure}
+
+It would be useful to note here what ``SMARTDDR'' is.  Because we have a capacitor to decouple the DC from the TX line,
+it is many times advantageous to leave the pin disconnected except when it is in use.  This will help keep the bias
+across the capacitor to 2.5V, so when the pin is turned high or low, it can create the $\pm$2.5v swing 10Base-T uses.
 
 \subsection{TX Manchester-encoded packets}
 When operating at 20 MHz, it would be possible to manually bit-bang out a message
@@ -346,6 +370,7 @@ we send another byte.  By sending groups of four bytes, that extra free cycle we
 do our three-cycle compare and jump at the end.  
 
 \subsection{RX Manchester-encoded packets}
+\label{rxmch}
 Doing the Manchester decoding is the difficult part.  Without using external hardware to lock onto
 the loop, or to detect the phase, it means we have to do that entirely with the AVR.  Because it is
 also difficult to tweak the AVR's clock to get in phase with the Ethernet signal, we opted to 
@@ -358,11 +383,11 @@ conveniently is possible.
 By sampling at three times the rate, we can identify ``Long'' and ``Short'' transitions.  Additionally,
 the fact that a signal is a ``1'' or a ``0'', incoming becomes irrelevant, and we can focus only on
 the transitions.  In order to read in the data, we operate in much the same way we TX'ed the packet.  However
-we need to wait for a reading from USIBR that is not 0x00 or 0xff, i.e. it contains both 1 and 0 bits. That
+we need to wait for a reading from USIDR that is not 0x00 or 0xff, i.e. it contains both 1 and 0 bits. That
 would mean we likely have a packet.
 
 Once we see that change, provided we're operating at $\approx$31.5 MHz, we can begin to capture the packet
-by continuously reading USIBR every eight cycles.  After every two packets, we can check to see if
+by continuously reading USIDR every eight cycles.  After every two packets, we can check to see if
 it is all 1's or all 0's.  If it is, we can stop, if not, we continue to capture to RAM.
 
 To understand how we can go from a Manchester bitstream to a series of 1's and 0's, we first
@@ -374,10 +399,10 @@ Considering that we can look for the start of packet flag, the 0xD5 from the beg
 whether the current bit is a 0 or a 1 throughout the life of the packet.
 
 \begin{figure}
-    \label{demanchester}
     \centering
     \includegraphics[width=3.0in]{demanchester}
     \caption{Demanchestration (33 MHz clock)}
+    \label{demanchester}
 \end{figure}
 
 A copy of the Demanchestrate function can be found in the code tree in \texttt{hlprocess.c}.
@@ -394,16 +419,30 @@ From there, we can pass it to the IP stack, where it will deal with the packet. 
 stack is outside the scope of this document.
 
 \subsection{Overall Process}
-We have covered how we can set up the system, how we can send NLPs, and how we can send and receive
-packets. In order to make this work, we put it in a main loop.
+We configure the pin change interrupt on PB0 so that if data ever comes in, we can start watching that line to see if it's a spurious data, a NLP, FLP or the beginnings of a packet. 
+If it's a packet, we start recording the pin as described in Section \ref{rxmch}
 
-We wait for packets for 8ms, send an NLP, wait for more packets for 8ms, do whatever housekeeping work we want, and then repeat the process.
+We configure timer 1 to operate on a 4ms period and set it up to fire an interrupt. After 4 ticks,
+we then send a NLP.  This timer can also be used to clock other higher level aspects
+of the chip and drive PWM if needed.  The NLPs can be sent by an arbitrary means, so long as they are
+sent out approximately every 16ms.
+
+Our main loop waits to see when the NLP timer advances.  We can schedule things to happen whenever in this loop. 
+Every 4 NLPs, we fire a broadcast packet.  
+
+Whenever user code locks interrupts, the system cannot receive.  If we continue locked until there insufficient
+preamble for the demanchestrate function to operate on, we will drop a packet.  User code can use interrupts freely as well
+(given the same caveat).
+
+User code can also send packets either in response to existing packets in the HandleUDP function or anywhere in code.
+
+As a warning, interrupts are disabled while the system is receiving a packet.
 
 \section{Conclusion}
 We have been able to implement a UDP/IP stack with ARP, UDP, and ICMP on an attiny85.  We have tested it
 with short wire runs to a few different types of switches and computers and found that we could communicate.
 We can send and receive packets up to a $\approx$90-bytes on-wire or 48-bytes of UDP payload.
-We have had very high packet loss, on the order of 10-30 \% of the packets.  This is important
+We have had moderate packet loss, on the order of 5-20 \% of the packets.  This is important
 when considering applications for this technology, as all protocols the user would have to use must be
 robust, able to handle lost packets gracefully, and must not be CPU intensive.
 
@@ -421,12 +460,10 @@ We could do a number of things from here that would be useful and interesting.  
 
 \begin{itemize}
 \item Use T0 input from PLL PWM on the AVR to increase sampling rate to 35 MHz, to improve input performance.
-\item Synchronize use of USIDR / USIBR to verify the AVR will not encounter a conflict with the shift register.
 \item Use a differential driver/receiver to drive the actual signal.
+\item Add magnetics and examine performance.
 \item Use the internal pull-up to tune the bias, detect if this pull-up helps somehow.
 \item Optimize the Demanchestration function in assembly.
-\item Use interrupts to send NLPs.
-\item Use interrupts to trigger receives.
 \item Automatically calibrate the proper OSCCAL for sending based on incoming packets.
 \item Improve error correction based on matching pairs and long/short segments. (Improvements to the Demanchestrate function)
 \end{itemize}
