@@ -3,6 +3,12 @@
 
 //Terrifying though it may be... This is how it's all configured.
 
+//If we are using an external driver, we must connect it this way:
+//RO -> PB0
+//DI <- PB1
+//DE <- PB2
+//#define USES_EXTERNAL_DRIVER
+
 //Warning: YOU Must use with an ATTinyX5 series chip or another chip
 //that allows you to tune OSCCAL to a high enough frequency.
 

@@ -233,6 +233,15 @@ int8_t et_init( const unsigned char * macaddy )
 
 	USICR = _BV(USIWM0) | _BV(USICS0) | _BV(USITC);
 
+#ifdef USES_EXTERNAL_DRIVER
+	DDRB &= ~_BV(0);
+	DDRB |= _BV(1);
+	DDRB |= _BV(2);
+	USICR &= ~_BV(USIWM0);  //Disable USICR
+
+
+#else //Doesn't use external driver
+
 	//setup port B
 	PORTB &= ~_BV(0); 
 	DDRB &= ~_BV(0);
@@ -245,6 +254,7 @@ int8_t et_init( const unsigned char * macaddy )
 	DDRB |= _BV(1);
 #endif
 
+
 	//Optional, changes bias.
 	//2k -> GND/2k ->5V seems best with this on
 	//Doesn't change much with it off. 2k/2k it is.
@@ -252,6 +262,8 @@ int8_t et_init( const unsigned char * macaddy )
 	PORTB &= ~_BV(0);
 #else
 	PORTB |= _BV(0);
+#endif
+
 #endif
 
 	return 0;

@@ -33,6 +33,17 @@
 .global SendNLP
 SendNLP:
 
+#ifdef USES_EXTERNAL_DRIVER
+
+	sbi PORTB, 1
+	sbi PORTB, 2
+#ifdef LONGNLP
+	nop  //+40ns
+#endif
+	cbi PORTB, 2
+
+#else //Doesn't use external driver.
+
 #if defined( INVERTTX ) || defined( INVERTNLP )
 	cbi PORTB, 1
 #else
@@ -53,8 +64,11 @@ SendNLP:
 #ifdef BIAS0
 	cbi PORTB, 1
 #endif
+
+#endif
 	ret
 
+//
 
 //Handles sending preamble + Packet ovr the USI
 //You must set the clock to 20 MHz well in advance of calling
@@ -82,9 +96,13 @@ SendTestASM:
 	ldi r27, OSC20
 	out OSCCAL, r27*/
 
+#ifdef USES_EXTERNAL_DRIVER
+	sbi PORTB, 2
+#else
 #ifdef SMARTDDR
 	in r21, DDRB
 	ori r21, 2
+#endif
 #endif
 	
 	ldi r27,0
@@ -134,7 +152,7 @@ SendLoop:
 	//Enable the USI
 	SBI USICR, USIWM0
 
-#ifdef SMARTDDR
+#if defined( SMARTDDR ) && !defined( USES_EXTERNAL_DRIVER )
 	nop
 	out DDRB, r21
 	nop
@@ -229,7 +247,9 @@ KeepGoing:			///subi r26,lo8(-(ManchesterTable))
 	andi r19,0 //Cleanup.
 	nop
 	out USEBR,r19
-#ifdef SMARTDDR
+#ifdef USES_EXTERNAL_DRIVER
+	cbi PORTB, 2
+#elif defined( SMARTDDR )
 	cbi DDRB, 1
 #endif
 	CBI USICR, USIWM0
